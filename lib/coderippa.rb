@@ -46,7 +46,7 @@ module Uv
 end
 
 
-preamble = <<END
+@@preamble = <<END
 \\documentclass[a4paper,landscape]{article}
 \\usepackage{xcolor}
 \\usepackage{colortbl}
@@ -63,37 +63,46 @@ preamble = <<END
 \\setlength{\\LTpre}{-10pt}
 END
 
-endtag = <<END
+@@endtag = <<END
 \\end{document}
 END
 
+# https://github.com/github/linguist
 
-counter = 0
+
 # path = "/Users/rambo/code/ruby/trivial.rb"
 
 # puts preamble
 # puts Uv.parse(File.read(path),"latex","ruby", true, "moc") if path.match(/\.rb\Z/)
 # puts endtag
+class CodeRippa
+	def self.rip(lang="ruby")
+		exts = {"ruby" => ".rb", "python" => ".py"}
+		counter = 0		
+		puts @@preamble
+		Find.find('/Users/rambo/code/flask') do |path|
+			depth = path.to_s.count("/")
+			if File.basename(path)[0] == ?.
+			      Find.prune
+			elsif FileTest.directory?(path) or path.match(/\.py\Z/)
+				begin
+					if path.match(/\.py\Z/)
+						puts "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\" 
+						puts "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}"
+					end
 
-puts preamble
-Find.find('/Users/rambo/code/ruby/ultraviolet') do |path|
-	depth = path.to_s.count("/")
-	if File.basename(path)[0] == ?.
-	      Find.prune
-	elsif FileTest.directory?(path) or path.match(/\.rb\Z/)
-		begin
-			if path.match(/\.rb\Z/)
-				puts "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_')}}}}\\\\" 
-				puts "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}"
+					puts "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}"					
+					puts Uv.parse(File.read(path),"latex",lang, true, "moc") if path.match(/\.py\Z/)
+					puts "\\clearpage"
+				rescue Exception => e
+					# ignore if something funky happens
+				end
+				counter += 1
 			end
-
-			puts "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}"					
-			puts Uv.parse(File.read(path),"latex","ruby", true, "moc") if path.match(/\.rb\Z/)
-			puts "\\clearpage"
-		rescue Exception => e
-			# ignore if something funky happens
 		end
-		counter += 1
+		puts @@endtag
 	end
 end
-puts endtag
+
+CodeRippa.rip("python")
+
