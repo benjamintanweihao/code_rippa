@@ -77,6 +77,7 @@ Find.find('/Users/rambo/code/ruby/ultraviolet') do |path|
 	      Find.prune
 	elsif FileTest.directory?(path) or path.match(/\.rb\Z/)
 		begin
+			puts "\\section*{$#{path}$}" if path.match(/\.rb\Z/)
 			puts "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}"					
 			puts Uv.parse(File.read(path),"latex","ruby", true, "moc") if path.match(/\.rb\Z/)
 			puts "\\clearpage"
