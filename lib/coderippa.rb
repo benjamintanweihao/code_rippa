@@ -1,6 +1,7 @@
 require 'rubygems'
 require 'find'
 require 'uv'
+require 'linguist'
 
 # Link to the theme file
 # /Users/rambo/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/1.9.1/psych.rb:154:in `parse': 
@@ -9,8 +10,30 @@ require 'uv'
 
 YAML::ENGINE.yamler= 'syck'
 
+@@preamble = <<END
+\\documentclass[a4paper,landscape]{article}
+\\usepackage{xcolor}
+\\usepackage{colortbl}
+\\usepackage{longtable}
+\\usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]{geometry}
+\\usepackage[T1]{fontenc}
+\\usepackage[scaled]{beramono}
+\\usepackage[bookmarksopen,bookmarksdepth=30]{hyperref}
+\\definecolor{mycolor}{HTML}{090A1B}
+\\pagecolor{mycolor}
+\\begin{document}
+\\setlength\\LTleft\\parindent
+\\setlength\\LTright\\fill
+\\setlength{\\LTpre}{-10pt}
+END
+
+@@endtag = <<END
+\\end{document}
+END
+
 module Uv
-	@@set_table_columns = false
+	@@set_table_columns = true
+	
 	def start_parsing name
     @stack       = [name]
     @string      = ""
@@ -45,57 +68,34 @@ module Uv
   end
 end
 
-
-@@preamble = <<END
-\\documentclass[a4paper,landscape]{article}
-\\usepackage{xcolor}
-\\usepackage{colortbl}
-\\usepackage{longtable}
-\\usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]{geometry}
-\\usepackage[T1]{fontenc}
-\\usepackage[scaled]{beramono}
-\\usepackage[bookmarksopen,bookmarksdepth=30]{hyperref}
-\\definecolor{mycolor}{HTML}{090A1B}
-\\pagecolor{mycolor}
-\\begin{document}
-\\setlength\\LTleft\\parindent
-\\setlength\\LTright\\fill
-\\setlength{\\LTpre}{-10pt}
-END
-
-@@endtag = <<END
-\\end{document}
-END
-
-# https://github.com/github/linguist
-
-
 # path = "/Users/rambo/code/ruby/trivial.rb"
-
-# puts preamble
+# puts @@preamble
 # puts Uv.parse(File.read(path),"latex","ruby", true, "moc") if path.match(/\.rb\Z/)
-# puts endtag
+# puts @@endtag
+
 class CodeRippa
-	def self.rip(lang="ruby")
-		exts = {"ruby" => ".rb", "python" => ".py"}
+	def self.rip
 		counter = 0		
+		
 		puts @@preamble
 		Find.find('/Users/rambo/code/flask') do |path|
 			depth = path.to_s.count("/")
 			if File.basename(path)[0] == ?.
-			      Find.prune
-			elsif FileTest.directory?(path) or path.match(/\.py\Z/)
+				Find.prune
+			else
 				begin
-					if path.match(/\.py\Z/)
+					unless FileTest.directory?(path) or Linguist::FileBlob.new(path).binary?
 						puts "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\" 
 						puts "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}"
 					end
-
 					puts "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}"					
-					puts Uv.parse(File.read(path),"latex",lang, true, "moc") if path.match(/\.py\Z/)
+					unless FileTest.directory?(path) or Linguist::FileBlob.new(path).binary?
+						lang = Linguist::FileBlob.new(path).language.name.downcase
+						puts Uv.parse(File.read(path),"latex",lang, true, "moc") 						
+					end					
 					puts "\\clearpage"
 				rescue Exception => e
-					# ignore if something funky happens
+					# ignore if something nasty happens
 				end
 				counter += 1
 			end
@@ -104,5 +104,5 @@ class CodeRippa
 	end
 end
 
-CodeRippa.rip("python")
+CodeRippa.rip
 
