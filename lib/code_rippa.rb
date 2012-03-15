@@ -1,7 +1,7 @@
 require 'rubygems'
 require 'find'
-require 'uv'
 require 'linguist'
+require 'uv'
 
 # Link to the theme file
 # /Users/rambo/.rvm/rubies/ruby-1.9.3-p0/lib/ruby/1.9.1/psych.rb:154:in `parse': 
@@ -73,36 +73,43 @@ end
 # puts Uv.parse(File.read(path),"latex","ruby", true, "moc") if path.match(/\.rb\Z/)
 # puts @@endtag
 
+
 class CodeRippa
-	def self.rip
+
+	
+	def self.rip(directory)
+			
+		f = File.new("out.tex", "w")
 		counter = 0		
 		
-		puts @@preamble
-		Find.find('/Users/rambo/code/flask') do |path|
+		f.write @@preamble
+		Find.find(directory) do |path|
 			depth = path.to_s.count("/")
 			if File.basename(path)[0] == ?.
 				Find.prune
 			else
 				begin
 					unless FileTest.directory?(path) or Linguist::FileBlob.new(path).binary?
-						puts "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\" 
-						puts "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}"
+						f.write "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\"
+						f.write "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}"
 					end
-					puts "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}"					
-					unless FileTest.directory?(path) or Linguist::FileBlob.new(path).binary?
+					 	f.write "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}"
+					unless FileTest.directory? path or Linguist::FileBlob.new(path).binary?
 						lang = Linguist::FileBlob.new(path).language.name.downcase
-						puts Uv.parse(File.read(path),"latex",lang, true, "moc") 						
+						f.write Uv.parse(File.read(path),"latex",lang, true, "moc")
 					end					
-					puts "\\clearpage"
+					f.write "\\clearpage"
 				rescue Exception => e
 					# ignore if something nasty happens
 				end
 				counter += 1
 			end
 		end
-		puts @@endtag
+		f.write @@endtag
+		f.close
 	end
+	
 end
 
-CodeRippa.rip
+CodeRippa.rip(ARGV[0])
 
