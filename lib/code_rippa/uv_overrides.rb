@@ -4,9 +4,11 @@ module Uv
 	@@set_table_columns = true
 	
 	Uv.syntax_path   = File.join(File.dirname(__FILE__), 'syntax')
-  Uv.render_path   = File.join(File.dirname(__FILE__))
+  Uv.render_path   = File.join(File.dirname(__FILE__), 'render')
   Uv.theme_path    = File.join(render_path, 'themes')
-  Uv.default_style = 'moc'
+  # Uv.default_style ||= 'moc'
+		
+	puts Uv.render_path
 		
 	def Uv.themes
     Dir.glob( File.join(@theme_path, '*.render') ).collect do |f| 
