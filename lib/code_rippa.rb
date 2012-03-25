@@ -1,6 +1,7 @@
 require 'uv'
 require 'find'
 require 'linguist'
+require '../lib/code_rippa/uv_overrides'
 
 YAML::ENGINE.yamler= 'syck'
 
@@ -13,7 +14,7 @@ module CodeRippa
 			srcfile = File.read(path)
 			src_ext = File.extname(path)[1..-1]
 						
-			if not excluded_exts.include? src_ext
+			unless excluded_exts.include? src_ext
 				outfile.write preamble theme
 				outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
 				outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
@@ -21,16 +22,17 @@ module CodeRippa
 				outfile.write endtag
 				outfile.close
 			else
-				puts "Warning: #{path} not processed. Check arguments.".background(:red).foreground(:yellow)
+				puts "Warning: #{path} not processed. Check arguments."
 			end				
 			
 		rescue Exception => e
-			print e.backtrace.join('\n').background(:red).foreground(:white)
+			puts e
 		end
 	end
+
 	
-	
-	def self.rip(dir_path, theme, syntax, excluded_exts = [])
+
+	def self.rip_dir(dir_path, theme, syntax, excluded_exts = [])
 			
 		outfile = File.open('out.tex', 'w') 
 		counter = 0		
@@ -43,22 +45,24 @@ module CodeRippa
 				Find.prune
 			else
 				begin
-					unless FileTest.directory?(path) or Linguist::FileBlob.new(path).binary?
+					puts ">> #{path}"
+					is_rippable = rippable?(path, syntax, excluded_exts)
+
+					if is_rippable
 						outfile.write "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
 						outfile.write "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
 					end
-						
-					f.write "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
 					
-					unless FileTest.directory? path or Linguist::FileBlob.new(path).binary?
-						if Linguist::FileBlob.new(path).language.name == 'Ruby'
-							# lang = Linguist::FileBlob.new(path).language.name.downcase
-							outfile.write Uv.parse(File.read(path), 'latex', 'ruby', theme)
-						end
-					end						
-					outfile.write "\\clearpage\n"
+					if bookmarkable?(path, syntax, excluded_exts)		
+						outfile.write "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
+					end
+
+					if is_rippable
+						outfile.write Uv.parse(File.read(path), 'latex', syntax, true, theme) 
+						outfile.write "\\clearpage\n"
+					end
 				rescue Exception => e
-					# ignore if something nasty happens
+					puts e
 				end
 				counter += 1
 			end
@@ -114,15 +118,59 @@ module CodeRippa
 			filetypes
 		end
 	
+
+		def self.bookmarkable?(path, syntax, excluded_exts)
+			if FileTest.directory?(path)
+				true
+			else
+				src_ext = File.extname(path)[1..-1]
+				lang = Linguist::FileBlob.new(path).language
+				lang = lang ? lang.name.downcase : ""
+
+				if Linguist::FileBlob.new(path).binary?
+					false
+				elsif excluded_exts.include?(src_ext)
+					false
+				elsif supported_syntax.include? lang
+					true
+				else
+					false
+				end
+			end
+		end
+	
+
+		def self.rippable?(path, syntax, excluded_exts)
+			if FileTest.directory?(path)
+				false
+			else
+				src_ext = File.extname(path)[1..-1]
+				lang = Linguist::FileBlob.new(path).language
+				lang = lang ? lang.name.downcase : ""
+				if Linguist::FileBlob.new(path).binary?
+					false
+				elsif excluded_exts.include? src_ext
+					false
+				elsif supported_syntax.include? lang
+					true
+				else
+					false
+				end
+			end
+		end
+
+
 		def self.page_color(theme)
 			f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
 			/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
 		end
 	
+
 		def self.heading_color(theme)
 			f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
 			/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[2]).to_s
 		end
+
 	
 		def self.preamble(theme)
 			preamble = ''
@@ -144,6 +192,7 @@ module CodeRippa
 			preamble << "\\setlength{\\LTpre}{-10pt}\n"
 			preamble
 		end
+		
 	
 		def self.endtag
 			"\\end{document}\n"
