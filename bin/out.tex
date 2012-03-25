@@ -1,0 +1,192 @@
+\documentclass[a4paper,landscape]{article}
+\pagestyle{empty}
+\usepackage{xcolor}
+\usepackage{colortbl}
+\usepackage{longtable}
+\usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[scaled]{beramono}
+\usepackage[bookmarksopen,bookmarksdepth=20]{hyperref}
+\definecolor{pgcolor}{HTML}{211E1E}
+\definecolor{headingcolor}{HTML}{DADADA}
+\pagecolor{pgcolor}
+\begin{document}
+\setlength\LTleft\parindent
+\setlength\LTright\fill
+\setlength{\LTpre}{-10pt}
+\textcolor{headingcolor}{\textbf{\texttt{/Users/rambo/code/ruby/code\_rippa/lib/code\_rippa.rb}}}\\
+\textcolor{headingcolor}{\rule{\linewidth}{1.0mm}}\\
+\newcolumntype{C}{>{\color[HTML]{DADADA}\columncolor[HTML]{211E1E}}l}
+\newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{73597E}}l}
+\begin{longtable}{NC}
+\texttt{   1 }&\mbox{\texttt{ {\color[HTML]{A1A1FF}require}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}uv{\color[HTML]{AD9361}'}}}}\\
+\texttt{   2 }&\mbox{\texttt{ {\color[HTML]{A1A1FF}require}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}find{\color[HTML]{AD9361}'}}}}\\
+\texttt{   3 }&\mbox{\texttt{ {\color[HTML]{A1A1FF}require}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}linguist{\color[HTML]{AD9361}'}}}}\\
+\texttt{   4 }&\mbox{\texttt{ {\color[HTML]{555555}{\color[HTML]{555555}\#}\hspace{1ex}require\hspace{1ex}'uv\_overrides'}}}\\
+\texttt{   5 }&\mbox{\texttt{ }}\\
+\texttt{   6 }&\mbox{\texttt{ }}\\
+\texttt{   7 }&\mbox{\texttt{ {\color[HTML]{C1C144}YAML}::ENGINE.yamler{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}syck{\color[HTML]{AD9361}'}}}}\\
+\texttt{   8 }&\mbox{\texttt{ }}\\
+\texttt{   9 }&\mbox{\texttt{ {\color[HTML]{555555}{\color[HTML]{555555}\#}\hspace{1ex}Change\hspace{1ex}to\hspace{1ex}module\hspace{1ex}later\hspace{1ex}on}}}\\
+\texttt{  10 }&\mbox{\texttt{ {\color[HTML]{6969FA}\textbf{module}}\hspace{1ex}CodeRippa}}\\
+\texttt{  11 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  12 }&\mbox{\texttt{ \hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.rip\_file({\color[HTML]{C1C144}path{\color[HTML]{C1C144},}\hspace{1ex}theme{\color[HTML]{C1C144},}\hspace{1ex}syntax{\color[HTML]{C1C144},}\hspace{1ex}excluded\_exts\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}[}{\color[HTML]{C1C144}]}})}}\\
+\texttt{  13 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}outfile\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}File.open({\color[HTML]{AD9361}{\color[HTML]{AD9361}'}out.tex{\color[HTML]{AD9361}'}},\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}w{\color[HTML]{AD9361}'}})\hspace{1ex}}}\\
+\texttt{  14 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}}}\\
+\texttt{  15 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{begin}}\hspace{1ex}}}\\
+\texttt{  16 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}srcfile\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}File.read(path)}}\\
+\texttt{  17 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}src\_ext\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}File.extname(path)[{\color[HTML]{CCCCCC}1}..{\color[HTML]{47B8D6}-}{\color[HTML]{CCCCCC}1}]}}\\
+\texttt{  18 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  19 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}{\color[HTML]{47B8D6}not}\hspace{1ex}excluded\_exts.include?\hspace{1ex}src\_ext}}\\
+\texttt{  20 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}preamble\hspace{1ex}theme}}\\
+\texttt{  21 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}textcolor\{headingcolor\}\{{\color[HTML]{AFA472}$\backslash$$\backslash$}textbf\{{\color[HTML]{AFA472}$\backslash$$\backslash$}texttt\{{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}path{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}gsub}}{\color[HTML]{AD9361}(}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}\_{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361},}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$\_{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361})}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}gsub}}{\color[HTML]{AD9361}(}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}\%{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361},}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$\%{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361})}{\color[HTML]{AD9361}\}}}\}\}\}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{  22 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}textcolor\{headingcolor\}\{{\color[HTML]{AFA472}$\backslash$$\backslash$}rule\{{\color[HTML]{AFA472}$\backslash$$\backslash$}linewidth\}\{1.0mm\}\}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{  23 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}Uv.parse(srcfile,\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}latex{\color[HTML]{AD9361}'}},\hspace{1ex}syntax,\hspace{1ex}{\color[HTML]{DE8E30}\textbf{true}},\hspace{1ex}theme)\hspace{1ex}}}\\
+\texttt{  24 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}endtag}}\\
+\texttt{  25 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.close}}\\
+\texttt{  26 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{else}}}}\\
+\texttt{  27 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}puts\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}Warning:\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}path{\color[HTML]{AD9361}\}}}\hspace{1ex}not\hspace{1ex}processed.\hspace{1ex}Check\hspace{1ex}arguments.{\color[HTML]{AD9361}''}}.background({\color[HTML]{6782D3}{\color[HTML]{6782D3}:}red}).foreground({\color[HTML]{6782D3}{\color[HTML]{6782D3}:}yellow})}}\\
+\texttt{  28 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  29 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  30 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{rescue}}\hspace{1ex}{\color[HTML]{C1C144}Exception}\hspace{1ex}=>\hspace{1ex}e}}\\
+\texttt{  31 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}print\hspace{1ex}e.backtrace.join({\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$n{\color[HTML]{AD9361}'}}).background({\color[HTML]{6782D3}{\color[HTML]{6782D3}:}red}).foreground({\color[HTML]{6782D3}{\color[HTML]{6782D3}:}white})}}\\
+\texttt{  32 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  33 }&\mbox{\texttt{ \hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  34 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{  35 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{  36 }&\mbox{\texttt{ \hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.rip({\color[HTML]{C1C144}dir\_path{\color[HTML]{C1C144},}\hspace{1ex}theme{\color[HTML]{C1C144},}\hspace{1ex}syntax{\color[HTML]{C1C144},}\hspace{1ex}excluded\_exts\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}[}{\color[HTML]{C1C144}]}})}}\\
+\texttt{  37 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  38 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}outfile\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}File.open({\color[HTML]{AD9361}{\color[HTML]{AD9361}'}out.tex{\color[HTML]{AD9361}'}},\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}w{\color[HTML]{AD9361}'}})\hspace{1ex}}}\\
+\texttt{  39 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}counter\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{CCCCCC}0}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  40 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}}}\\
+\texttt{  41 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}preamble(theme)}}\\
+\texttt{  42 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}}}\\
+\texttt{  43 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}Find.find(dir\_path)\hspace{1ex}{\color[HTML]{6969FA}\textbf{do\hspace{1ex}}}|{\color[HTML]{C1C144}path}|}}\\
+\texttt{  44 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}depth\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}path.to\_s.count({\color[HTML]{AD9361}{\color[HTML]{AD9361}'}/{\color[HTML]{AD9361}'}})}}\\
+\texttt{  45 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}File.basename(path)[{\color[HTML]{CCCCCC}0}]\hspace{1ex}{\color[HTML]{47B8D6}==}\hspace{1ex}{\color[HTML]{CCCCCC}?.}}}\\
+\texttt{  46 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}Find.prune}}\\
+\texttt{  47 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{else}}}}\\
+\texttt{  48 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{begin}}}}\\
+\texttt{  49 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{unless}}\hspace{1ex}FileTest.directory?(path)\hspace{1ex}{\color[HTML]{47B8D6}or}\hspace{1ex}Linguist::FileBlob.new(path).binary?}}\\
+\texttt{  50 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}textcolor\{white\}\{{\color[HTML]{AFA472}$\backslash$$\backslash$}textbf\{{\color[HTML]{AFA472}$\backslash$$\backslash$}texttt\{{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}path{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}gsub}}{\color[HTML]{AD9361}(}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}\_{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361},}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$\_{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361})}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}gsub}}{\color[HTML]{AD9361}(}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}\%{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361},}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$\%{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361})}{\color[HTML]{AD9361}\}}}\}\}\}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{  51 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}textcolor\{white\}\{{\color[HTML]{AFA472}$\backslash$$\backslash$}rule\{{\color[HTML]{AFA472}$\backslash$$\backslash$}linewidth\}\{1.0mm\}\}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{  52 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  53 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  54 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}f.write\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}pdfbookmark[{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}depth{\color[HTML]{47B8D6}-}{\color[HTML]{CCCCCC}2}{\color[HTML]{AD9361}\}}}]\{{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}{\color[HTML]{AD9361}File}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}basename}}{\color[HTML]{AD9361}(}path{\color[HTML]{AD9361})}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}gsub}}{\color[HTML]{AD9361}(}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}\_{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361},}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$\_{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361})}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}gsub}}{\color[HTML]{AD9361}(}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}\%{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361},}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}$\backslash$\%{\color[HTML]{AD9361}'}}{\color[HTML]{AD9361})}{\color[HTML]{AD9361}\}}}\}\{{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}counter{\color[HTML]{AD9361}\}}}\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{  55 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  56 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{unless}}\hspace{1ex}FileTest.directory?\hspace{1ex}path\hspace{1ex}{\color[HTML]{47B8D6}or}\hspace{1ex}Linguist::FileBlob.new(path).binary?}}\\
+\texttt{  57 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}Linguist::FileBlob.new(path).language.name\hspace{1ex}{\color[HTML]{47B8D6}==}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}Ruby{\color[HTML]{AD9361}'}}}}\\
+\texttt{  58 }&\mbox{\texttt{ {\color[HTML]{555555}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{555555}\#}\hspace{1ex}lang\hspace{1ex}=\hspace{1ex}Linguist::FileBlob.new(path).language.name.downcase}}}\\
+\texttt{  59 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}Uv.parse(File.read(path),\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}latex{\color[HTML]{AD9361}'}},\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}ruby{\color[HTML]{AD9361}'}},\hspace{1ex}theme)}}\\
+\texttt{  60 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  61 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  62 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}clearpage{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{  63 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{rescue}}\hspace{1ex}{\color[HTML]{C1C144}Exception}\hspace{1ex}=>\hspace{1ex}e}}\\
+\texttt{  64 }&\mbox{\texttt{ {\color[HTML]{555555}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{555555}\#}\hspace{1ex}ignore\hspace{1ex}if\hspace{1ex}something\hspace{1ex}nasty\hspace{1ex}happens}}}\\
+\texttt{  65 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  66 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}counter\hspace{1ex}{\color[HTML]{47B8D6}+=}\hspace{1ex}{\color[HTML]{CCCCCC}1}}}\\
+\texttt{  67 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  68 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  69 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}outfile.write\hspace{1ex}endtag}}\\
+\texttt{  70 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}outfile.close}}\\
+\texttt{  71 }&\mbox{\texttt{ \hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  72 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  73 }&\mbox{\texttt{ \hspace{3ex}{\color[HTML]{A1A1FF}private}}}\\
+\texttt{  74 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{  75 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.usage}}\\
+\texttt{  76 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}Usage:\hspace{1ex}code\_rippa\hspace{1ex}[options]\hspace{1ex}file\_or\_directory{\color[HTML]{AD9361}''}}}}\\
+\texttt{  77 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  78 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{  79 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.syntax\_path}}\\
+\texttt{  80 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}Uv.syntax\_path}}\\
+\texttt{  81 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  82 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}}}\\
+\texttt{  83 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.supported\_syntax}}\\
+\texttt{  84 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}syntax\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}[]}}\\
+\texttt{  85 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  86 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}Dir.foreach(syntax\_path)\hspace{1ex}{\color[HTML]{6969FA}\textbf{do\hspace{1ex}}}|{\color[HTML]{C1C144}f}|}}\\
+\texttt{  87 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}File.extname(f)\hspace{1ex}{\color[HTML]{47B8D6}==}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}.syntax{\color[HTML]{AD9361}''}}}}\\
+\texttt{  88 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}y\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}YAML}.load(File.read\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}syntax\_path{\color[HTML]{AD9361}\}}}/{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}f{\color[HTML]{AD9361}\}}}{\color[HTML]{AD9361}''}})}}\\
+\texttt{  89 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}syntax\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}File.basename(f,\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}.*{\color[HTML]{AD9361}'}})\hspace{1ex}}}\\
+\texttt{  90 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  91 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  92 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}syntax}}\\
+\texttt{  93 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{  94 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}}}\\
+\texttt{  95 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.supported\_langs}}\\
+\texttt{  96 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}langs\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}[]}}\\
+\texttt{  97 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{  98 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}Dir.foreach(syntax\_path)\hspace{1ex}{\color[HTML]{6969FA}\textbf{do\hspace{1ex}}}|{\color[HTML]{C1C144}f}|}}\\
+\texttt{  99 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}File.extname(f)\hspace{1ex}{\color[HTML]{47B8D6}==}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}.syntax{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 100 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}y\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}YAML}.load(File.read\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}syntax\_path{\color[HTML]{AD9361}\}}}/{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}f{\color[HTML]{AD9361}\}}}{\color[HTML]{AD9361}''}})}}\\
+\texttt{ 101 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}langs\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}y[{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}name{\color[HTML]{AD9361}''}}]\hspace{1ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}y[{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}name{\color[HTML]{AD9361}''}}]}}\\
+\texttt{ 102 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 103 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 104 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}langs}}\\
+\texttt{ 105 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 106 }&\mbox{\texttt{ }}\\
+\texttt{ 107 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 108 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.supported\_exts}}\\
+\texttt{ 109 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}filetypes\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}[]}}\\
+\texttt{ 110 }&\mbox{\texttt{ }}\\
+\texttt{ 111 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}Dir.foreach(syntax\_path)\hspace{1ex}{\color[HTML]{6969FA}\textbf{do\hspace{1ex}}}|{\color[HTML]{C1C144}f}|}}\\
+\texttt{ 112 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}File.extname(f)\hspace{1ex}{\color[HTML]{47B8D6}==}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}.syntax{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 113 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}y\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}YAML}.load(File.read\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}syntax\_path{\color[HTML]{AD9361}\}}}/{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}f{\color[HTML]{AD9361}\}}}{\color[HTML]{AD9361}''}})}}\\
+\texttt{ 114 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}filetypes\hspace{1ex}{\color[HTML]{47B8D6}+=}\hspace{1ex}y[{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}fileTypes{\color[HTML]{AD9361}''}}]\hspace{1ex}{\color[HTML]{6969FA}\textbf{if}}\hspace{1ex}y[{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}fileTypes{\color[HTML]{AD9361}''}}]}}\\
+\texttt{ 115 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 116 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 117 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}filetypes}}\\
+\texttt{ 118 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 119 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 120 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.page\_color({\color[HTML]{C1C144}theme})}}\\
+\texttt{ 121 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}f\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}YAML}.load(File.read({\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}{\color[HTML]{AD9361}Uv}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}render\_path}}{\color[HTML]{AD9361}\}}}/latex/{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}theme{\color[HTML]{AD9361}\}}}.render{\color[HTML]{AD9361}''}}))\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{ 122 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{666666}{\color[HTML]{666666}/}}{\color[HTML]{666666}{\color[HTML]{666666}{\color[HTML]{666666}(}{\color[HTML]{666666}{\color[HTML]{666666}[}A-Fa-f0-9{\color[HTML]{666666}]}}{\color[HTML]{666666}{\color[HTML]{666666}\{}6{\color[HTML]{666666}\}}}|{\color[HTML]{666666}{\color[HTML]{666666}[}A-Fa-f0-9{\color[HTML]{666666}]}}{\color[HTML]{666666}{\color[HTML]{666666}\{}3{\color[HTML]{666666}\}}}{\color[HTML]{666666})}}}{\color[HTML]{666666}{\color[HTML]{666666}/}}.match(f[{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}listing{\color[HTML]{AD9361}'}}][{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}begin{\color[HTML]{AD9361}'}}].split({\color[HTML]{AD9361}{\color[HTML]{AD9361}'}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AD9361}'}})[{\color[HTML]{CCCCCC}3}]).to\_s}}\\
+\texttt{ 123 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 124 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 125 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.heading\_color({\color[HTML]{C1C144}theme})}}\\
+\texttt{ 126 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}f\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{C1C144}YAML}.load(File.read({\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}{\color[HTML]{AD9361}Uv}{\color[HTML]{AD9361}{\color[HTML]{AD9361}.}{\color[HTML]{AD9361}render\_path}}{\color[HTML]{AD9361}\}}}/latex/{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}theme{\color[HTML]{AD9361}\}}}.render{\color[HTML]{AD9361}''}}))\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}\hspace{3ex}}}\\
+\texttt{ 127 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{666666}{\color[HTML]{666666}/}}{\color[HTML]{666666}{\color[HTML]{666666}{\color[HTML]{666666}(}{\color[HTML]{666666}{\color[HTML]{666666}[}A-Fa-f0-9{\color[HTML]{666666}]}}{\color[HTML]{666666}{\color[HTML]{666666}\{}6{\color[HTML]{666666}\}}}|{\color[HTML]{666666}{\color[HTML]{666666}[}A-Fa-f0-9{\color[HTML]{666666}]}}{\color[HTML]{666666}{\color[HTML]{666666}\{}3{\color[HTML]{666666}\}}}{\color[HTML]{666666})}}}{\color[HTML]{666666}{\color[HTML]{666666}/}}.match(f[{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}listing{\color[HTML]{AD9361}'}}][{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}begin{\color[HTML]{AD9361}'}}].split({\color[HTML]{AD9361}{\color[HTML]{AD9361}'}{\color[HTML]{AFA472}$\backslash$$\backslash$}{\color[HTML]{AD9361}'}})[{\color[HTML]{CCCCCC}2}]).to\_s}}\\
+\texttt{ 128 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 129 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 130 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.preamble({\color[HTML]{C1C144}theme})}}\\
+\texttt{ 131 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}=}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}'}{\color[HTML]{AD9361}'}}}}\\
+\texttt{ 132 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}documentclass[a4paper,landscape]\{article\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 133 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}pagestyle\{empty\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 134 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage\{xcolor\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 135 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage\{colortbl\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 136 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage\{longtable\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 137 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]\{geometry\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 138 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage[T1]\{fontenc\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 139 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage[scaled]\{beramono\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 140 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}usepackage[bookmarksopen,bookmarksdepth=20]\{hyperref\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 141 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}definecolor\{pgcolor\}\{HTML\}\{{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}{\color[HTML]{AD9361}{\color[HTML]{AD9361}page\_color}}{\color[HTML]{AD9361}(}theme{\color[HTML]{AD9361})}{\color[HTML]{AD9361}\}}}\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 142 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}definecolor\{headingcolor\}\{HTML\}\{{\color[HTML]{AD9361}{\color[HTML]{AD9361}\#\{}{\color[HTML]{AD9361}{\color[HTML]{AD9361}heading\_color}}{\color[HTML]{AD9361}(}theme{\color[HTML]{AD9361})}{\color[HTML]{AD9361}\}}}\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 143 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}pagecolor\{pgcolor\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 144 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}begin\{document\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 145 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}setlength{\color[HTML]{AFA472}$\backslash$$\backslash$}LTleft{\color[HTML]{AFA472}$\backslash$$\backslash$}parindent{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 146 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}setlength{\color[HTML]{AFA472}$\backslash$$\backslash$}LTright{\color[HTML]{AFA472}$\backslash$$\backslash$}fill{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 147 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble\hspace{1ex}{\color[HTML]{47B8D6}<<}\hspace{1ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}setlength\{{\color[HTML]{AFA472}$\backslash$$\backslash$}LTpre\}\{-10pt\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 148 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}preamble}}\\
+\texttt{ 149 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 150 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 151 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{def}}\hspace{1ex}self.endtag}}\\
+\texttt{ 152 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}\hspace{3ex}{\color[HTML]{AD9361}{\color[HTML]{AD9361}''}{\color[HTML]{AFA472}$\backslash$$\backslash$}end\{document\}{\color[HTML]{AFA472}$\backslash$n}{\color[HTML]{AD9361}''}}}}\\
+\texttt{ 153 }&\mbox{\texttt{ \hspace{3ex}\hspace{3ex}{\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 154 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 155 }&\mbox{\texttt{ {\color[HTML]{6969FA}\textbf{end}}}}\\
+\texttt{ 156 }&\mbox{\texttt{ }}\\
+\texttt{ 157 }&\mbox{\texttt{ }}\\
+\texttt{ 158 }&\mbox{\texttt{ }}\\
+\texttt{ 159 }&\mbox{\texttt{ }}\\
+\texttt{ 160 }&\mbox{\texttt{ }}\\
+\texttt{ 161 }&\mbox{\texttt{ \hspace{3ex}}}\\
+\texttt{ 162 }&\mbox{\texttt{ }}\\
+\texttt{ 163 }&\mbox{\texttt{ {\color[HTML]{555555}{\color[HTML]{555555}\#}\hspace{1ex}infile\hspace{1ex}=\hspace{1ex}File.new\hspace{1ex}'out.tex',\hspace{1ex}'w'}}}\\
+\texttt{ 164 }&\mbox{\texttt{ }}\\
+\texttt{ 165 }&\mbox{\texttt{ {\color[HTML]{555555}{\color[HTML]{555555}\#}\hspace{1ex}CodeRippa.rip\_file\hspace{1ex}infile,\hspace{1ex}options[:theme],\hspace{1ex}}}}\\
+\texttt{ 166 }&\mbox{\texttt{ }}\\
+\texttt{ 167 }&\mbox{\texttt{ {\color[HTML]{555555}{\color[HTML]{555555}\#}\hspace{1ex}CodeRippa.rip\_file\hspace{1ex}infile,\hspace{1ex}ARGV[0]}}}\\
+\texttt{ 168 }&\mbox{\texttt{ {\color[HTML]{555555}{\color[HTML]{555555}\#}\hspace{1ex}infile.close}}}\\
+\texttt{ 169 }&\mbox{\texttt{ }}\\
+\end{longtable}
+\end{document}

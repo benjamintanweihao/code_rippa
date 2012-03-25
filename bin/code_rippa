@@ -1,0 +1,74 @@
+#! /usr/bin/env ruby
+begin
+	require 'optparse'
+	require 'code_rippa'
+rescue LoadError
+   $:.unshift File.join( File.dirname(__FILE__), '..', 'lib' )
+   require 'code_rippa'
+end
+
+options = {}
+option_parser = OptionParser.new do |opts|
+
+	opts.banner = CodeRippa.usage
+
+	opts.on('-l', '--list-themes', 'List all available themes') do
+		puts Uv.themes.join("\n")
+		exit
+	end
+	
+	opts.on('-t', '--theme THEME', 'Selected theme') do |theme|
+		if Uv.themes.include? theme
+			options[:theme] = theme	 
+		else	
+			raise ArgumentError, "#{theme} theme not found. Use -l to see the list of available themes."
+		end
+	end
+	
+	opts.on('-n', '--list-syntax', 'List all available syntax') do
+		puts CodeRippa.supported_syntax.join("\n")
+		exit
+	end
+	
+	opts.on('-s', '--syntax SYNTAX', 'Selected syntax') do |syntax|
+		if CodeRippa.supported_syntax.include? syntax
+			options[:syntax] = syntax				 
+		else	
+			raise ArgumentError, "syntax for #{syntax} not found. Use -s to see the list of available syntax."
+		end
+	end
+			
+				
+	options[:excluded_exts] = []
+	opts.on('-x', '--excluded-exts E1,E2,EN', Array, 'Exclude these extensions when processing') do |exts|
+		
+		options[:excluded_exts] = exts.sort!
+		valid_exts = exts & CodeRippa.supported_exts
+		
+		if valid_exts != exts
+			invalid_exts = exts - valid_exts
+			raise ArgumentError, "These extensions are not supported: #{invalid_exts.join(" ")}. Aborting."
+		else
+			options[:ex_extensions] = valid_exts
+		end
+	end
+		
+	opts.on('-h', '--help', 'Display this screen') do
+		puts opts
+		exit
+	end	 
+end
+
+begin
+	option_parser.parse!	
+	
+	if options[:theme] and options[:syntax] and ARGV.size == 1
+		CodeRippa.rip_file(ARGV[0], options[:theme], options[:syntax], options[:excluded_exts])
+	else
+		raise ArgumentError, "Missing arguments. Aborting.\n" + CodeRippa.usage
+	end
+	
+rescue ArgumentError => e
+	puts e
+	exit
+end
