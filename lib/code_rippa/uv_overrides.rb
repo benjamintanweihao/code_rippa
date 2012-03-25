@@ -5,11 +5,9 @@ module Uv
 	
 	Uv.syntax_path   = File.join(File.dirname(__FILE__), 'syntax')
   Uv.render_path   = File.join(File.dirname(__FILE__), 'render')
-  Uv.theme_path    = File.join(render_path, 'themes')
+  Uv.theme_path    = File.join(File.dirname(__FILE__), 'render', 'latex')
   # Uv.default_style ||= 'moc'
-		
-	puts Uv.render_path
-		
+				
 	def Uv.themes
     Dir.glob( File.join(@theme_path, '*.render') ).collect do |f| 
       File.basename(f, '.render')
