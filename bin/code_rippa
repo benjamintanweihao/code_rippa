@@ -3,8 +3,8 @@ begin
 	require 'optparse'
 	require 'code_rippa'
 rescue LoadError
-   $:.unshift File.join(File.dirname(__FILE__), '..', 'lib')
-   require 'code_rippa'
+  $:.unshift File.join(File.dirname(__FILE__), '..', 'lib', )
+  require 'code_rippa'
 end
 
 options = {}

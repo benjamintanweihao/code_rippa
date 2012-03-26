@@ -1,7 +1,7 @@
 require 'uv'
 require 'find'
 require 'linguist'
-require '../lib/code_rippa/uv_overrides'
+require 'code_rippa/uv_overrides'
 
 YAML::ENGINE.yamler= 'syck'
 
@@ -72,7 +72,7 @@ module CodeRippa
 	end
 															
 	private
-	
+
 	
 		def self.usage
 		 "Usage: code_rippa [options] file_or_directory"
