@@ -45,7 +45,7 @@ module CodeRippa
 				Find.prune
 			else
 				begin
-					puts ">> #{path}"
+
 					is_rippable = rippable?(path, syntax, excluded_exts)
 
 					if is_rippable
@@ -76,6 +76,12 @@ module CodeRippa
 	
 		def self.usage
 		 "Usage: code_rippa [options] file_or_directory"
+		 <<END  
+		 werwerwer
+		 END
+		 
+		 
+		 
 		end
 	
 		def self.syntax_path

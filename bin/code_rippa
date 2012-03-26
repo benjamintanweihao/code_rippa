@@ -9,12 +9,35 @@ end
 
 options = {}
 option_parser = OptionParser.new do |opts|
+	
+	opts.banner =<<END
 
-	opts.banner = CodeRippa.usage
+  Usage: code_rippa [options] input_file_or_directory
 
+  Parses input_file or directory and outputs a file named out.tex. 
+  It expects both the syntax and theme to be specified.
+  
+  Example:
+
+     code_rippa -s ruby -t amy path_to_file.rb
+
+     Renders the contents of path_to_file.rb into out.tex.
+
+     Then run
+     
+     pdflatex out.tex
+     
+     to generate the PDF output.
+        
+  "-s" and "-t" are mandatory. The rest are optional.
+
+  Options:
+
+  END
+	
 	opts.on('-l', '--list-themes', 'List all available themes') do
 		puts Uv.themes.join("\n")
-		exit
+		exit 0
 	end
 	
 	opts.on('-t', '--theme THEME', 'Selected theme') do |theme|
@@ -27,7 +50,7 @@ option_parser = OptionParser.new do |opts|
 	
 	opts.on('-n', '--list-syntax', 'List all available syntax') do
 		puts CodeRippa.supported_syntax.join("\n")
-		exit
+		exit 0
 	end
 	
 	opts.on('-s', '--syntax SYNTAX', 'Selected syntax') do |syntax|
@@ -55,24 +78,23 @@ option_parser = OptionParser.new do |opts|
 		
 	opts.on('-h', '--help', 'Display this screen') do
 		puts opts
-		exit
+		exit 0
 	end	 
 end
 
 begin
 	option_parser.parse!	
-	
 	if options[:theme] and options[:syntax] and ARGV.size == 1
 		if FileTest.file?(ARGV[0])
 			CodeRippa.rip_file(ARGV[0], options[:theme], options[:syntax], options[:excluded_exts])
 		elsif FileTest.directory?(ARGV[0])
 			CodeRippa.rip_dir(ARGV[0], options[:theme], options[:syntax], options[:excluded_exts])
 		end
+		exit 0
 	else
 		raise ArgumentError, "Missing arguments. Aborting.\n" + CodeRippa.usage
 	end
-	
 rescue ArgumentError => e
 	puts e
-	exit
+	exit 1
 end
