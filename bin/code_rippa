@@ -32,8 +32,7 @@ option_parser = OptionParser.new do |opts|
   "-s" and "-t" are mandatory. The rest are optional.
 
   Options:
-
-  END
+END
 	
 	opts.on('-l', '--list-themes', 'List all available themes') do
 		puts Uv.themes.join("\n")
