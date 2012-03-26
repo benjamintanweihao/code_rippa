@@ -73,6 +73,7 @@ module CodeRippa
 															
 	private
 	
+	
 		def self.usage
 		 "Usage: code_rippa [options] file_or_directory"
 		end
@@ -80,6 +81,7 @@ module CodeRippa
 		def self.syntax_path
 			Uv.syntax_path
 		end
+
 		
 		def self.supported_syntax
 			syntax = []
@@ -92,6 +94,7 @@ module CodeRippa
 			end
 			syntax
 		end
+
 		
 		def self.supported_langs
 			langs = []
@@ -192,7 +195,7 @@ module CodeRippa
 			preamble << "\\setlength{\\LTpre}{-10pt}\n"
 			preamble
 		end
-		
+
 	
 		def self.endtag
 			"\\end{document}\n"
