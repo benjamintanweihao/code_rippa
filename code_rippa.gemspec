@@ -9,6 +9,7 @@ Gem::Specification.new do |gem|
   gem.description   = %q{Converts source code into a (bookmarked, themed, and syntax highlighted!) PDF.}
   gem.summary       = %q{Converts source code into a (bookmarked, themed, and syntax highlighted!) PDF. Supports 150 languages and Textmate themes. }
   gem.homepage      = "http://code-rippa.heroku.com"
+  gem.has_rdoc      = false
   gem.files         = `git ls-files`.split($\)
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   # gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
