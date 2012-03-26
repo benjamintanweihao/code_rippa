@@ -7,7 +7,7 @@ Gem::Specification.new do |gem|
   gem.email         = ["ben@witsvale.com"]
   gem.platform      = Gem::Platform::RUBY
   gem.description   = %q{Converts source code into a (bookmarked, themed, and syntax highlighted!) PDF.}
-  gem.summary       = %q{Converts source code into a (bookmarked, themed, and syntax highlighted!) PDF. Supports 150 languages and Textmate themes. }
+  gem.summary       = %q{CodeRippa takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 15 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.}
   gem.homepage      = "http://code-rippa.heroku.com"
   gem.has_rdoc      = false
   gem.files         = `git ls-files`.split($\)
