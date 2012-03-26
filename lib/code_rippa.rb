@@ -72,17 +72,6 @@ module CodeRippa
 	end
 															
 	private
-
-	
-		def self.usage
-		 "Usage: code_rippa [options] file_or_directory"
-		 <<END  
-		 werwerwer
-		 END
-		 
-		 
-		 
-		end
 	
 		def self.syntax_path
 			Uv.syntax_path

@@ -92,7 +92,7 @@ begin
 		end
 		exit 0
 	else
-		raise ArgumentError, "Missing arguments. Aborting.\n" + CodeRippa.usage
+		raise ArgumentError, "Missing arguments. Aborting.\n"
 	end
 rescue ArgumentError => e
 	puts e
