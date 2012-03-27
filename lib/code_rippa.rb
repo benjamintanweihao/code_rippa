@@ -6,21 +6,17 @@ YAML::ENGINE.yamler= 'syck'
 
 module CodeRippa
 			
-	def self.rip_file(path, theme, syntax, excluded_exts = [])
+	def self.rip_file(path, theme, syntax)
 		begin 
 			srcfile = File.read(path)
 			src_ext = File.extname(path)[1..-1]					
-			unless excluded_exts.include? src_ext
-			  outfile = File.open('out.tex', 'w') 
-				outfile.write preamble theme
-				outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
-				outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
-				outfile.write Uv.parse(srcfile, 'latex', syntax, true, theme) 
-				outfile.write endtag
-				outfile.close
-			else
-				puts "Warning: #{path} not processed. Check arguments."
-			end			
+		  outfile = File.open('out.tex', 'w') 
+			outfile.write preamble theme
+			outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
+			outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
+			outfile.write Uv.parse(srcfile, 'latex', syntax, true, theme) 
+			outfile.write endtag
+			outfile.close
 		rescue Exception => e
 			puts e
 		end

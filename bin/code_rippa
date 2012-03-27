@@ -63,10 +63,8 @@ END
 	# No need to check if its a correct extension.			
 	options[:excluded_exts] = []
 	opts.on('-x', '--excluded-exts E1,E2,EN', Array, 'Exclude these extensions when processing') do |exts|
-		
 		options[:excluded_exts] = exts.sort!
 		valid_exts = exts & CodeRippa.supported_exts
-		
 		if valid_exts != exts
 			invalid_exts = exts - valid_exts
 			raise ArgumentError, "These extensions are not supported: #{invalid_exts.join(" ")}. Aborting."
@@ -85,9 +83,12 @@ begin
 	option_parser.parse!	
 	if options[:theme] and options[:syntax] and ARGV.size == 1
 		if FileTest.file?(ARGV[0])
-			CodeRippa.rip_file(ARGV[0], options[:theme], options[:syntax], options[:excluded_exts])
-		elsif FileTest.directory?(ARGV[0])
-			CodeRippa.rip_dir(ARGV[0], options[:theme], options[:syntax], options[:excluded_exts])
+			CodeRippa.rip_file(ARGV[0], options[:theme], options[:syntax])
+		elsif File.directory?(ARGV[0])
+		  Dir.chdir(ARGV[0])
+			CodeRippa.rip_dir(Dir.pwd, options[:theme], options[:syntax], options[:excluded_exts])
+		else
+		  raise ArgumentError, "Invalid path. Aborting.\n"
 		end
 		exit 0
 	else
