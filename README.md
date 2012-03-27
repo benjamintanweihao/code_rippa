@@ -81,7 +81,7 @@ Note: In case your system doesn't have `pdflatex`, you can get a [LaTeX](http://
 
 ## Credits
 
-None of this would be possible without the awesome [ultraviolet](https://github.com/giom/ultraviolet) and [spox-ultraviolet](https://github.com/spox/ultraviolet) and  [linguist](https://github.com/github/linguist) gems. Props to [__lwheng__](https://github.com/lwheng) for providing most of the LaTeX help.
+None of this would be possible without the awesome [ultraviolet](https://github.com/giom/ultraviolet) and [spox-ultraviolet](https://github.com/spox/ultraviolet) gems. Props to [__lwheng__](https://github.com/lwheng) for providing most of the LaTeX help.
 
 ## Contributing
 
