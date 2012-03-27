@@ -9,7 +9,6 @@ end
 
 options = {}
 option_parser = OptionParser.new do |opts|
-	
 	opts.banner =<<END
 
   Usage: code_rippa [options] input_file_or_directory
@@ -34,9 +33,12 @@ option_parser = OptionParser.new do |opts|
   Options:
 END
 	
-	opts.on('-l', '--list-themes', 'List all available themes') do
-		puts Uv.themes.join("\n")
-		exit 0
+	opts.on('-s', '--syntax SYNTAX', 'Selected syntax') do |syntax|
+		if CodeRippa.supported_syntax.include? syntax
+			options[:syntax] = syntax				 
+		else	
+			raise ArgumentError, "syntax for #{syntax} not found. Use -s to see the list of available syntax."
+		end
 	end
 	
 	opts.on('-t', '--theme THEME', 'Selected theme') do |theme|
@@ -52,15 +54,16 @@ END
 		exit 0
 	end
 	
-	opts.on('-s', '--syntax SYNTAX', 'Selected syntax') do |syntax|
-		if CodeRippa.supported_syntax.include? syntax
-			options[:syntax] = syntax				 
-		else	
-			raise ArgumentError, "syntax for #{syntax} not found. Use -s to see the list of available syntax."
-		end
+	opts.on('-l', '--list-themes', 'List all available themes') do
+		puts Uv.themes.join("\n")
+		exit 0
 	end
-			
-	# No need to check if its a correct extension.			
+	
+	opts.on('-c', '--version', 'Display version number') do
+		puts CodeRippa::VERSION
+		exit 0
+	end
+
 	options[:excluded_exts] = []
 	opts.on('-x', '--excluded-exts E1,E2,EN', Array, 'Exclude these extensions when processing') do |exts|
 		options[:excluded_exts] = exts.sort!
