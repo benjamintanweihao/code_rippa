@@ -86,3 +86,16 @@ None of this would be possible without the awesome [ultraviolet](https://github.
 ## Contributing
 
 Currently this gem is in its infancy. Any bug reports and feature requests are very welcomed.
+
+## Changelog
+
+### 0.0.4
+
+- Removed dependency on Linguist.
+- Tidier code.
+	
+### 0.0.1 - 0.0.3
+
+- Initial gem push
+- Fixed many stupid bugs along the way
+
