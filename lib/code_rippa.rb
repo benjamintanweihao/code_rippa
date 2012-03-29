@@ -2,8 +2,12 @@ require 'uv'
 require 'find'
 require 'code_rippa/uv_overrides'
 require 'code_rippa/version'
+require 'ansi/progressbar'
+require 'rainbow'
+include ANSI
 
-YAML::ENGINE.yamler= 'syck'
+
+YAML::ENGINE.yamler = 'syck'
 
 module CodeRippa
 			
@@ -24,10 +28,13 @@ module CodeRippa
 	end
 
 	def self.rip_dir(dir_path, theme, syntax, excluded_exts = [])
+	  rip_text = "Rippin'".color(:blue)
+	  pbar = Progressbar.new(rip_text, Dir["**/*"].length)
 		counter = 0					
 		outfile = File.open('out.tex', 'w') 
-		outfile.write preamble(theme)
-		Find.find(dir_path) do |path|
+		
+		outfile.write preamble theme
+		 Find.find dir_path do |path|
 			depth = path.to_s.count('/')
 			if File.basename(path)[0] == ?. or File.basename(path) == "out.tex"
 				Find.prune
@@ -52,12 +59,24 @@ module CodeRippa
 				end
 				counter += 1
 			end
+			pbar.inc
 		end
+		
 		outfile.write endtag
+		pbar.finish
+		
+		msg =  "Completed successfully.\n".color(:green)
+		msg << "Output file written to: "
+		msg << "#{File.expand_path(outfile)}\n".color(:yellow)
+		msg << "Now run "
+    msg << "pdflatex #{File.expand_path(outfile)} ".color(:red)
+    msg << "** TWICE ** to generate PDF."
+    puts msg
+		
 		outfile.close
 	end
 															
-	private
+	private	
 		def self.syntax_path
 			Uv.syntax_path
 		end
@@ -99,7 +118,9 @@ module CodeRippa
 				true
 			else
 				src_ext = File.extname(path)[1..-1]
-				if excluded_exts.include?(src_ext)
+				if File.basename(path) == "out.tex"
+				  false
+				elsif excluded_exts.include?(src_ext)
 					false
 				elsif supported_exts.include?(src_ext)
   				true

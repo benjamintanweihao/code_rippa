@@ -59,7 +59,7 @@ END
 		exit 0
 	end
 	
-	opts.on('-c', '--version', 'Display version number') do
+	opts.on('-v', '--version', 'Display version number') do
 		puts CodeRippa::VERSION
 		exit 0
 	end
