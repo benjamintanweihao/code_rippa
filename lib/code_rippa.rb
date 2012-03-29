@@ -21,7 +21,15 @@ module CodeRippa
 			outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
 			outfile.write Uv.parse(srcfile, 'latex', syntax, true, theme) 
 			outfile.write endtag
-			outfile.close
+			
+			msg =  "Completed successfully.\n".color(:green)
+  		msg << "Output file written to: "
+  		msg << "#{File.expand_path(outfile)}\n".color(:yellow)
+  		msg << "Now run "
+      msg << "pdflatex #{File.expand_path(outfile)} ".color(:red)
+      msg << "** TWICE ** to generate PDF."
+      puts msg
+      outfile.close
 		rescue Exception => e
 			puts e
 		end
