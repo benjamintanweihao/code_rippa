@@ -13,22 +13,18 @@ option_parser = OptionParser.new do |opts|
 
   Usage: code_rippa [options] input_file_or_directory
 
-  Parses input_file or directory and outputs a file named out.tex. 
-  It expects both the syntax and theme to be specified.
+     Parses input_file or directory and outputs a file named out.tex. 
+     It expects both the syntax and theme to be specified.
   
   Example:
 
-     code_rippa -s ruby -t amy path_to_file.rb
+    code_rippa -s ruby -t amy path_to_file.rb
 
-     Renders the contents of path_to_file.rb into out.tex.
+    Renders the contents of path_to_file.rb into out.tex.
 
-     Then run
-     
-     pdflatex out.tex
-     
-     to generate the PDF output.
+    Then run `pdflatex out.tex` to generate the PDF output.
         
-  "-s" and "-t" are mandatory. The rest are optional.
+    "-s" and "-t" are mandatory. The rest are optional.
 
   Options:
 END
