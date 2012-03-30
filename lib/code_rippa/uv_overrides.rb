@@ -1,5 +1,7 @@
 require 'uv'
 
+# These module monkey patches the original Spox's Ultraviolet, in order 
+# to override defaults.
 module Uv
 	@@set_table_columns = true
 	
