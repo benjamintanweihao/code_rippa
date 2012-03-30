@@ -89,6 +89,12 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 
 ## Changelog
 
+
+### 0.0.5
+
+- Better performance when parsing.
+- Code documentation.
+
 ### 0.0.4
 
 - Removed dependency on Linguist.
