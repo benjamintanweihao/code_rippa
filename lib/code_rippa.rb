@@ -10,7 +10,10 @@ include ANSI
 YAML::ENGINE.yamler = 'syck'
 
 module CodeRippa
-			
+  
+  @@supported_syntax = nil
+  @@supported_ext = nil
+  
 	def self.rip_file(path, theme, syntax)
 		begin 
 			srcfile = File.read(path)
@@ -36,10 +39,9 @@ module CodeRippa
 	end
 
 	def self.rip_dir(dir_path, theme, syntax, excluded_exts = [])
-	  rip_text = "Rippin'".color(:blue)
-	  pbar = Progressbar.new(rip_text, Dir["**/*"].length)
-		counter = 0					
-		outfile = File.open('out.tex', 'w') 
+	  pbar     = Progressbar.new("Rippin'".color(:blue), Dir["**/*"].length)
+		counter  = 0					
+		outfile  = File.open('out.tex', 'w') 
 		
 		outfile.write preamble theme
 		 Find.find dir_path do |path|
@@ -90,13 +92,17 @@ module CodeRippa
 		end
 		
 		def self.supported_syntax
-			syntax = []
-			Dir.foreach(syntax_path) do |f|
-				if File.extname(f) == ".syntax"
-					syntax << File.basename(f, '.*') 
-				end
-			end
-			syntax
+		  if @@supported_syntax
+		    @@supported_syntax
+	    else  
+			  @@supported_syntax = []
+  			Dir.foreach(syntax_path) do |f|
+  				if File.extname(f) == ".syntax"
+  					@@supported_syntax << File.basename(f, '.*') 
+  				end
+  			end
+			@@supported_syntax
+		  end
 		end
 		
 		def self.supported_langs
@@ -111,14 +117,18 @@ module CodeRippa
 		end
 
 		def self.supported_exts
-			filetypes = []
-			Dir.foreach(syntax_path) do |f|
-				if File.extname(f) == ".syntax"
-					y = YAML.load(File.read "#{syntax_path}/#{f}")
-					filetypes += y["fileTypes"] if y["fileTypes"]
-				end
-			end
-			filetypes
+		  if @@supported_ext
+		    @@supported_ext
+	    else
+  			@@supported_ext = []
+  			Dir.foreach(syntax_path) do |f|
+  				if File.extname(f) == ".syntax"
+  					y = YAML.load(File.read "#{syntax_path}/#{f}")
+  					@@supported_ext += y["fileTypes"] if y["fileTypes"]
+  				end
+  			end
+  			@@supported_ext	      
+      end
 		end
 
 		def self.bookmarkable?(path, syntax, excluded_exts)
