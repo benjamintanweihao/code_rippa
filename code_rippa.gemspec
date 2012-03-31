@@ -14,7 +14,7 @@ Gem::Specification.new do |gem|
   gem.executables   = gem.files.grep(%r{^bin/}).map{ |f| File.basename(f) }
   # gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "code_rippa"
-  gem.require_paths = ["lib"]
+  gem.require_paths = ["lib", "lib/syntax", "lib/render"]
   gem.version       = CodeRippa::VERSION
   gem.required_ruby_version = '>= 1.9.0'
   gem.add_dependency "rainbow"

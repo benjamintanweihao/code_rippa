@@ -22,7 +22,7 @@ option_parser = OptionParser.new do |opts|
 
     Renders the contents of path_to_file.rb into out.tex.
 
-    Then run `pdflatex out.tex` to generate the PDF output.
+    Then run `pdflatex -interaction=batchmode out.tex` to generate the PDF output.
         
     "-s" and "-t" are mandatory. The rest are optional.
 
@@ -46,8 +46,7 @@ END
 	end
 	
 	opts.on('-n', '--list-syntax', 'List all available syntax') do
-    # puts CodeRippa.supported_syntax.join("\n")
-    puts CodeRippa.syntax_path
+    puts CodeRippa.supported_syntax.join("\n")
 		exit 0
 	end
 	

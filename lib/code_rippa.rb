@@ -42,7 +42,7 @@ module CodeRippa
 			msg << "Output file written to: "
 			msg << "#{File.expand_path(outfile)}\n".color(:yellow)
 			msg << "Now run "
-			msg << "pdflatex #{File.expand_path(outfile)} ".color(:red)
+			msg << "pdflatex -interaction=batchmode #{File.expand_path(outfile)} ".color(:red)
 			msg << "** TWICE ** to generate PDF."
 			puts msg
 			outfile.close
@@ -126,16 +126,12 @@ module CodeRippa
 		#		# => ['ruby','prolog'] 
 		#
 		# Returns an Array of supported syntaxes 
-		def self.supported_syntax
-		  puts "HEEEERE"
-		  puts syntax_path
-			
+		def self.supported_syntax			
 			if @@supported_syntax
 				@@supported_syntax
 			else	
 				@@supported_syntax = []
 				Dir.foreach(syntax_path) do |f|
-				  puts syntax_path
 					if File.extname(f) == ".syntax"
 						@@supported_syntax << File.basename(f, '.*') 
 					end
