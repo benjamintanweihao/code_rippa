@@ -19,5 +19,6 @@ Gem::Specification.new do |gem|
   gem.add_dependency "rainbow"
   gem.add_dependency "ansi"  
   gem.add_dependency "spox-ultraviolet", "~> 0.10.5"
+  gem.add_development_dependency "rake"  
   gem.add_development_dependency "minitest"  
 end
