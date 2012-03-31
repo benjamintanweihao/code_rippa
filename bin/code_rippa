@@ -15,7 +15,13 @@ option_parser = OptionParser.new do |opts|
 
      Parses input_file or directory and outputs a file named out.tex. 
      It expects both the syntax and theme to be specified.
-  
+     
+     To see all syntaxes, type:
+        code_rippa -n
+        
+     And to see all themes, type:
+        code_rippa -l     
+      
   Example:
 
     code_rippa -s ruby -t amy path_to_file.rb
