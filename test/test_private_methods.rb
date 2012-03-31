@@ -40,7 +40,7 @@ describe CodeRippa do
       assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.py",     'moc', [])
       assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.sh",     'moc', [])
       assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.groovy", 'moc', [])
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.php", 'moc', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.php", 'moc', [])
     end
   
     it "should not parse a file with an extension that isn't supported" do
@@ -69,10 +69,6 @@ describe CodeRippa do
       assert_equal true, CodeRippa.bookmarkable?("#{fixtures_path}/", 'moc', [])    
     end
   
-    it "should not bookmark the output TEX file" do
-      assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/out.tex", 'moc', [])    
-    end
-    
     it "should not bookmark a file that has an excluded extension" do
       assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/hello.rb",  'moc', ['rb'])
       assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/hello.c",   'moc', ['c'])

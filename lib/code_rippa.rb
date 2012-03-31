@@ -6,7 +6,6 @@ require 'ansi/progressbar'
 require 'rainbow'
 include ANSI
 
-
 YAML::ENGINE.yamler = 'syck'
 
 module CodeRippa
@@ -105,7 +104,7 @@ module CodeRippa
 		msg << "Output file written to: "
 		msg << "#{File.expand_path(outfile)}\n".color(:yellow)
 		msg << "Now run "
-		msg << "pdflatex #{File.expand_path(outfile)} ".color(:red)
+		msg << "pdflatex -interaction=batchmode #{File.expand_path(outfile)} ".color(:red)
 		msg << "** TWICE ** to generate PDF."
 		puts msg
 		
