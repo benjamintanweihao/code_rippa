@@ -125,13 +125,17 @@ module CodeRippa
 		#		supported_syntax 
 		#		# => ['ruby','prolog'] 
 		#
-		# Returns an Array of supported languages 
+		# Returns an Array of supported syntaxes 
 		def self.supported_syntax
+		  puts "HEEEERE"
+		  puts syntax_path
+			
 			if @@supported_syntax
 				@@supported_syntax
 			else	
 				@@supported_syntax = []
 				Dir.foreach(syntax_path) do |f|
+				  puts syntax_path
 					if File.extname(f) == ".syntax"
 						@@supported_syntax << File.basename(f, '.*') 
 					end

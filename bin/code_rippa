@@ -33,7 +33,7 @@ END
 		if CodeRippa.supported_syntax.include? syntax
 			options[:syntax] = syntax				 
 		else	
-			raise ArgumentError, "syntax for #{syntax} not found. Use -s to see the list of available syntax."
+			raise ArgumentError, "syntax for #{syntax} not found. Use -n to see the list of available syntax."
 		end
 	end
 	
@@ -46,7 +46,8 @@ END
 	end
 	
 	opts.on('-n', '--list-syntax', 'List all available syntax') do
-		puts CodeRippa.supported_syntax.join("\n")
+    # puts CodeRippa.supported_syntax.join("\n")
+    puts CodeRippa.syntax_path
 		exit 0
 	end
 	
