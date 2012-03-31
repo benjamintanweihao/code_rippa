@@ -6,6 +6,7 @@ require 'ansi/progressbar'
 require 'rainbow'
 include ANSI
 
+
 YAML::ENGINE.yamler = 'syck'
 
 module CodeRippa
