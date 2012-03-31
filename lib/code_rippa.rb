@@ -1,4 +1,3 @@
-require 'uv'
 require 'find'
 require 'code_rippa/uv_overrides'
 require 'code_rippa/version'
