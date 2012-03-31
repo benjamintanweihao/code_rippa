@@ -2,20 +2,9 @@
 
 [![Build Status](https://secure.travis-ci.org/benjamintanweihao/code_rippa.png)](http://travis-ci.org/benjamintanweihao/code_rippa)
 
-
 CodeRippa takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 15 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.
 
 ## Installation
-
-Add this line to your application's Gemfile:
-
-	$ gem 'code_rippa'
-
-And then execute:
-
-	$ bundle
-
-Or install it yourself as:
 
 	$ gem install code_rippa
 
@@ -92,6 +81,9 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 
 ## Changelog
 
+### 0.0.6
+
+- Include MiniTest specs
 
 ### 0.0.5
 
