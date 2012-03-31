@@ -1,5 +1,8 @@
 # CodeRippa
 
+[![Build Status](https://secure.travis-ci.org/benjamintanweihao/code_rippa.png)](http://travis-ci.org/benjamintanweihao/code_rippa)
+
+
 CodeRippa takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 15 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.
 
 ## Installation
