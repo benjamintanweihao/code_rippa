@@ -2,6 +2,7 @@ require 'find'
 require 'code_rippa/uv_overrides'
 require 'code_rippa/version'
 require 'ansi/progressbar'
+require 'language_sniffer'
 require 'rainbow'
 include ANSI
 
@@ -69,8 +70,8 @@ module CodeRippa
 		outfile	 = File.open('out.tex', 'w') 
 		
 		outfile.write preamble theme
-		 Find.find dir_path do |path|
-		  pbar.title = path 
+		Find.find dir_path do |path|		  
+		  puts LanguageSniffer.detect(path).language.name unless FileTest.directory?(path)
 			depth = path.to_s.count('/')
 			if File.basename(path)[0] == ?. or File.basename(path) == "out.tex"
 				Find.prune
