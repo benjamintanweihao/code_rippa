@@ -70,6 +70,7 @@ module CodeRippa
 		
 		outfile.write preamble theme
 		 Find.find dir_path do |path|
+		  pbar.title = path 
 			depth = path.to_s.count('/')
 			if File.basename(path)[0] == ?. or File.basename(path) == "out.tex"
 				Find.prune
