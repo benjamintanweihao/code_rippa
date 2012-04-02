@@ -71,14 +71,23 @@ module CodeRippa
 		
 		outfile.write preamble theme
 		Find.find dir_path do |path|		  
-		  puts LanguageSniffer.detect(path).language.name unless FileTest.directory?(path)
 			depth = path.to_s.count('/')
 			if File.basename(path)[0] == ?. or File.basename(path) == "out.tex"
 				Find.prune
 			else
 				begin
+
+				  # TODO: Remove the 'syntax argument' 
+				  syntax = ""
+				  if FileTest.directory?(path)
+				    syntax = LanguageSniffer.detect(path).language
+				    syntax = syntax.name.downcase if syntax
+				    if syntax = 
+				    puts "Parse: #{path} "
+				    puts "Using: #{syntax}"
+			    end
 					is_rippable = rippable?(path, syntax, excluded_exts)
-					if is_rippable
+					if is_rippable      		  
 						outfile.write "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
 						outfile.write "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
 					end
