@@ -4,3 +4,5 @@ log/*.log
 tmp/
 .sass-cache/
 .DS_Store
+*.gem
+out.*
