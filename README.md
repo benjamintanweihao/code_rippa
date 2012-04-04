@@ -4,6 +4,11 @@
 
 CodeRippa takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 15 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.
 
+## Prequisites
+
+You will definitely need a TeX distribution installed. To check, simply type `pdflatex`.
+In case your system doesn't have `pdflatex`, you should install a [LaTeX](http://www.tug.org/texlive/) distribution.
+
 ## Installation
 
 	$ gem install code_rippa
@@ -55,7 +60,6 @@ Note that the output file is saved as _out.tex_ in the current directory where _
 
 	$ pdflatex out.tex			# Saved as out.pdf
 
-		
 ### Producing PDF from a directory
 	
 Example:
@@ -68,8 +72,6 @@ Then, you'll need to run _pdflatex_ __twice__. This is because LaTeX needs to ge
 
 	$ pdflatex out.tex			# Saved as out.pdf
 	$ pdflatex out.tex			# Remember to run this twice!
-	
-Note: In case your system doesn't have `pdflatex`, you can get a [LaTeX](http://www.tug.org/texlive/) distribution.
 
 ## Credits
 
@@ -84,11 +86,12 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 ### 0.0.7.pre
 
 - Use [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist
+- Wrap lines of troublesome files such as minified javascript and parser generator outputs. 
 
 #### TODO
 
-- Sensible defaults, make syntax typing optional.
-- Detect the longest line within file, so that we don't parse troublesome files such as javascript that has been minified, or code that has been processed by a parser generator.
+- Sensible defaults, remove the need for inputting the syntax optional
+- Generate warnings when syntax is not supported.
 
 ### 0.0.6
 

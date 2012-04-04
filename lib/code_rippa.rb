@@ -34,6 +34,15 @@ module CodeRippa
 			outfile.write preamble theme
 			outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
 			outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
+			
+      if num_char_of_longest_line(path) < 160
+  			outfile.write Uv.parse(File.read(path), 'latex', syntax, true, theme) 
+  		else
+  		  wrapped_output = ""
+  		  IO.readlines(path).each { |line| wrapped_output << wrap(line, 120) }
+  			outfile.write Uv.parse(wrapped_output, 'latex', syntax, true, theme) 
+  		end
+			
 			outfile.write Uv.parse(srcfile, 'latex', syntax, true, theme) 
 			outfile.write endtag
 			
@@ -42,8 +51,8 @@ module CodeRippa
 			msg << "#{File.expand_path(outfile)}\n".color(:yellow)
 			msg << "Now run "
 			msg << "pdflatex -interaction=batchmode #{File.expand_path(outfile)} ".color(:red)
-			msg << "** TWICE ** to generate PDF."
 			puts msg
+			
 			outfile.close
 		rescue Exception => e
 			puts e
@@ -64,7 +73,7 @@ module CodeRippa
 	#
 	# Returns nothing.
 	def self.rip_dir(dir_path, theme, syntax, excluded_exts = [])
-		pbar		 = Progressbar.new("Rippin'".color(:blue), Dir["**/*"].length)
+		pbar		 = Progressbar.new("Rippin'", Dir["**/*"].length)
 		counter	 = 0					
 		outfile	 = File.open('out.tex', 'w') 
 		
@@ -79,11 +88,11 @@ module CodeRippa
 				  # TODO: Remove the 'syntax argument' 
 				  syntax = ""
 				  unless FileTest.directory?(path)
-				    syntax = LanguageSniffer.detect(path).language
-				    syntax = syntax.name.downcase if syntax
-				    puts "Parse: #{path} "
-				    puts "Using: #{syntax}"
+				    language = LanguageSniffer.detect(path).language
+				    syntax   = language.name.downcase if language
+				    puts "Parsing: #{path} "
 			    end
+					
 					is_rippable = rippable?(path, syntax, excluded_exts)
 					if is_rippable      		  
 						outfile.write "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
@@ -94,10 +103,18 @@ module CodeRippa
 						outfile.write "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
 					end
 					
+					output = ""
 					if is_rippable
-						outfile.write Uv.parse(File.read(path), 'latex', syntax, true, theme) 
+            
+            if num_char_of_longest_line(path) < 160
+              output = File.read(path)
+      			else
+      			  IO.readlines(path).each { |line| output << wrap(line, 120) }
+      			end
+      			outfile.write Uv.parse(output, 'latex', syntax, true, theme) 
 						outfile.write "\\clearpage\n"
 					end
+					
 				rescue Exception => e
 					puts e
 				end
@@ -122,7 +139,11 @@ module CodeRippa
 															
 	private 
 	
-	def num_char_of_longest_line(path)
+	def self.wrap(text, width) 
+    text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
+  end
+	
+	def self.num_char_of_longest_line(path)
     IO.readlines(path).collect { |x| x.length }.max	 
 	end
 	
@@ -263,8 +284,6 @@ module CodeRippa
 			src_ext = File.extname(path)[1..-1]
 			if excluded_exts.include? src_ext
 				false
-			elsif num_char_of_longest_line > 160
-			  false
 			elsif supported_exts.include?(src_ext)
 				true
 			else
