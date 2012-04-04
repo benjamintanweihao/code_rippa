@@ -6,7 +6,6 @@ require 'language_sniffer'
 require 'rainbow'
 include ANSI
 
-
 YAML::ENGINE.yamler = 'syck'
 
 module CodeRippa
@@ -79,10 +78,9 @@ module CodeRippa
 
 				  # TODO: Remove the 'syntax argument' 
 				  syntax = ""
-				  if FileTest.directory?(path)
+				  unless FileTest.directory?(path)
 				    syntax = LanguageSniffer.detect(path).language
 				    syntax = syntax.name.downcase if syntax
-				    if syntax = 
 				    puts "Parse: #{path} "
 				    puts "Using: #{syntax}"
 			    end
@@ -123,206 +121,213 @@ module CodeRippa
 	end
 															
 	private 
-		def self.syntax_path
-			Uv.syntax_path
-		end
-		
-		# Returns an Array of supported syntaxes. This is done by parsing 
-		# all the file names in the syntax folder.
-		#
-		# Examples
-		#
-		#		supported_syntax 
-		#		# => ['ruby','prolog'] 
-		#
-		# Returns an Array of supported syntaxes 
-		def self.supported_syntax			
-			if @@supported_syntax
-				@@supported_syntax
-			else	
-				@@supported_syntax = []
-				Dir.foreach(syntax_path) do |f|
-					if File.extname(f) == ".syntax"
-						@@supported_syntax << File.basename(f, '.*') 
-					end
-				end
+	
+	def num_char_of_longest_line(path)
+    IO.readlines(path).collect { |x| x.length }.max	 
+	end
+	
+	def self.syntax_path
+		Uv.syntax_path
+	end
+	
+	# Returns an Array of supported syntaxes. This is done by parsing 
+	# all the file names in the syntax folder.
+	#
+	# Examples
+	#
+	#		supported_syntax 
+	#		# => ['ruby','prolog'] 
+	#
+	# Returns an Array of supported syntaxes 
+	def self.supported_syntax			
+		if @@supported_syntax
 			@@supported_syntax
+		else	
+			@@supported_syntax = []
+			Dir.foreach(syntax_path) do |f|
+				if File.extname(f) == ".syntax"
+					@@supported_syntax << File.basename(f, '.*') 
+				end
+			end
+		@@supported_syntax
+		end
+	end
+	
+	# Returns an Array of supported languages. This is done by parsing 
+	# all the file names in the syntax folder.
+	#
+	# Examples
+	#
+	#		supported_langs 
+	#		# => ['Ruby','Prolog'] 
+	#
+	# Returns an Array of supported languages
+	def self.supported_langs
+		langs = []
+		Dir.foreach(syntax_path) do |f|
+			if File.extname(f) == ".syntax"
+				y = YAML.load(File.read "#{syntax_path}/#{f}")
+				langs << y["name"] if y["name"]
 			end
 		end
-		
-		# Returns an Array of supported languages. This is done by parsing 
-		# all the file names in the syntax folder.
-		#
-		# Examples
-		#
-		#		supported_langs 
-		#		# => ['Ruby','Prolog'] 
-		#
-		# Returns an Array of supported languages
-		def self.supported_langs
-			langs = []
+		langs
+	end
+	
+	# Returns an Array of file extensions that is supported by code_rippa 
+	#
+	# Examples
+	#
+	#		supported_langs 
+	#		# => ['rb', 'Gemfile', 'erb'] 
+	#
+	# Returns an Array of supported extensions.
+	def self.supported_exts
+		if @@supported_ext
+			@@supported_ext
+		else
+			@@supported_ext = []
 			Dir.foreach(syntax_path) do |f|
 				if File.extname(f) == ".syntax"
 					y = YAML.load(File.read "#{syntax_path}/#{f}")
-					langs << y["name"] if y["name"]
+					@@supported_ext += y["fileTypes"] if y["fileTypes"]
 				end
 			end
-			langs
+			@@supported_ext				
 		end
-		
-		# Returns an Array of file extensions that is supported by code_rippa 
-		#
-		# Examples
-		#
-		#		supported_langs 
-		#		# => ['rb', 'Gemfile', 'erb'] 
-		#
-		# Returns an Array of supported extensions.
-		def self.supported_exts
-			if @@supported_ext
-				@@supported_ext
-			else
-				@@supported_ext = []
-				Dir.foreach(syntax_path) do |f|
-					if File.extname(f) == ".syntax"
-						y = YAML.load(File.read "#{syntax_path}/#{f}")
-						@@supported_ext += y["fileTypes"] if y["fileTypes"]
-					end
-				end
-				@@supported_ext				
-			end
-		end
+	end
 
-		# Returns True if path should be bookmarked in the output TEX/PDF document.
-		#
-		# path					- The file/directory path
-		# syntax				- The syntax to perform parsing/syntax highlighting. 
-		#									Note the the syntax should be supported by code_rippa.
-		# excluded_exts - An Array of extensions to ignore during parsing.
-		#
-		#
-		# Examples
-		#
-		#		bookmarkable?("hello.rb", "ruby", []) 
-		#		# => true 
-		#
-		#		bookmarkable?("hello.rb", "ruby", ["rb", "html"]) 
-		#		# => false
-		#
-		#		bookmarkable?("hello.klingon", "klingon", []) 
-		#		# => false
-		#
-		# Returns True if path should be bookmarked.
-		def self.bookmarkable?(path, syntax, excluded_exts)
-			if FileTest.directory?(path)
+	# Returns True if path should be bookmarked in the output TEX/PDF document.
+	#
+	# path					- The file/directory path
+	# syntax				- The syntax to perform parsing/syntax highlighting. 
+	#									Note the the syntax should be supported by code_rippa.
+	# excluded_exts - An Array of extensions to ignore during parsing.
+	#
+	#
+	# Examples
+	#
+	#		bookmarkable?("hello.rb", "ruby", []) 
+	#		# => true 
+	#
+	#		bookmarkable?("hello.rb", "ruby", ["rb", "html"]) 
+	#		# => false
+	#
+	#		bookmarkable?("hello.klingon", "klingon", []) 
+	#		# => false
+	#
+	# Returns True if path should be bookmarked.
+	def self.bookmarkable?(path, syntax, excluded_exts)
+		if FileTest.directory?(path)
+			true
+		else
+			src_ext = File.extname(path)[1..-1]
+			if File.basename(path) == "out.tex"
+				false
+			elsif excluded_exts.include?(src_ext)
+				false
+			elsif supported_exts.include?(src_ext)
 				true
 			else
-				src_ext = File.extname(path)[1..-1]
-				if File.basename(path) == "out.tex"
-					false
-				elsif excluded_exts.include?(src_ext)
-					false
-				elsif supported_exts.include?(src_ext)
-					true
-				else
-					false
-				end
-			end
-		end
-		
-		# Returns True if path should be ripped as part of the output TEX file. 
-		#
-		# path					- The file. (directories will return false.)
-		# syntax				- The syntax to perform parsing/syntax highlighting. 
-		#									Note the the syntax should be supported by code_rippa.
-		# excluded_exts - An Array of extensions to ignore during parsing.
-		#
-		#
-		# Examples
-		#
-		#		rippable?("hello.rb", "ruby", []) 
-		#		# => true 
-		#
-		#		rippable?("~/code/", "ruby", []) 
-		#		# => false
-		#
-		#		rippable?("hello.rb", "ruby", ["rb", "html"]) 
-		#		# => false
-		#
-		#		rippable?("hello.klingon", "klingon", []) 
-		#		# => false
-		#
-		# Returns true if path should be ripped.
-		def self.rippable?(path, syntax, excluded_exts)
-			if FileTest.directory?(path)
 				false
-			else
-				src_ext = File.extname(path)[1..-1]
-				if excluded_exts.include? src_ext
-					false
-				elsif supported_exts.include?(src_ext)
-					true
-				else
-					false
-				end
 			end
 		end
-
-		# Returns the hex color code of the page color. This is done by looking at
-		# the *.render file of the selected theme.
-		#
-		# theme - The selected theme.
-		# 
-		# Examples
-		#
-		#		page_color('moc') 
-		#		# => "E8E8E8"
-		#
-		# Returns an String containing the hex color code of the page.
-		def self.page_color(theme)
-			f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
-			/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
-		end
+	end
 	
-		# Returns the hex color code of the heading. This is done by looking at
-		# the *.render file of the selected theme. The heading is present at 
-		# the top of each new document in the output TEX/PDF file.
-		#
-		# theme - The selected theme.
-		# 
-		# Examples
-		#
-		#		heading_color('moc') 
-		#		# => "E8E8E8"
-		#
-		# Returns an String containing the hex color code of the heading.
-		def self.heading_color(theme)
-			f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
-			/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[2]).to_s
+	# Returns True if path should be ripped as part of the output TEX file. 
+	#
+	# path					- The file. (directories will return false.)
+	# syntax				- The syntax to perform parsing/syntax highlighting. 
+	#									Note the the syntax should be supported by code_rippa.
+	# excluded_exts - An Array of extensions to ignore during parsing.
+	#
+	#
+	# Examples
+	#
+	#		rippable?("hello.rb", "ruby", []) 
+	#		# => true 
+	#
+	#		rippable?("~/code/", "ruby", []) 
+	#		# => false
+	#
+	#		rippable?("hello.rb", "ruby", ["rb", "html"]) 
+	#		# => false
+	#
+	#		rippable?("hello.klingon", "klingon", []) 
+	#		# => false
+	#
+	# Returns true if path should be ripped.
+	def self.rippable?(path, syntax, excluded_exts)
+		if FileTest.directory?(path)
+			false
+		else
+			src_ext = File.extname(path)[1..-1]
+			if excluded_exts.include? src_ext
+				false
+			elsif num_char_of_longest_line > 160
+			  false
+			elsif supported_exts.include?(src_ext)
+				true
+			else
+				false
+			end
 		end
+	end
 
-		def self.preamble(theme)
-			preamble = ''
-			preamble << "\\documentclass[a4paper,landscape]{article}\n"
-			preamble << "\\pagestyle{empty}\n"
-			preamble << "\\usepackage{xcolor}\n"
-			preamble << "\\usepackage{colortbl}\n"
-			preamble << "\\usepackage{longtable}\n"
-			preamble << "\\usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]{geometry}\n"
-			preamble << "\\usepackage[T1]{fontenc}\n"
-			preamble << "\\usepackage[scaled]{beramono}\n"
-			preamble << "\\usepackage[bookmarksopen,bookmarksdepth=20]{hyperref}\n"
-			preamble << "\\definecolor{pgcolor}{HTML}{#{page_color(theme)}}\n"
-			preamble << "\\definecolor{headingcolor}{HTML}{#{heading_color(theme)}}\n"
-			preamble << "\\pagecolor{pgcolor}\n"
-			preamble << "\\begin{document}\n"
-			preamble << "\\setlength\\LTleft\\parindent\n"
-			preamble << "\\setlength\\LTright\\fill\n"
-			preamble << "\\setlength{\\LTpre}{-10pt}\n"
-			preamble
-		end
-	
-		def self.endtag
-			"\\end{document}\n"
-		end
+	# Returns the hex color code of the page color. This is done by looking at
+	# the *.render file of the selected theme.
+	#
+	# theme - The selected theme.
+	# 
+	# Examples
+	#
+	#		page_color('moc') 
+	#		# => "E8E8E8"
+	#
+	# Returns an String containing the hex color code of the page.
+	def self.page_color(theme)
+		f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
+		/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
+	end
+
+	# Returns the hex color code of the heading. This is done by looking at
+	# the *.render file of the selected theme. The heading is present at 
+	# the top of each new document in the output TEX/PDF file.
+	#
+	# theme - The selected theme.
+	# 
+	# Examples
+	#
+	#		heading_color('moc') 
+	#		# => "E8E8E8"
+	#
+	# Returns an String containing the hex color code of the heading.
+	def self.heading_color(theme)
+		f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
+		/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[2]).to_s
+	end
+
+	def self.preamble(theme)
+		preamble = ''
+		preamble << "\\documentclass[a4paper,landscape]{article}\n"
+		preamble << "\\pagestyle{empty}\n"
+		preamble << "\\usepackage{xcolor}\n"
+		preamble << "\\usepackage{colortbl}\n"
+		preamble << "\\usepackage{longtable}\n"
+		preamble << "\\usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]{geometry}\n"
+		preamble << "\\usepackage[T1]{fontenc}\n"
+		preamble << "\\usepackage[scaled]{beramono}\n"
+		preamble << "\\usepackage[bookmarksopen,bookmarksdepth=20]{hyperref}\n"
+		preamble << "\\definecolor{pgcolor}{HTML}{#{page_color(theme)}}\n"
+		preamble << "\\definecolor{headingcolor}{HTML}{#{heading_color(theme)}}\n"
+		preamble << "\\pagecolor{pgcolor}\n"
+		preamble << "\\begin{document}\n"
+		preamble << "\\setlength\\LTleft\\parindent\n"
+		preamble << "\\setlength\\LTright\\fill\n"
+		preamble << "\\setlength{\\LTpre}{-10pt}\n"
+		preamble
+	end
+
+	def self.endtag
+		"\\end{document}\n"
+	end
 end

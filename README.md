@@ -81,6 +81,15 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 
 ## Changelog
 
+### 0.0.7.pre
+
+- Use [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist
+
+#### TODO
+
+- Sensible defaults, make syntax typing optional.
+- Detect the longest line within file, so that we don't parse troublesome files such as javascript that has been minified, or code that has been processed by a parser generator.
+
 ### 0.0.6
 
 - Include MiniTest specs
