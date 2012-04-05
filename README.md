@@ -21,11 +21,11 @@ In case your system doesn't have `pdflatex`, you should install a [LaTeX](http:/
     	-l, --list-themes                List all available themes
     	-t, --theme THEME                Selected theme
     	-n, --list-syntax                List all available syntax
-    	-s, --syntax SYNTAX              Selected syntax
-    	-x, --excluded-exts E1,E2,EN     Exclude these extensions when processing
     	-h, --help                       Display this screen
 
 ### List all available themes (84 and counting!)
+
+Many of the themes found in CodeRippa can be found [here](http://wiki.macromates.com/Themes/UserSubmittedThemes)	
 		
 	$ code_rippa -l
 	
@@ -36,29 +36,18 @@ In case your system doesn't have `pdflatex`, you should install a [LaTeX](http:/
 	twilight
 	zenburnesque
 	... more themes omitted
-	
-### Themes Preview
-
-Many of the themes found in CodeRippa can be found [here](http://wiki.macromates.com/Themes/UserSubmittedThemes)	
-	
-### List all supported syntax
-
-	$ code_rippa -n
-	
-	actionscript
-	erlang
-	java
-	javascript
-	prolog
-	ruby
-	yaml
-	... more syntaxes omitted
-	
+		
 ### Producing PDF from a single file
 
 Example:
-	
-	$ code_rippa -s ruby -t zenburnesque path_to_single_file.rb
+
+Without theme specified (defaults to: _made_of_code_):
+
+	$ code_rippa path_to_single_file.rb
+
+With theme specified:
+
+	$ code_rippa -t zenburnesque path_to_single_file.rb
 
 Note that the output file is saved as _out.tex_ in the current directory where _code_rippa_ was called from. 
 
@@ -68,7 +57,13 @@ Note that the output file is saved as _out.tex_ in the current directory where _
 	
 Example:
 
-	$ code_rippa -s java -t rubyblue path_to_directory
+Without theme specified (defaults to: _made_of_code_):
+	
+	$ code_rippa path_to_directory
+
+With theme specified:
+
+	$ code_rippa -t rubyblue path_to_directory
 
 Note that the output file is saved as _out.tex_ in the current directory where _code_rippa_ was called from. 
 
@@ -92,10 +87,10 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 - Using [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist for automated source code language detection
 - Themes! Glorious themes! 84 themes to choose from! Props to [filmgirl](https://github.com/filmgirl/TextMate-Themes), and the rest of the wonderful TM users who submitted their themes.
 - Wrap lines of troublesome files such as minified javascript and parser generator outputs.
+- Sensible defaults, removed the need for specifying the syntax 
 
 #### TODO
 
-- Sensible defaults, remove the need for inputting the syntax optional
 - Generate warnings when syntax is not supported.
 
 ### 0.0.6
