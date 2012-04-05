@@ -346,5 +346,6 @@ module CodeRippa
 	
 end
 
-CodeRippa.parse("/Users/rambo/code/ruby/code_rippa", "succulent")
+# Sanity check
+# CodeRippa.parse("/Users/rambo/code/ruby/code_rippa", "succulent")
 # CodeRippa.parse("/Users/rambo/code/ruby/code_rippa/lib/code_rippa.rb", "amy")

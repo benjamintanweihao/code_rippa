@@ -78,12 +78,12 @@ end
 
 begin
 	option_parser.parse!	
-	if options[:theme] and options[:syntax] and ARGV.size == 1
+	if options[:theme] and ARGV.size == 1
 		if FileTest.file?(ARGV[0])
-			CodeRippa.rip_file(ARGV[0], options[:theme])
+			CodeRippa.parse(ARGV[0], options[:theme])
 		elsif File.directory?(ARGV[0])
 		  Dir.chdir(ARGV[0])
-			CodeRippa.rip_dir(Dir.pwd, options[:theme], options[:excluded_exts])
+		  CodeRippa.parse(Dir.pwd, options[:theme])
 		else
 		  raise ArgumentError, "Invalid path. Aborting.\n"
 		end
