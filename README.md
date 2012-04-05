@@ -90,7 +90,7 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 ### 0.0.7.pre
 
 - Using [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist for automated source code language detection
-- Themes! Glorious themes! 84 themes to choose from! Props to [filmgirl](https://github.com/filmgirl/TextMate-Themes), and the rest of the TM users.
+- Themes! Glorious themes! 84 themes to choose from! Props to [filmgirl](https://github.com/filmgirl/TextMate-Themes), and the rest of the wonderful TM users who submitted their themes.
 - Wrap lines of troublesome files such as minified javascript and parser generator outputs.
 
 #### TODO
