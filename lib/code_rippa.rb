@@ -33,37 +33,38 @@ module CodeRippa
 	# Returns nothing 
 	def self.parse(path, theme)
 	  output = ""
-	  begin
-	    if FileTest.file?(path)
-  	    output = parse_file(path, theme)
-      else
-        pbar		 = Progressbar.new("Rippin'", Dir["**/*"].length)
-        counter	 = 0					
+	  
+    if FileTest.file?(path)
+	    output = parse_file(path, theme)
+    else
+      pbar		 = Progressbar.new("Rippin'", Dir["**/*"].length)
+      counter	 = 0					
 
-        Find.find path do |p|		  
-      		depth = p.to_s.count('/')
+      Find.find path do |p|		  
+        puts "Parsing: #{p} "
+    		depth = p.to_s.count('/')
 
-      		if File.basename(p)[0] == ?.
-    				Find.prune
-    			else    			  
-  					output << bookmark(p, depth, counter) if bookmarkable?(p, source_syntax(p))
-  			    output << parse_file(p, theme)
-    		  end
-    		  counter += 1
-  				pbar.inc
-    		end
-    		pbar.finish
-  	  end
-      
-  	  outfile = File.open('out.tex', 'w')  	  
-  	  output  = preamble(theme) << output << postscript
-  	  outfile.write output
-
-  	  puts completed_message(path, File.expand_path(outfile))
-  		
-	  rescue Exception => e
-	    puts e.backtrace
+    		if File.basename(p)[0] == ?.
+  				Find.prune
+  			else    			  
+					output << bookmark(p, depth, counter) if bookmarkable?(p, source_syntax(p))
+			    begin
+			      output << parse_file(p, theme)
+			    rescue Exception => e
+			      puts "Failed: #{p}".color(:red)
+			    end
+  		  end
+  		  counter += 1
+				pbar.inc
+  		end
+  		pbar.finish
 	  end
+    
+	  outfile = File.open('out.tex', 'w')  	  
+	  output  = preamble(theme) << output << postscript
+	  outfile.write output
+	  puts completed_message(path, File.expand_path(outfile))
+	  outfile.close
 	end
 	
 	
@@ -85,10 +86,10 @@ module CodeRippa
 	  syntax  = source_syntax(path)
 	  
 	  if rippable?(path, syntax)
-			content << heading(path)
-			output  =  (max_width(path) <= MAX_WIDTH) ? File.read(path) : wrap_file(path, MAX_WIDTH)      
-      content << Uv.parse(output, 'latex', syntax, true, theme) 	
-      content << "\\clearpage\n"
+		  content << heading(path)
+		  output  =  (max_width(path) <= MAX_WIDTH) ? File.read(path) : wrap_file(path, MAX_WIDTH)      
+      content << Uv.parse(output, 'latex', syntax, true, theme)
+      content << "\\clearpage\n" 	
     end
     content
 	end
@@ -112,9 +113,13 @@ module CodeRippa
 	
 	def self.source_syntax(path)
 	  syntax = ""
+	  language = ""
 	  if FileTest.file?(path) and not File.binary?(path)
-	    language = LanguageSniffer.detect(path).language
-      syntax   = language.name.downcase if language
+	    begin
+	      language = LanguageSniffer.detect(path).language
+	      syntax = language.name.downcase if language
+      rescue Exception => e
+      end
     end
     syntax
 	end
