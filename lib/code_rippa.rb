@@ -303,10 +303,10 @@ module CodeRippa
 	#		# => "E8E8E8"
 	#
 	# Returns an String containing the hex color code of the page.
-	def self.page_color(theme)
-		f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
-		/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
-	end
+  def self.page_color(theme)
+    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))           
+    /([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
+  end
 
 	# Returns the hex color code of the heading. This is done by looking at
 	# the *.render file of the selected theme. The heading is present at 
@@ -320,11 +320,12 @@ module CodeRippa
 	#		# => "E8E8E8"
 	#
 	# Returns an String containing the hex color code of the heading.
-	def self.heading_color(theme)
-		f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))						
-		/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[2]).to_s
-	end
-
+  def self.heading_color(theme)
+    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))           
+    hex_color = /([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
+    (hex_color.hex ^ 0xFFFFFF).to_s 
+  end
+	
 	def self.preamble(theme)
 		preamble = ''
 		preamble << "\\documentclass[a4paper,landscape]{article}\n"
