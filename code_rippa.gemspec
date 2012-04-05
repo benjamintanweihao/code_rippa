@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.version       = CodeRippa::VERSION
   gem.required_ruby_version = '>= 1.9.0'
   gem.add_dependency "rainbow"
+  gem.add_dependency "color"  
   gem.add_dependency "ansi"  
   gem.add_dependency "language_sniffer"  
   gem.add_dependency "spox-ultraviolet", "~> 0.10.5"

@@ -4,6 +4,8 @@ require 'code_rippa/version'
 require 'ansi/progressbar'
 require 'language_sniffer'
 require 'rainbow'
+require 'color'
+
 include ANSI
 
 YAML::ENGINE.yamler = 'syck'
