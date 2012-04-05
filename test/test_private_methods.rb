@@ -29,35 +29,35 @@ describe CodeRippa do
   describe ".rippable?" do
     
     it "should parse a file with an extension that is supported" do
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.rb",  'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.c",   'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.cpp", 'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.m",   'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.s",   'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.txt", 'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.haml", 'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.json", 'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.py",     'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.sh",     'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.groovy", 'moc', [])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.php", 'moc', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.rb",  'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.c",   'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.cpp", 'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.m",   'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.s",   'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.txt", 'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.haml", 'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.json", 'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.py",     'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.sh",     'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.groovy", 'rubyblue', [])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.php", 'rubyblue', [])
     end
   
     it "should not parse a file with an extension that isn't supported" do
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.vark",   'moc', [])    
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.psd",  'moc', [])    
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.ai",   'moc', [])    
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.scala", 'moc', [])
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.vark",   'rubyblue', [])    
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.psd",  'rubyblue', [])    
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.ai",   'rubyblue', [])    
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.scala", 'rubyblue', [])
     end
   
     it "should not parse a directory" do
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/", 'moc', [])    
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/", 'rubyblue', [])    
     end
     
     it "should not parse a file that has an excluded extension" do
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.rb", 'moc', ['rb'])
-      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.c",  'moc', ['c'])
-      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.cpp", 'moc', ['rb'])
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.rb", 'rubyblue', ['rb'])
+      assert_equal false, CodeRippa.rippable?("#{fixtures_path}/hello.c",  'rubyblue', ['c'])
+      assert_equal true, CodeRippa.rippable?("#{fixtures_path}/hello.cpp", 'rubyblue', ['rb'])
     end
     
   end
@@ -66,13 +66,13 @@ describe CodeRippa do
   describe ".bookmarkable?" do
     
     it "should bookmark a directory" do
-      assert_equal true, CodeRippa.bookmarkable?("#{fixtures_path}/", 'moc', [])    
+      assert_equal true, CodeRippa.bookmarkable?("#{fixtures_path}/", 'rubyblue', [])    
     end
   
     it "should not bookmark a file that has an excluded extension" do
-      assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/hello.rb",  'moc', ['rb'])
-      assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/hello.c",   'moc', ['c'])
-      assert_equal true,  CodeRippa.bookmarkable?("#{fixtures_path}/hello.cpp", 'moc', ['rb'])
+      assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/hello.rb",  'rubyblue', ['rb'])
+      assert_equal false, CodeRippa.bookmarkable?("#{fixtures_path}/hello.c",   'rubyblue', ['c'])
+      assert_equal true,  CodeRippa.bookmarkable?("#{fixtures_path}/hello.cpp", 'rubyblue', ['rb'])
     end
     
   end

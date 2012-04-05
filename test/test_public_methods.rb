@@ -19,7 +19,7 @@ describe CodeRippa do
   describe ".rip_file" do
     it "should rip a file that is supported" do
       puts File.expand_path(File.open("."))
-      CodeRippa.rip_file(File.join("#{File.expand_path(File.open("."))}", "hello.rb"), "moc", "ruby")
+      CodeRippa.rip_file(File.join("#{File.expand_path(File.open("."))}", "hello.rb"), "rubyblue", "ruby")
       f1 = File.open("out.tex")
       f2 = File.open("rip_file.tex")
       assert (f1.size - f2.size).abs < 300
@@ -28,7 +28,7 @@ describe CodeRippa do
   
   describe ".rip_dir" do
     it "should rip a directory that is supported" do
-      CodeRippa.rip_dir("ruby_proj/", "moc", "ruby")
+      CodeRippa.rip_dir("ruby_proj/", "rubyblue", "ruby")
       f1 = File.open("out.tex")
       f2 = File.open("rip_dir.tex")
       assert (f1.size - f2.size).abs < 300

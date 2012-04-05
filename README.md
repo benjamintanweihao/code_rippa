@@ -25,17 +25,21 @@ In case your system doesn't have `pdflatex`, you should install a [LaTeX](http:/
     	-x, --excluded-exts E1,E2,EN     Exclude these extensions when processing
     	-h, --help                       Display this screen
 
-### List all available themes
+### List all available themes (84 and counting!)
 		
 	$ code_rippa -l
 	
 	active4d
 	all_hallows_eve
 	amy
-	moc
+	made_of_code
 	twilight
 	zenburnesque
 	... more themes omitted
+	
+### Themes Preview
+
+Many of the themes found in CodeRippa can be found [here](http://wiki.macromates.com/Themes/UserSubmittedThemes)	
 	
 ### List all supported syntax
 
@@ -64,7 +68,7 @@ Note that the output file is saved as _out.tex_ in the current directory where _
 	
 Example:
 
-	$ code_rippa -s java -t moc path_to_directory
+	$ code_rippa -s java -t rubyblue path_to_directory
 
 Note that the output file is saved as _out.tex_ in the current directory where _code_rippa_ was called from. 
 
