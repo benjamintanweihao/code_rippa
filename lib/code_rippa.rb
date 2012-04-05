@@ -309,8 +309,9 @@ module CodeRippa
   end
 
 	# Returns the hex color code of the heading. This is done by looking at
-	# the *.render file of the selected theme. The heading is present at 
-	# the top of each new document in the output TEX/PDF file.
+	# the *.render file of the selected theme, and invert the page color.
+	# The heading is present at the top of each new document in the output 
+	# TEX/PDF file.
 	#
 	# theme - The selected theme.
 	# 
@@ -321,9 +322,9 @@ module CodeRippa
 	#
 	# Returns an String containing the hex color code of the heading.
   def self.heading_color(theme)
-    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))           
-    hex_color = /([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
-    (hex_color.hex ^ 0xFFFFFF).to_s 
+    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))               
+    c = Color::RGB.from_html(/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s)
+    Color::RGB.new(255-c.red, 255-c.green, 255- c.blue).html.gsub("#","")    
   end
 	
 	def self.preamble(theme)
