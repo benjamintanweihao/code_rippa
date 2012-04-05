@@ -2,7 +2,7 @@
 
 [![Build Status](https://secure.travis-ci.org/benjamintanweihao/code_rippa.png)](http://travis-ci.org/benjamintanweihao/code_rippa)
 
-_CodeRippa_ takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 84 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.
+_CodeRippa_ takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 84 themes, all of which are available in TextMate. 
 
 ## Prerequisites
 
@@ -79,7 +79,7 @@ Then, you'll need to run _pdflatex_ __twice__. This is because LaTeX needs to ge
 
 ## Credits
 
-None of this would be possible without the awesome [ultraviolet](https://github.com/giom/ultraviolet) and [spox-ultraviolet](https://github.com/spox/ultraviolet), and [language_sniffer](https://github.com/grosser/language_sniffer) gems. Props to [__lwheng__](https://github.com/lwheng) for providing most of the LaTeX help.
+None of this would be possible without the awesome [ultraviolet](https://github.com/giom/ultraviolet) [spox-ultraviolet](https://github.com/spox/ultraviolet) and [language_sniffer](https://github.com/grosser/language_sniffer) gems. Props to [__lwheng__](https://github.com/lwheng) for providing most of the LaTeX help.
 
 ## Contributing
 
@@ -91,7 +91,7 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 
 - Using [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist for automated source code language detection
 - Themes! Glorious themes! 84 themes to choose from! Props to [filmgirl](https://github.com/filmgirl/TextMate-Themes), and the rest of the TM users.
-- Wrap lines of troublesome files such as minified javascript and parser generator outputs. 
+- Wrap lines of troublesome files such as minified javascript and parser generator outputs.
 
 #### TODO
 
