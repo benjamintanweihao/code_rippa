@@ -21,14 +21,12 @@ module CodeRippa
   # Parses the given directory/file, and writes the output file (out.tex)
   # into the current directory.
   # 
-  # dir_path      - The directory path
-  # syntax        - The syntax to perform parsing/syntax highlighting. 
-  #                 Note the the syntax should be supported by code_rippa.
-  # excluded_exts - An Array of extensions to ignore during parsing. 
+  # path          - The directory path
+  # theme         - The selected theme
   # 
   # Examples
   #
-  #   parse("~/code/ruby/some_folder_or_file", "space_cadet", "ruby")
+  #   parse("~/code/ruby/some_folder_or_file", "space_cadet")
   #
   # Returns nothing 
   def self.parse(path, theme)
@@ -72,13 +70,11 @@ module CodeRippa
   # into the current directory.
   # 
   # path          - The file path
-  # syntax        - The syntax to perform parsing/syntax highlighting. 
-  #                 Note the the syntax should be supported by code_rippa.
-  # excluded_exts - An Array of extensions to ignore during parsing. 
+  # theme         - The selected theme
   # 
   # Examples
   #
-  #   parse_file("~/code/ruby/some_folder/some_file.rb", "space_cadet", "ruby")
+  #   parse_file("~/code/ruby/some_folder/some_file.rb", "space_cadet")
   #
   # Returns a String of TeX output.
   def self.parse_file(path, theme)
@@ -95,22 +91,91 @@ module CodeRippa
   end
 
                               
-  private 
+private 
+
+  # Returns True if path should be bookmarked in the output TEX/PDF document.
+  #
+  # path          - The file/directory path
+  # syntax        - The syntax to perform parsing/syntax highlighting. 
+  #                 Note the the syntax should be supported by code_rippa.
+  #
+  # Examples
+  #
+  #   bookmarkable?("hello.rb", "ruby") 
+  #   # => true 
+  #
+  #   bookmarkable?("hello.klingon", "klingon") 
+  #   # => false
+  #
+  # Returns True if path should be bookmarked.
+  def self.bookmarkable?(path, syntax)
+    if FileTest.directory?(path)
+      true
+    else
+      src_ext = File.extname(path)[1..-1]
+      if File.basename(path) == "out.tex"
+        false
+      elsif supported_exts.include?(src_ext)
+        true
+      else
+        false
+      end
+    end
+  end
+
+  # Returns True if path should be ripped as part of the output TEX file. 
+  #
+  # path          - The file. (directories will return false.)
+  # syntax        - The syntax to perform parsing/syntax highlighting. 
+  #                 Note the the syntax should be supported by code_rippa.
+  #
+  # Examples
+  #
+  #   rippable?("hello.rb", "ruby") 
+  #   # => true 
+  #
+  #   rippable?("~/code/", "ruby") 
+  #   # => false
+  #
+  #   rippable?("hello.klingon", "klingon") 
+  #   # => false
+  #
+  # Returns true if path should be ripped.
+  def self.rippable?(path, syntax)
+    if FileTest.directory?(path)
+      false
+    else
+      if supported_exts.include?(File.extname(path)[1..-1])
+        true
+      else
+        false
+      end
+    end
+  end
   
+  # Places a PDF bookmark
+  def self.bookmark(path, depth, counter)
+    "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
+  end
+  
+  # Returns the maximum width (number of characters) in a given file
+  def self.max_width(path)
+    IO.readlines(path).collect { |x| x.length }.max  
+  end
+  
+  # Returns the String of the wrapped text
+  def self.wrap(text, width) 
+    text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
+  end
+  
+  # Returns the String of the wrapped file
   def self.wrap_file(path, width)
     wrapped_output = ""
     IO.readlines(path).each { |line| wrapped_output << wrap(line, width) }
     wrapped_output
   end
-
-  def self.wrap(text, width) 
-    text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
-  end
   
-  def self.max_width(path)
-    IO.readlines(path).collect { |x| x.length }.max  
-  end
-  
+  # Returns the String of the source file. If not found, a blank String is returned.
   def self.source_syntax(path)
     syntax = ""
     language = ""
@@ -128,57 +193,7 @@ module CodeRippa
     Uv.syntax_path
   end
   
-  # Returns an Array of supported syntaxes. This is done by parsing 
-  # all the file names in the syntax folder.
-  #
-  # Examples
-  #
-  #   supported_syntax 
-  #   # => ['ruby','prolog'] 
-  #
-  # Returns an Array of supported syntaxes 
-  def self.supported_syntax     
-    if @@supported_syntax
-      @@supported_syntax
-    else  
-      @@supported_syntax = []
-      Dir.foreach(syntax_path) do |f|
-        if File.extname(f) == ".syntax"
-          @@supported_syntax << File.basename(f, '.*') 
-        end
-      end
-    @@supported_syntax
-    end
-  end
-  
-  # Returns an Array of supported languages. This is done by parsing 
-  # all the file names in the syntax folder.
-  #
-  # Examples
-  #
-  #   supported_langs 
-  #   # => ['Ruby','Prolog'] 
-  #
-  # Returns an Array of supported languages
-  def self.supported_langs
-    langs = []
-    Dir.foreach(syntax_path) do |f|
-      if File.extname(f) == ".syntax"
-        y = YAML.load(File.read "#{syntax_path}/#{f}")
-        langs << y["name"] if y["name"]
-      end
-    end
-    langs
-  end
-  
-  # Returns an Array of file extensions that is supported by code_rippa 
-  #
-  # Examples
-  #
-  #   supported_langs 
-  #   # => ['rb', 'Gemfile', 'erb'] 
-  #
-  # Returns an Array of supported extensions.
+  # Returns an Array of supported file extensions
   def self.supported_exts
     if @@supported_ext
       @@supported_ext
@@ -194,124 +209,49 @@ module CodeRippa
     end
   end
   
-  def self.bookmark(path, depth, counter)
-    "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
-  end
-
-  # Returns True if path should be bookmarked in the output TEX/PDF document.
-  #
-  # path          - The file/directory path
-  # syntax        - The syntax to perform parsing/syntax highlighting. 
-  #                 Note the the syntax should be supported by code_rippa.
-  # excluded_exts - An Array of extensions to ignore during parsing.
-  #
-  #
-  # Examples
-  #
-  #   bookmarkable?("hello.rb", "ruby", []) 
-  #   # => true 
-  #
-  #   bookmarkable?("hello.rb", "ruby", ["rb", "html"]) 
-  #   # => false
-  #
-  #   bookmarkable?("hello.klingon", "klingon", []) 
-  #   # => false
-  #
-  # Returns True if path should be bookmarked.
-  def self.bookmarkable?(path, syntax, excluded_exts=[])
-    if FileTest.directory?(path)
-      true
-    else
-      src_ext = File.extname(path)[1..-1]
-      if File.basename(path) == "out.tex"
-        false
-      elsif excluded_exts.include?(src_ext)
-        false
-      elsif supported_exts.include?(src_ext)
-        true
-      else
-        false
+  # Returns an Array of supported languages.
+  def self.supported_langs
+    langs = []
+    Dir.foreach(syntax_path) do |f|
+      if File.extname(f) == ".syntax"
+        y = YAML.load(File.read "#{syntax_path}/#{f}")
+        langs << y["name"] if y["name"]
       end
+    end
+    langs
+  end
+  
+  # Returns an Array of supported syntaxes. 
+  def self.supported_syntax     
+    if @@supported_syntax
+      @@supported_syntax
+    else  
+      @@supported_syntax = []
+      Dir.foreach(syntax_path) do |f|
+        if File.extname(f) == ".syntax"
+          @@supported_syntax << File.basename(f, '.*') 
+        end
+      end
+    @@supported_syntax
     end
   end
   
-  # Returns True if path should be ripped as part of the output TEX file. 
-  #
-  # path          - The file. (directories will return false.)
-  # syntax        - The syntax to perform parsing/syntax highlighting. 
-  #                 Note the the syntax should be supported by code_rippa.
-  # excluded_exts - An Array of extensions to ignore during parsing.
-  #
-  #
-  # Examples
-  #
-  #   rippable?("hello.rb", "ruby", []) 
-  #   # => true 
-  #
-  #   rippable?("~/code/", "ruby", []) 
-  #   # => false
-  #
-  #   rippable?("hello.rb", "ruby", ["rb", "html"]) 
-  #   # => false
-  #
-  #   rippable?("hello.klingon", "klingon", []) 
-  #   # => false
-  #
-  # Returns true if path should be ripped.
-  def self.rippable?(path, syntax, excluded_exts=[])
-    if FileTest.directory?(path)
-      false
-    else
-      src_ext = File.extname(path)[1..-1]
-      if excluded_exts.include? src_ext
-        false
-      elsif supported_exts.include?(src_ext)
-        true
-      else
-        false
-      end
-    end
-  end
-
-  # Returns the hex color code of the page color. This is done by looking at
-  # the *.render file of the selected theme.
-  #
-  # theme - The selected theme.
-  # 
-  # Examples
-  #
-  #   page_color('made_of_code') 
-  #   # => "E8E8E8"
-  #
-  # Returns an String containing the hex color code of the page.
-  def self.page_color(theme)
-    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))           
-    /([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
-  end
-  
-  # Heading of each new file
-  #
+  # Returns a String containing the heading of the parsed file.
   def self.heading(path)
     "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n" + 
     "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
   end
 
-  # Returns the hex color code of the heading. This is done by looking at
-  # the *.render file of the selected theme, and then inverting the page color.
-  # The heading is present at the top of each new document in the output 
-  # TEX/PDF file.
-  #
-  # theme - The selected theme.
-  # 
-  # Examples
-  #
-  #   heading_color('made_of_code') 
-  #   # => "E8E8E8"
-  #
-  # Returns an String containing the hex color code of the heading.
+  # Returns the hex color code of the heading, which is the inverse of page color.
   def self.heading_color(theme)
     c = Color::RGB.from_html(page_color(theme))
     Color::RGB.new(255-c.red, 255-c.green, 255- c.blue).html.gsub("#","").upcase   
+  end
+
+  # Returns a String containing the hex color code of the page.
+  def self.page_color(theme)
+    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))           
+    /([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
   end
   
   def self.preamble(theme)

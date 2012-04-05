@@ -14,24 +14,21 @@ option_parser = OptionParser.new do |opts|
   Usage: code_rippa [options] input_file_or_directory
 
      Parses input_file or directory and outputs a file named out.tex. 
-     It expects both the syntax and theme to be specified.
-     
-     To see all syntaxes, type:
-        code_rippa -n
-        
-     And to see all themes, type:
+     Unless specified, 'Made of Code' is used as the default theme.
+             
+     To see all themes, type:
         code_rippa -l     
       
-  Example:
-
-    code_rippa -t amy path_to_file.rb
-
-    Renders the contents of path_to_file.rb into out.tex.
+  Examples:
+    
+    1. code_rippa path_to_file.rb             (uses default theme)
+    
+    2. code_rippa -t rubyblue path_to_file.rb (with theme specified)
+    
+    3. code_rippa -t rubyblue path_to_dir     
 
     Then run `pdflatex -interaction=batchmode out.tex` to generate the PDF output.
         
-    "-t" is mandatory. The rest are optional.
-
   Options:
 END
     
@@ -57,18 +54,6 @@ END
     puts CodeRippa::VERSION
     exit 0
   end
-
-  options[:excluded_exts] = []
-  opts.on('-x', '--excluded-exts E1,E2,EN', Array, 'Exclude these extensions when processing') do |exts|
-    options[:excluded_exts] = exts.sort!
-    valid_exts = exts & CodeRippa.supported_exts
-    if valid_exts != exts
-      invalid_exts = exts - valid_exts
-      raise ArgumentError, "These extensions are not supported: #{invalid_exts.join(" ")}. Aborting."
-    else
-      options[:ex_extensions] = valid_exts
-    end
-  end
     
   opts.on('-h', '--help', 'Display this screen') do
     puts opts
@@ -78,7 +63,10 @@ end
 
 begin
   option_parser.parse!  
-  if options[:theme] and ARGV.size == 1
+  # Set default theme. TODO: Allow user to change this
+  options[:theme] ||= "made_of_code"
+  
+  if ARGV.size == 1
     if FileTest.file?(ARGV[0])
       CodeRippa.parse(ARGV[0], options[:theme])
     elsif File.directory?(ARGV[0])
