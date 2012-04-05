@@ -1,0 +1,87 @@
+--- 
+name: RubyRobot
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{000000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{EEEEEE}
+  end: "}"
+  selector: text
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{000000}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{A28075}"
+  end: "}"
+  selector: comment
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{121212}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{A28075}
+  end: "}"
+  selector: comment.block
+- begin: "{\\color[HTML]{367C1B}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{D01D33}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{AAAAAA}"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{3185B9}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{AAAAAA}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{C3C3C3}"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{60F400}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{D8E600}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\underline{"
+  end: "}}"
+  selector: entity.name.type
+- begin: "{\\underline{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{AAAAAA}"
+  end: "}"
+  selector: meta.tag, meta.tag entity
+- begin: "{\\color[HTML]{367C1B}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{CBC3B1}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{DF864D}"
+  end: "}"
+  selector: support.class
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{000000}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{4A8CDB}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

@@ -1,0 +1,72 @@
+--- 
+name: "Why\xE2\x80\x99s Poignant"
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: markup.bold
+- begin: "{\\underline{"
+  end: "}}"
+  selector: meta.link, markup.underline
+- begin: "{\\color[HTML]{4F1900}\\textbf{"
+  end: "}}"
+  selector: entity.name.class, entity.name.type.class, support.class, constant.language, variable.other.constant, entity.other.attribute-name, punctuation.definition.entity
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: constant.character, constant.other, punctuation.definition.constant
+- begin: "{\\color[HTML]{761B48}\\textbf{"
+  end: "}}"
+  selector: keyword, keyword.operator.setter, keyword.other.special-method, punctuation.delimiter.method, entity.name.tag
+- begin: "{\\color[HTML]{9D3266}"
+  end: "}"
+  selector: punctuation, punctuation.definition.string, variable.other, meta.tag, support.type.property-name
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFEF9}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{9D3266}
+  end: "}"
+  selector: punctuation.definition.string
+- begin: "{\\color[HTML]{2A9A66}"
+  end: "}"
+  selector: constant.numeric, constant.character.entity, constant.character.entity punctuation.definition.entity
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E8F5F5}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{2A9A66}
+  end: "}"
+  selector: string
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E8F1F5}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{443355}
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{2D669A}"
+  end: "}"
+  selector: variable.language, variable.other, variable.parameter.function, keyword.other.special-method, variable.other.block
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: constant.character, punctuation.definition.comment, punctuation.delimiter.object
+- begin: "{\\color[HTML]{555555}"
+  end: "}"
+  selector: comment, punctuation.definition.comment
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{2D669A}\columncolor[HTML]{FFFEF9}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{3B88CD}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

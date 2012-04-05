@@ -1,0 +1,129 @@
+--- 
+name: Ruby Blue
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{111D2F}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{8AA6C1}
+  end: "}"
+  selector: text
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{132032}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{428BDD}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{8AA6C1}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{F8BB00}"
+  end: "}"
+  selector: keyword
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0C151E}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{B6B9F9}
+  end: "}"
+  selector: other.preprocessor.c
+- begin: "{"
+  end: "}"
+  selector: entity.name.preprocessor
+- begin: "{"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{FFFFFF}\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{121F32}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{438AD7}
+  end: "}"
+  selector: source comment.block
+- begin: "{\\color[HTML]{1DC116}"
+  end: "}"
+  selector: string - meta.embedded
+- begin: "{\\color[HTML]{7CFF3C}"
+  end: "}"
+  selector: string.quoted.single
+- begin: "{\\color[HTML]{EDDD37}"
+  end: "}"
+  selector: string constant.character.escape
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{CACACA}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{080808}
+  end: "}"
+  selector: string.interpolated
+- begin: "{\\color[HTML]{CA4344}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{E2CE00}"
+  end: "}"
+  selector: string.literal
+- begin: "{\\color[HTML]{EDDD3D}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{B53B3C}"
+  end: "}"
+  selector: constant.other
+- begin: "{\\color[HTML]{8AA6C1}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{8AA6C1}"
+  end: "}"
+  selector: punctuation.definition - comment - constant
+- begin: "{\\color[HTML]{8AA6C1}"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{468434}"
+  end: "}"
+  selector: string.interpolated constant.character.escape
+- begin: "{"
+  end: "}"
+  selector: entity.name.class
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{B43D3D}"
+  end: "}"
+  selector: support.function
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{344668}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: meta.diff, meta.diff.header
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{7A3942}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{6DB04E}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: markup.inserted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{968C44}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: markup.changed
+- begin: "{\\color[HTML]{65798C}"
+  end: "}"
+  selector: meta.tag.haml, meta.section.attributes.haml, entity.name.tag.class.haml, entity.name.tag.id.haml
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{121E31}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{38566F}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

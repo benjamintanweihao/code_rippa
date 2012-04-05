@@ -1,0 +1,147 @@
+--- 
+name: Upstream Vibrant
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{4E4E4E}\\textbf{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{2499DA}\\textbf{"
+  end: "}}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{FF73FD}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{9CFFFF}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{FF6C60}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{9CFFFF}"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{B2D72C}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{FF6C60}"
+  end: "}"
+  selector: variable.language
+- begin: "{\\color[HTML]{E2F6F2}"
+  end: "}"
+  selector: constant.character.escape, string source
+- begin: "{\\color[HTML]{B2D72C}"
+  end: "}"
+  selector: meta.preprocessor
+- begin: "{\\color[HTML]{B2D72C}"
+  end: "}"
+  selector: keyword.control.import
+- begin: "{\\color[HTML]{EEEEEE}"
+  end: "}"
+  selector: entity.name.function, support.function.any-method
+- begin: "{\\underline{"
+  end: "}}"
+  selector: entity.name.type
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{2499DA}"
+  end: "}"
+  selector: keyword.control
+- begin: "{\\color[HTML]{EEEEEE}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{E1F5B1}"
+  end: "}"
+  selector: storage.modifier
+- begin: "{\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{70727E}"
+  end: "}"
+  selector: storage.type.method
+- begin: "{\\color[HTML]{E2F6FF}\\textit{"
+  end: "}}"
+  selector: meta.section entity.name.section, declaration.section entity.name.section
+- begin: "{\\color[HTML]{E1F5B1}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{FFF7B0}"
+  end: "}"
+  selector: support.class, support.type
+- begin: "{\\color[HTML]{B2D72C}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{9CFFFF}"
+  end: "}"
+  selector: support.variable
+- begin: "{\\color[HTML]{687687}"
+  end: "}"
+  selector: keyword.operator.js
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{0A0B0C}
+  end: "}"
+  selector: invalid.deprecated.trailing-whitespace
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{000000}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source, string.unquoted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{000000}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source string.unquoted, text source text source
+- begin: "{\\color[HTML]{68685B}"
+  end: "}"
+  selector: meta.tag.preprocessor.xml
+- begin: "{\\color[HTML]{888888}"
+  end: "}"
+  selector: meta.tag.sgml.doctype, meta.tag.sgml.doctype entity, meta.tag.sgml.doctype string, meta.tag.preprocessor.xml, meta.tag.preprocessor.xml entity, meta.tag.preprocessor.xml string
+- begin: "{\\textit{"
+  end: "}}"
+  selector: string.quoted.docinfo.doctype.DTD
+- begin: "{\\color[HTML]{2499DA}"
+  end: "}"
+  selector: meta.tag, declaration.tag
+- begin: "{\\color[HTML]{2499DA}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{E1F5B1}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{4266A0}"
+  end: "}"
+  selector: markup.heading
+- begin: "{\\color[HTML]{89725B}\\textit{"
+  end: "}}"
+  selector: markup.quote
+- begin: "{\\color[HTML]{B90690}"
+  end: "}"
+  selector: markup.list
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{E2F6FF}\columncolor[HTML]{000000}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{B33F43}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

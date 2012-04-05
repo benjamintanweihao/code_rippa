@@ -299,7 +299,7 @@ module CodeRippa
 	# 
 	# Examples
 	#
-	#		page_color('moc') 
+	#		page_color('made_of_code') 
 	#		# => "E8E8E8"
 	#
 	# Returns an String containing the hex color code of the page.
@@ -316,7 +316,7 @@ module CodeRippa
 	# 
 	# Examples
 	#
-	#		heading_color('moc') 
+	#		heading_color('made_of_code') 
 	#		# => "E8E8E8"
 	#
 	# Returns an String containing the hex color code of the heading.

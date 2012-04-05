@@ -1,0 +1,90 @@
+--- 
+name: Close to the Sea
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{78B2C7}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{3A81C8}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{B8252A}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{AED4DC}"
+  end: "}"
+  selector: constant.character, constant.other
+- begin: "{\\color[HTML]{D0BFAF}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{5F919A}\\textbf{"
+  end: "}}"
+  selector: keyword
+- begin: "{\\color[HTML]{FFFFFA}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{BC681E}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{EA511B}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{C0EFFE}"
+  end: "}"
+  selector: variable.parameter
+- begin: "{"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{E1DA69}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{FF005C}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{54BA42}"
+  end: "}"
+  selector: support.type, support.class
+- begin: "{\\color[HTML]{FFFFFA}"
+  end: "}"
+  selector: support.other.variable
+- begin: "{"
+  end: "}"
+  selector: invalid
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{FFFFFA}\columncolor[HTML]{172024}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{B5A9AD}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"
