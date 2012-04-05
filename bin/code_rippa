@@ -1,7 +1,7 @@
 #! /usr/bin/env ruby
 begin
-	require 'optparse'
-	require 'code_rippa'
+  require 'optparse'
+  require 'code_rippa'
 rescue LoadError
   $:.unshift File.join(File.dirname(__FILE__), '..', 'lib', )
   require 'code_rippa'
@@ -9,7 +9,7 @@ end
 
 options = {}
 option_parser = OptionParser.new do |opts|
-	opts.banner =<<END
+  opts.banner =<<END
 
   Usage: code_rippa [options] input_file_or_directory
 
@@ -34,64 +34,64 @@ option_parser = OptionParser.new do |opts|
 
   Options:
 END
-		
-	opts.on('-t', '--theme THEME', 'Selected theme') do |theme|
-		if Uv.themes.include? theme
-			options[:theme] = theme	 
-		else	
-			raise ArgumentError, "#{theme} theme not found. Use -l to see the list of available themes."
-		end
-	end
-	
-	opts.on('-n', '--list-syntax', 'List all available syntax') do
+    
+  opts.on('-t', '--theme THEME', 'Selected theme') do |theme|
+    if Uv.themes.include? theme
+      options[:theme] = theme  
+    else  
+      raise ArgumentError, "#{theme} theme not found. Use -l to see the list of available themes."
+    end
+  end
+  
+  opts.on('-n', '--list-syntax', 'List all available syntax') do
     puts CodeRippa.supported_syntax.join("\n")
-		exit 0
-	end
-	
-	opts.on('-l', '--list-themes', 'List all available themes') do
-		puts Uv.themes.join("\n")
-		exit 0
-	end
-	
-	opts.on('-v', '--version', 'Display version number') do
-		puts CodeRippa::VERSION
-		exit 0
-	end
+    exit 0
+  end
+  
+  opts.on('-l', '--list-themes', 'List all available themes') do
+    puts Uv.themes.join("\n")
+    exit 0
+  end
+  
+  opts.on('-v', '--version', 'Display version number') do
+    puts CodeRippa::VERSION
+    exit 0
+  end
 
-	options[:excluded_exts] = []
-	opts.on('-x', '--excluded-exts E1,E2,EN', Array, 'Exclude these extensions when processing') do |exts|
-		options[:excluded_exts] = exts.sort!
-		valid_exts = exts & CodeRippa.supported_exts
-		if valid_exts != exts
-			invalid_exts = exts - valid_exts
-			raise ArgumentError, "These extensions are not supported: #{invalid_exts.join(" ")}. Aborting."
-		else
-			options[:ex_extensions] = valid_exts
-		end
-	end
-		
-	opts.on('-h', '--help', 'Display this screen') do
-		puts opts
-		exit 0
-	end	 
+  options[:excluded_exts] = []
+  opts.on('-x', '--excluded-exts E1,E2,EN', Array, 'Exclude these extensions when processing') do |exts|
+    options[:excluded_exts] = exts.sort!
+    valid_exts = exts & CodeRippa.supported_exts
+    if valid_exts != exts
+      invalid_exts = exts - valid_exts
+      raise ArgumentError, "These extensions are not supported: #{invalid_exts.join(" ")}. Aborting."
+    else
+      options[:ex_extensions] = valid_exts
+    end
+  end
+    
+  opts.on('-h', '--help', 'Display this screen') do
+    puts opts
+    exit 0
+  end  
 end
 
 begin
-	option_parser.parse!	
-	if options[:theme] and ARGV.size == 1
-		if FileTest.file?(ARGV[0])
-			CodeRippa.parse(ARGV[0], options[:theme])
-		elsif File.directory?(ARGV[0])
-		  Dir.chdir(ARGV[0])
-		  CodeRippa.parse(Dir.pwd, options[:theme])
-		else
-		  raise ArgumentError, "Invalid path. Aborting.\n"
-		end
-		exit 0
-	else
-		raise ArgumentError, "Missing arguments. Aborting.\n"
-	end
+  option_parser.parse!  
+  if options[:theme] and ARGV.size == 1
+    if FileTest.file?(ARGV[0])
+      CodeRippa.parse(ARGV[0], options[:theme])
+    elsif File.directory?(ARGV[0])
+      Dir.chdir(ARGV[0])
+      CodeRippa.parse(Dir.pwd, options[:theme])
+    else
+      raise ArgumentError, "Invalid path. Aborting.\n"
+    end
+    exit 0
+  else
+    raise ArgumentError, "Missing arguments. Aborting.\n"
+  end
 rescue ArgumentError => e
-	puts e
-	exit 1
+  puts e
+  exit 1
 end
