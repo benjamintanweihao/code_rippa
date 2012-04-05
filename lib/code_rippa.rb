@@ -95,8 +95,8 @@ module CodeRippa
 					
 					is_rippable = rippable?(path, syntax, excluded_exts)
 					if is_rippable      		  
-						outfile.write "\\textcolor{white}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
-						outfile.write "\\textcolor{white}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
+						outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
+						outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
 					end
 					
 					if bookmarkable?(path, syntax, excluded_exts)		
