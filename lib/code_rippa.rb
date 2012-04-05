@@ -324,9 +324,11 @@ module CodeRippa
 	#
 	# Returns an String containing the hex color code of the heading.
   def self.heading_color(theme)
-    f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))               
-    c = Color::RGB.from_html(/([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s)
-    Color::RGB.new(255-c.red, 255-c.green, 255- c.blue).html.gsub("#","")    
+    c = Color::RGB.from_html(page_color(theme))
+    puts "Background: #{c.html}"
+    inverted_color = Color::RGB.new(255-c.red, 255-c.green, 255- c.blue).html.gsub("#","")   
+    puts "Inverted: #{inverted_color}"
+    inverted_color 
   end
 	
 	def self.preamble(theme)
