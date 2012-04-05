@@ -1,0 +1,192 @@
+--- 
+name: zenburn
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{87AE86}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{568E4D}"
+  end: "}"
+  selector: keyword.other.phpdoc
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: punctuation.definition.comment
+- begin: "{\\color[HTML]{DEDEDE}\\textbf{"
+  end: "}}"
+  selector: keyword.other.directive
+- begin: "{\\underline{"
+  end: "}}"
+  selector: keyword.other.directive.line-number
+- begin: "{\\color[HTML]{FF8080}"
+  end: "}"
+  selector: constant.character
+- begin: "{\\color[HTML]{D68686}"
+  end: "}"
+  selector: string, string.unquoted
+- begin: "{\\color[HTML]{D6D6D6}"
+  end: "}"
+  selector: string.unquoted.heredoc
+- begin: "{\\color[HTML]{87D6D5}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{D6D6AE}\\textbf{"
+  end: "}}"
+  selector: constant.language, support.constant.core
+- begin: "{\\color[HTML]{CC9495}"
+  end: "}"
+  selector: constant.character, constant.other, support.constant
+- begin: "{\\color[HTML]{FED6AF}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{FED6AF}"
+  end: "}"
+  selector: keyword.control
+- begin: "{\\color[HTML]{FF8000}\\textbf{"
+  end: "}}"
+  selector: entity.name.module,support.other.module
+- begin: "{\\color[HTML]{FEFED6}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\underline{"
+  end: "}}"
+  selector: source.ocaml keyword.operator.symbol.infix.floating-point
+- begin: "{\\underline{"
+  end: "}}"
+  selector: source.ocaml keyword.operator.symbol.prefix.floating-point
+- begin: "{\\color[HTML]{FFFB9D}"
+  end: "}"
+  selector: storage.type,storage.modifier
+- begin: "{\\color[HTML]{4080A0}"
+  end: "}"
+  selector: entity.name.class.variant
+- begin: "{"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{D6D6D6}"
+  end: "}"
+  selector: entity.name.type,entity.other
+- begin: "{\\color[HTML]{D78D1B}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{FFE000}"
+  end: "}"
+  selector: storage.type.user-defined
+- begin: "{\\color[HTML]{F4A020}\\underline{"
+  end: "}}"
+  selector: entity.name.type
+- begin: "{"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{FF5274}\\textbf{"
+  end: "}}"
+  selector: invalid
+- begin: "{\\color[HTML]{D6D7AF}\\textbf{"
+  end: "}}"
+  selector: entity.other.attribute-name.html
+- begin: "{\\color[HTML]{D6D7AF}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{898989}"
+  end: "}"
+  selector: punctuation.section.embedded.begin.php,punctuation.section.embedded.end.php
+- begin: "{\\color[HTML]{FED6AF}\\textbf{"
+  end: "}}"
+  selector: variable.parameter, variable.other
+- begin: "{\\color[HTML]{FED6AF}"
+  end: "}"
+  selector: support.function.construct
+- begin: "{\\color[HTML]{FEFED6}"
+  end: "}"
+  selector: punctuation.definition.variable
+- begin: "{\\color[HTML]{FFFD87}"
+  end: "}"
+  selector: support.function,meta.function-call
+- begin: "{\\color[HTML]{C7BA18}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{ABD6D5}"
+  end: "}"
+  selector: meta.brace
+- begin: "{\\color[HTML]{DADADA}"
+  end: "}"
+  selector: punctuation.definition.string.begin,punctuation.definition.string.end
+- begin: "{\\color[HTML]{EBDAC9}\\textbf{"
+  end: "}}"
+  selector: punctuation.definition.tag.begin.html,punctuation.definition.tag.end.html,meta.tag.structure.any.html
+- begin: "{\\color[HTML]{FED6AF}\\textbf{"
+  end: "}}"
+  selector: entity.name.tag.yaml
+- begin: "{\\color[HTML]{D6D6D6}"
+  end: "}"
+  selector: punctuation.definition.entry
+- begin: "{\\color[HTML]{B7B7B7}\\textbf{"
+  end: "}}"
+  selector: keyword.other.DML.sql, keyword.other.data-integrity.sql
+- begin: "{\\color[HTML]{95BFF3}\\textbf{"
+  end: "}}"
+  selector: source.sql, constant.other.database-name.sql, constant.other.table-name.sql, keyword.operator.star
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{393939}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: source.diff
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{9F9D15}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: source.diff meta.diff.comment, source.diff meta.toc-list.comment.diff
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{393939}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{CA7172}\textbf{
+  end: "}}"
+  selector: meta.diff.header.from-file
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{393939}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{60B38A}\textbf{
+  end: "}}"
+  selector: meta.diff.header.to-file
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{393939}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{8CD0D3}
+  end: "}"
+  selector: meta.diff.range.unified
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{393939}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{60B38A}
+  end: "}"
+  selector: markup.inserted.diff
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{393939}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{CA7172}
+  end: "}"
+  selector: markup.deleted.diff
+- begin: "{\\color[HTML]{C76F41}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{9E6A5F}"
+  end: "}"
+  selector: string.regexp.arbitrary-repitition
+- begin: "{\\color[HTML]{F2F2F2}"
+  end: "}"
+  selector: punctuation.definition.arbitrary-repitition
+- begin: "{\\color[HTML]{CB8E81}"
+  end: "}"
+  selector: string.regexp.character-class
+- begin: "{\\color[HTML]{F2F2F2}"
+  end: "}"
+  selector: punctuation.definition.character-class
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{DEDEDE}\columncolor[HTML]{393939}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{838383}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

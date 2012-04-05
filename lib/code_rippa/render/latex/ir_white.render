@@ -1,0 +1,207 @@
+--- 
+name: IR_White
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{898989}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{A15001}"
+  end: "}"
+  selector: entity
+- begin: "{\\color[HTML]{016692}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{646409}\\underline{"
+  end: "}}"
+  selector: entity.name.type
+- begin: "{\\color[HTML]{646409}"
+  end: "}"
+  selector: support
+- begin: "{\\color[HTML]{877611}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{014A69}"
+  end: "}"
+  selector: storage.modifier
+- begin: "{\\color[HTML]{333366}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{009F78}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{8C008A}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{"
+  end: "}"
+  selector: punctuation
+- begin: "{\\color[HTML]{696989}"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{A00294}\\textit{"
+  end: "}}"
+  selector: invalid.deprecated
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F6D8F5}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{A00294}
+  end: "}"
+  selector: invalid.illegal
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{B3B5BC}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source
+- begin: "{\\color[HTML]{D19264}\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: source string source
+- begin: "{\\color[HTML]{00FF00}"
+  end: "}"
+  selector: source string source punctuation.section.embedded
+- begin: "{\\color[HTML]{00FF00}"
+  end: "}"
+  selector: string constant
+- begin: "{\\color[HTML]{9D7416}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{FF8000}"
+  end: "}"
+  selector: string.regexp constant.character.escape, string.regexp source.ruby.embedded, string.regexp string.regexp.arbitrary-repitition
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{191919}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{B08C39}
+  end: "}"
+  selector: string.regexp.group
+- begin: "{\\color[HTML]{C29B4E}"
+  end: "}"
+  selector: string.regexp.character-class
+- begin: "{\\color[HTML]{756565}"
+  end: "}"
+  selector: string variable
+- begin: "{\\color[HTML]{7A7025}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{582B00}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{765757}"
+  end: "}"
+  selector: meta.preprocessor.c
+- begin: "{\\color[HTML]{502424}"
+  end: "}"
+  selector: meta.preprocessor.c keyword
+- begin: "{\\color[HTML]{010101}\\textit{"
+  end: "}}"
+  selector: meta.cast
+- begin: "{\\color[HTML]{010101}"
+  end: "}"
+  selector: meta.sgml.html meta.doctype, meta.sgml.html meta.doctype entity, meta.sgml.html meta.doctype string, meta.xml-processing, meta.xml-processing entity, meta.xml-processing string
+- begin: "{\\color[HTML]{0067C2}"
+  end: "}"
+  selector: meta.tag, meta.tag entity
+- begin: "{\\color[HTML]{00528B}"
+  end: "}"
+  selector: source entity.name.tag, source entity.other.attribute-name, meta.tag.inline, meta.tag.inline entity
+- begin: "{\\color[HTML]{BC4D00}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{9B431E}"
+  end: "}"
+  selector: entity.name.tag.namespace, entity.other.attribute-name.namespace
+- begin: "{\\color[HTML]{0067C2}\\underline{"
+  end: "}}"
+  selector: meta.selector.css entity.name.tag
+- begin: "{\\color[HTML]{628795}"
+  end: "}"
+  selector: meta.selector.css entity.other.attribute-name.tag.pseudo-class
+- begin: "{\\color[HTML]{667587}"
+  end: "}"
+  selector: meta.selector.css entity.other.attribute-name.id
+- begin: "{\\color[HTML]{2A85CF}"
+  end: "}"
+  selector: meta.selector.css entity.other.attribute-name.class
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: support.type.property-name.css
+- begin: "{\\color[HTML]{675C06}"
+  end: "}"
+  selector: meta.property-group support.constant.property-value.css, meta.property-value support.constant.property-value.css
+- begin: "{\\color[HTML]{795A5A}"
+  end: "}"
+  selector: meta.preprocessor.at-rule keyword.control.at-rule
+- begin: "{\\color[HTML]{3C785D}"
+  end: "}"
+  selector: meta.property-value support.constant.named-color.css, meta.property-value constant
+- begin: "{\\color[HTML]{628795}"
+  end: "}"
+  selector: meta.constructor.argument.css
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0E2231}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}\textit{
+  end: "}}"
+  selector: meta.diff, meta.diff.header
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{420E09}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{4A410D}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: markup.changed
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{253B22}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: markup.inserted
+- begin: "{\\color[HTML]{9D7416}\\textit{"
+  end: "}}"
+  selector: markup.italic
+- begin: "{\\color[HTML]{9D7416}\\textbf{"
+  end: "}}"
+  selector: markup.bold
+- begin: "{\\color[HTML]{9B431E}\\underline{"
+  end: "}}"
+  selector: markup.underline
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FEE2A2}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{46391E}\textit{
+  end: "}}"
+  selector: markup.quote
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{632D04}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{D95B06}
+  end: "}"
+  selector: markup.heading, markup.heading entity
+- begin: "{\\color[HTML]{46391E}"
+  end: "}"
+  selector: markup.list
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{B3B5BC}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{7C4CA8}
+  end: "}"
+  selector: markup.raw
+- begin: "{\\color[HTML]{C84D09}\\textit{"
+  end: "}}"
+  selector: markup comment
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{242424}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{746DFF}
+  end: "}"
+  selector: meta.separator
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F0F0F0}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.line.entry.logfile, meta.line.exit.logfile
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{751012}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: meta.line.error.logfile
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{010101}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{E0E0ED}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

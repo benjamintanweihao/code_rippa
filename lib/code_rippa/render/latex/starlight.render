@@ -1,0 +1,51 @@
+--- 
+name: Starlight
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{AEAEAE}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{B9A185}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{B9A185}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{A38474}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{A19A83}"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{F3D651}"
+  end: "}"
+  selector: invalid
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{C0B6A8}\columncolor[HTML]{223859}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{50729C}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

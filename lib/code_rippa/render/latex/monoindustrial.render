@@ -1,0 +1,132 @@
+--- 
+name: monoindustrial
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{151C19}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{666C68}
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{C23B00}"
+  end: "}"
+  selector: storage, support.type
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{151C19}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: string.unquoted.embedded, text source, string.unquoted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{1A0700}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E94700}
+  end: "}"
+  selector: constant.character.escaped, string source - string.unquoted.embedded, string string source
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{1A0700}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{C23800}
+  end: "}"
+  selector: string - string source, string source string, meta.scope.heredoc
+- begin: "{\\color[HTML]{E98800}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{648BD2}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{E98800}"
+  end: "}"
+  selector: constant
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{161D1A}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{A8B3AB}
+  end: "}"
+  selector: other.preprocessor
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{161D1A}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{A8B3AB}
+  end: "}"
+  selector: entity.name.preprocessor
+- begin: "{\\color[HTML]{A8B3AB}"
+  end: "}"
+  selector: entity.name.function, keyword.operator, keyword.other.name-of-parameter
+- begin: "{\\color[HTML]{9A2F00}"
+  end: "}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{648BD2}"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{666C68}"
+  end: "}"
+  selector: storage.type.method
+- begin: "{\\color[HTML]{A39E64}"
+  end: "}"
+  selector: keyword, storage.type.function.php
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{481D1B}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: invalid.trailing-whitespace
+- begin: "{\\color[HTML]{588E60}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{5778B6}"
+  end: "}"
+  selector: support.class, support.type, entity.name
+- begin: "{\\color[HTML]{C87500}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{5879B7}"
+  end: "}"
+  selector: support.other.variable
+- begin: "{\\color[HTML]{68685B}"
+  end: "}"
+  selector: declaration.xml-processing
+- begin: "{\\color[HTML]{888888}"
+  end: "}"
+  selector: declaration.doctype
+- begin: "{\\color[HTML]{888888}"
+  end: "}"
+  selector: declaration.doctype.DTD
+- begin: "{\\color[HTML]{A65EFF}"
+  end: "}"
+  selector: declaration.tag
+- begin: "{\\color[HTML]{A65EFF}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{909993}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{C7CCC9}"
+  end: "}"
+  selector: punctuation
+- begin: "{\\color[HTML]{7642B7}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0B0F0D}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: meta.scope.changed-files.svn, markup.inserted.svn, markup.changed.svn, markup.deleted.svn
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{747C77}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.section
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{747C77}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.section meta.section
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{747C77}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.section meta.section meta.section
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{222C28}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{919994}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

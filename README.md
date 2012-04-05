@@ -4,7 +4,7 @@
 
 CodeRippa takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 15 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.
 
-## Prequisites
+## Prerequisites
 
 You will definitely need a TeX distribution installed. To check, simply type `pdflatex`.
 In case your system doesn't have `pdflatex`, you should install a [LaTeX](http://www.tug.org/texlive/) distribution.
@@ -85,7 +85,8 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 
 ### 0.0.7.pre
 
-- Use [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist
+- Using [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist for automated source code language detection
+- Themes! Glorious themes! 77 themes to choose from! Props to [filmgirl](https://github.com/filmgirl/TextMate-Themes)
 - Wrap lines of troublesome files such as minified javascript and parser generator outputs. 
 
 #### TODO

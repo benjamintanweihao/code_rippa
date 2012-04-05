@@ -1,0 +1,120 @@
+--- 
+name: "[ Argonaut ]"
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{00A6FF}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: keyword, storage, support.type
+- begin: "{\\color[HTML]{6497C5}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{A0A3F9}"
+  end: "}"
+  selector: constant.character.escaped, string source
+- begin: "{\\color[HTML]{D70000}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{0068C5}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{A4ED2D}\\textbf{"
+  end: "}}"
+  selector: constant
+- begin: "{\\color[HTML]{7B9A00}"
+  end: "}"
+  selector: other.preprocessor
+- begin: "{\\color[HTML]{FFCE00}\\textbf{"
+  end: "}}"
+  selector: entity.name.preprocessor
+- begin: "{\\color[HTML]{FFCA00}\\textbf{"
+  end: "}}"
+  selector: entity.name.function
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{000000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{DB001C}\underline{
+  end: "}}"
+  selector: entity.name.class
+- begin: "{\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{70727E}"
+  end: "}"
+  selector: storage.type.method
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{333333}
+  end: "}"
+  selector: invalid.trailing-whitespace
+- begin: "{\\color[HTML]{3FAF30}\\textit{"
+  end: "}}"
+  selector: declaration.section entity.name.section
+- begin: "{\\color[HTML]{815DB3}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{7A88F6}\\textbf{"
+  end: "}}"
+  selector: support.class, support.type
+- begin: "{\\color[HTML]{06960E}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{F18F94}\\textbf{"
+  end: "}}"
+  selector: support.other.variable
+- begin: "{\\color[HTML]{606E7E}"
+  end: "}"
+  selector: keyword.operator.js
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{07080A}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source, string.unquoted
+- begin: "{\\color[HTML]{68685B}"
+  end: "}"
+  selector: declaration.xml-processing
+- begin: "{\\color[HTML]{888888}"
+  end: "}"
+  selector: declaration.doctype
+- begin: "{\\textit{"
+  end: "}}"
+  selector: declaration.doctype.DTD
+- begin: "{\\color[HTML]{62A6FF}"
+  end: "}"
+  selector: declaration.tag
+- begin: "{\\color[HTML]{0065D3}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.parameter.attribute
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{B2B2B2}\columncolor[HTML]{151515}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{002F53}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

@@ -1,0 +1,132 @@
+--- 
+name: BBEdit
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{804000}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{0000FF}"
+  end: "}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{FF0080}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{FF0080}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{C5060B}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{004080}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{006600}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{33CC33}"
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source
+- begin: "{\\color[HTML]{1A921C}"
+  end: "}"
+  selector: other.preprocessor
+- begin: "{\\color[HTML]{0C450D}"
+  end: "}"
+  selector: entity.name.preprocessor
+- begin: "{\\color[HTML]{0000A2}"
+  end: "}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\underline{"
+  end: "}}"
+  selector: entity.name.class
+- begin: "{"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{70727E}"
+  end: "}"
+  selector: storage.type.method
+- begin: "{"
+  end: "}"
+  selector: meta.section entity.name.section, declaration.section entity.name.section
+- begin: "{\\color[HTML]{0000FF}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{6D79DE}"
+  end: "}"
+  selector: support.class, support.type
+- begin: "{\\color[HTML]{06960E}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{21439C}"
+  end: "}"
+  selector: support.other.variable
+- begin: "{\\color[HTML]{687687}"
+  end: "}"
+  selector: keyword.operator.js
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: invalid.trailing-whitespace
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{558CF6}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source, string.unquoted
+- begin: "{\\color[HTML]{68685B}"
+  end: "}"
+  selector: meta.xml-processing, declaration.xml-processing
+- begin: "{\\color[HTML]{888888}"
+  end: "}"
+  selector: meta.doctype, declaration.doctype
+- begin: "{"
+  end: "}"
+  selector: meta.doctype.DTD, declaration.doctype.DTD
+- begin: "{\\color[HTML]{1C02FF}"
+  end: "}"
+  selector: meta.tag, declaration.tag
+- begin: "{"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{0C07FF}"
+  end: "}"
+  selector: markup.heading
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: markup.quote
+- begin: "{\\color[HTML]{B90690}"
+  end: "}"
+  selector: markup.list
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{FFD420}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

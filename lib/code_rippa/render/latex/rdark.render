@@ -1,0 +1,93 @@
+--- 
+name: RDark
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{646763}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{5CE638}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{5CE638}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{5CE638}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: constant.character, constant.other
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{5BA1CF}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{FFAA3E}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{878A85}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{"
+  end: "}"
+  selector: support.function
+- begin: "{"
+  end: "}"
+  selector: support.constant
+- begin: "{"
+  end: "}"
+  selector: support.type, support.class
+- begin: "{"
+  end: "}"
+  selector: support.other.variable
+- begin: "{"
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{374B4F}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source, string.unquoted.heredoc, source source
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{B9BDB6}\columncolor[HTML]{1B2426}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{E0E8FF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

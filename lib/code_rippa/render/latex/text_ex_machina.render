@@ -1,0 +1,96 @@
+--- 
+name: Text Ex Machina
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{333333}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{66CCFF}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{AE81FF}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{AE81FF}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{AE81FF}"
+  end: "}"
+  selector: constant.character, constant.other
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{777CB2}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{323464}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{656797}"
+  end: "}"
+  selector: storage.type
+- begin: "{\\color[HTML]{CCCDFD}\\underline{"
+  end: "}}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{CCCDFD}\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{CCFF66}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{D9F2A6}\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{323464}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{777CB2}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{B3F273}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{3FE200}\\textit{"
+  end: "}}"
+  selector: support.type, support.class
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: support.other.variable
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0000FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F0}\textit{
+  end: "}}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0080FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F0}\textit{
+  end: "}}"
+  selector: invalid.deprecated
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{E6E6E6}\columncolor[HTML]{151515}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{666666}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

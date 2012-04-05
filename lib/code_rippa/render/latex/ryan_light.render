@@ -1,0 +1,81 @@
+--- 
+name: Ryan Light
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{808080}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{006A08}"
+  end: "}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{820095}"
+  end: "}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\color[HTML]{0802D3}"
+  end: "}"
+  selector: entity.name
+- begin: "{\\color[HTML]{0900D3}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{7E3700}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{A62B29}"
+  end: "}"
+  selector: constant, variable.other.constant
+- begin: "{\\color[HTML]{0000CD}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{0E8D90}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{010E83}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{006A09}"
+  end: "}"
+  selector: support.type
+- begin: "{\\color[HTML]{006A09}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{2D439B}"
+  end: "}"
+  selector: meta.tag, declaration.tag, entity.name.tag, entity.other.attribute-name
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFADE}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: text source.ruby
+- begin: "{\\color[HTML]{26B31A}"
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source, string source.ruby
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{C3DCFF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

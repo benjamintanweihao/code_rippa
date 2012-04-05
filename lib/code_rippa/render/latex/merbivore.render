@@ -1,0 +1,99 @@
+--- 
+name: Merbivore
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{"
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{AD2EA4}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{FC6F09}"
+  end: "}"
+  selector: keyword, storage
+- begin: "{"
+  end: "}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{"
+  end: "}"
+  selector: entity.name
+- begin: "{\\color[HTML]{FC83FF}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{58C554}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{1EDAFB}"
+  end: "}"
+  selector: constant
+- begin: "{"
+  end: "}"
+  selector: variable.other.constant
+- begin: "{\\color[HTML]{FDC251}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{8DFF0A}"
+  end: "}"
+  selector: string
+- begin: "{"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{1EDAFB}"
+  end: "}"
+  selector: support.type
+- begin: "{\\color[HTML]{8DFF0A}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{FC6F09}"
+  end: "}"
+  selector: meta.tag, declaration.tag, entity.name.tag
+- begin: "{\\color[HTML]{FFFF89}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: "{\\color[HTML]{519F50}"
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source, string source.ruby
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{144212}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.inserted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{660000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{2F33AB}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.diff.header, meta.separator.diff, meta.diff.index, meta.diff.range
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{E6E1DC}\columncolor[HTML]{161616}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{5A647E}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

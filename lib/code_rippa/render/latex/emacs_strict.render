@@ -1,0 +1,84 @@
+--- 
+name: Emacs Strict
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{FF7D27}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{AEC4DE}"
+  end: "}"
+  selector: other.preprocessor
+- begin: "{\\color[HTML]{FF9E7B}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{94FE9A}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{00FFFF}"
+  end: "}"
+  selector: storage.modifier
+- begin: "{\\color[HTML]{94FE9A}"
+  end: "}"
+  selector: entity.name.class, support.class
+- begin: "{\\color[HTML]{81CEF9}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{00FFFF}"
+  end: "}"
+  selector: keyword, variable.language
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: invalid.trailing-whitespace
+- begin: "{\\color[HTML]{7DFDFA}"
+  end: "}"
+  selector: entity.name.tag.xml, meta.xml-processing.html
+- begin: "{\\color[HTML]{7DFDFA}"
+  end: "}"
+  selector: entity.name.tag.doctype.html, meta.sgml.html
+- begin: "{\\color[HTML]{9CCFF4}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{"
+  end: "}"
+  selector: meta.tag, declaration.tag
+- begin: "{\\color[HTML]{EBDB8D}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{E27F3F}"
+  end: "}"
+  selector: markup.heading
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: markup.underline.link
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{D3D3D3}\columncolor[HTML]{000000}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{001DC3}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

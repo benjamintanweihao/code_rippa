@@ -1,0 +1,102 @@
+--- 
+name: Espresso
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{AAAAAA}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F5FAFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{2F6F9F}\textbf{
+  end: "}}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{4F9FD0}"
+  end: "}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\color[HTML]{CF4F5F}"
+  end: "}"
+  selector: entity.name
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F6F5FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{7463CA}\textit{
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{2F6F9F}\\textbf{"
+  end: "}}"
+  selector: support
+- begin: "{\\color[HTML]{CF4F5F}\\textbf{"
+  end: "}}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: variable
+- begin: "{\\color[HTML]{CF4F5F}\\textbf{"
+  end: "}}"
+  selector: constant
+- begin: "{\\color[HTML]{CF4F5F}"
+  end: "}"
+  selector: variable.other.constant
+- begin: "{\\color[HTML]{0B51A6}\\textbf{"
+  end: "}}"
+  selector: constant.language
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFF0F0}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{CF4F5F}
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{D71707}\\textbf{"
+  end: "}}"
+  selector: support.function
+- begin: "{\\color[HTML]{0B51A6}"
+  end: "}"
+  selector: support.type
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F5FAFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{2F6F9F}
+  end: "}"
+  selector: entity.name.tag, declaration.tag
+- begin: "{\\color[HTML]{4F9FD0}\\textit{"
+  end: "}}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: meta.tag
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFF0F0}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source, string source.ruby
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{81C7FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.inserted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{D1363D}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{64AB80}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.diff.header, meta.separator.diff, meta.diff.index, meta.diff.range
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{80C7FF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

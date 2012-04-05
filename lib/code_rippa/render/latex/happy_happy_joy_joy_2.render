@@ -1,0 +1,198 @@
+--- 
+name: Happy happy joy joy 2
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{858B7C}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{ACB4A4}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{858B7C}\textit{
+  end: "}}"
+  selector: comment.block
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DFC8C7}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{901A12}\textbf{
+  end: "}}"
+  selector: string
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DFC8C7}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E12B1F}\textbf{
+  end: "}}"
+  selector: string constant
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DFC8C7}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{A70000}\textbf{
+  end: "}}"
+  selector: string source
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DFC8C7}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{C8297C}\textbf{
+  end: "}}"
+  selector: string variable, variable.parameter.misc.css
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFF55}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{292929}\textbf{
+  end: "}}"
+  selector: string.interpolated, string.interpolation
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{CC3E37}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}\textbf{
+  end: "}}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{5A7057}\\textbf{"
+  end: "}}"
+  selector: keyword.control
+- begin: "{\\color[HTML]{65961E}"
+  end: "}"
+  selector: keyword.control.import
+- begin: "{\\color[HTML]{2060A0}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{761B48}\\textbf{"
+  end: "}}"
+  selector: keyword.operator.setter
+- begin: "{\\color[HTML]{2D669A}\\textbf{"
+  end: "}}"
+  selector: keyword.other.special-method
+- begin: "{\\color[HTML]{3C8F93}"
+  end: "}"
+  selector: keyword.other.unit
+- begin: "{\\color[HTML]{A08000}"
+  end: "}"
+  selector: storage.type, support.type
+- begin: "{\\color[HTML]{70727E}"
+  end: "}"
+  selector: storage.type.method
+- begin: "{\\color[HTML]{800080}"
+  end: "}"
+  selector: storage.type.user-defined
+- begin: "{\\color[HTML]{6EAC34}\\underline{"
+  end: "}}"
+  selector: storage.modifier
+- begin: "{\\color[HTML]{E12B1F}\\textbf{"
+  end: "}}"
+  selector: constant, support.constant
+- begin: "{\\color[HTML]{AE81FF}\\textbf{"
+  end: "}}"
+  selector: constant.character
+- begin: "{\\color[HTML]{2A9A66}\\textbf{"
+  end: "}}"
+  selector: constant.character.entity
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F0727D}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}\textbf{
+  end: "}}"
+  selector: constant.character.escape
+- begin: "{\\color[HTML]{376FC3}\\textbf{"
+  end: "}}"
+  selector: constant.language
+- begin: "{\\color[HTML]{4F9B00}\\textbf{"
+  end: "}}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{54AC3B}\\textbf{"
+  end: "}}"
+  selector: variable, support.variable
+- begin: "{\\color[HTML]{9D3266}\\textbf{"
+  end: "}}"
+  selector: variable.other
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: support.function
+- begin: "{\\color[HTML]{8D0004}\\textbf{"
+  end: "}}"
+  selector: support.function.properties
+- begin: "{\\color[HTML]{2970CA}\\textbf{"
+  end: "}}"
+  selector: class, support.class
+- begin: "{\\color[HTML]{990000}\\textbf{"
+  end: "}}"
+  selector: support.class.exception
+- begin: "{\\color[HTML]{080808}\\textbf{"
+  end: "}}"
+  selector: markup.bold
+- begin: "{\\color[HTML]{E34733}"
+  end: "}"
+  selector: markup.deleted
+- begin: "{\\color[HTML]{4266A0}\\textbf{"
+  end: "}}"
+  selector: markup.heading
+- begin: "{\\textit{"
+  end: "}}"
+  selector: markup.italic
+- begin: "{\\color[HTML]{234A97}\\textbf{"
+  end: "}}"
+  selector: markup.link, link, meta.link.inline
+- begin: "{\\color[HTML]{B90690}"
+  end: "}"
+  selector: markup.list
+- begin: "{\\color[HTML]{0B6125}\\textit{"
+  end: "}}"
+  selector: markup.quote
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFFFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{234A97}
+  end: "}"
+  selector: markup.raw
+- begin: "{\\color[HTML]{080808}\\underline{"
+  end: "}}"
+  selector: markup.underline
+- begin: "{\\color[HTML]{4266A0}"
+  end: "}"
+  selector: declaration.tag
+- begin: "{\\color[HTML]{4F1900}\\textbf{"
+  end: "}}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{C08060}\\underline{"
+  end: "}}"
+  selector: entity.name.class.variant
+- begin: "{\\color[HTML]{5C3566}\\textbf{"
+  end: "}}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{519A58}\\textbf{"
+  end: "}}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{589C24}\\textbf{"
+  end: "}}"
+  selector: entity.name.type.class
+- begin: "{\\color[HTML]{8000C0}\\underline{"
+  end: "}}"
+  selector: entity.name.type.class.type
+- begin: "{\\color[HTML]{D2261B}\\underline{"
+  end: "}}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{84A135}\\underline{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}\textbf{
+  end: "}}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FF0000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}\textbf{
+  end: "}}"
+  selector: invalid.bad-comma.css
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{AE81FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{5B62B5}\textbf{
+  end: "}}"
+  selector: invalid.deprecated
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: invalid.deprecated.trailing-whitespace
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{562D56}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}\textbf{
+  end: "}}"
+  selector: invalid.illegal
+- begin: "{\\color[HTML]{2A9A66}\\textbf{"
+  end: "}}"
+  selector: punctuation.definition.entity
+- begin: "{\\color[HTML]{761B48}\\textbf{"
+  end: "}}"
+  selector: punctuation.delimiter.method
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{2A2A2A}\columncolor[HTML]{E5E5E5}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{F0C936}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

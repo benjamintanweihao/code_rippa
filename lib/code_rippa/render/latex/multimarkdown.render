@@ -1,0 +1,75 @@
+--- 
+name: MultiMarkdown
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFFFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{979797}
+  end: "}"
+  selector: meta.header.multimarkdown
+- begin: "{\\underline{"
+  end: "}}"
+  selector: meta.header.key.multimarkdown
+- begin: "{"
+  end: "}"
+  selector: meta.header.value.multimarkdown
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: markup.heading.markdown
+- begin: "{\\color[HTML]{FF0000}"
+  end: "}"
+  selector: markup.table.multimarkdown
+- begin: "{\\color[HTML]{21FF0A}"
+  end: "}"
+  selector: meta.link.reference.def.markdown
+- begin: "{\\color[HTML]{FF8D04}"
+  end: "}"
+  selector: meta.footnote.reference.def.multimarkdown
+- begin: "{\\color[HTML]{0ABFFF}"
+  end: "}"
+  selector: meta.citation.reference.def.multimarkdown
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E5E5E5}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.raw.block.markdown
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E5E5E5}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.math.multimarkdown
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: markup.raw.inline.markdown
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E5E5E5}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.quote.markdown
+- begin: "{\\color[HTML]{FF0093}"
+  end: "}"
+  selector: citation.possible
+- begin: "{\\color[HTML]{0205F0}"
+  end: "}"
+  selector: meta.link
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{B5D8F7}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

@@ -1,0 +1,123 @@
+--- 
+name: idleFingers
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: text
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{282828}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{CDCDCD}
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{BC9458}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{FFE5BB}"
+  end: "}"
+  selector: meta.tag, declaration.tag, meta.doctype
+- begin: "{\\color[HTML]{FFC66D}"
+  end: "}"
+  selector: entity.name
+- begin: "{\\color[HTML]{FFF980}"
+  end: "}"
+  selector: source.ruby entity.name
+- begin: "{\\color[HTML]{B7DFF8}"
+  end: "}"
+  selector: variable.other
+- begin: "{\\color[HTML]{CCCC33}"
+  end: "}"
+  selector: support.class.ruby
+- begin: "{\\color[HTML]{6C99BB}"
+  end: "}"
+  selector: constant, support.constant
+- begin: "{\\color[HTML]{CC7833}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{D0D0FF}"
+  end: "}"
+  selector: other.preprocessor.c
+- begin: "{"
+  end: "}"
+  selector: entity.name.preprocessor
+- begin: "{"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{575757}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: source comment.block
+- begin: "{\\color[HTML]{A5C261}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{AAAAAA}"
+  end: "}"
+  selector: string constant.character.escape
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{CCCC33}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: string.interpolated
+- begin: "{\\color[HTML]{CCCC33}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{CCCC33}"
+  end: "}"
+  selector: string.literal
+- begin: "{\\color[HTML]{787878}"
+  end: "}"
+  selector: string.interpolated constant.character.escape
+- begin: "{\\underline{"
+  end: "}}"
+  selector: entity.name.class
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{B83426}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{6EA533}"
+  end: "}"
+  selector: markup.list.unnumbered.textile
+- begin: "{\\color[HTML]{6EA533}"
+  end: "}"
+  selector: markup.list.numbered.textile
+- begin: "{\\color[HTML]{C2C2C2}\\textbf{"
+  end: "}}"
+  selector: markup.bold.textile
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FF0000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{323232}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{5A647E}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

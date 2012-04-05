@@ -1,0 +1,102 @@
+--- 
+name: Coda
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{3C802C}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{ED7722}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{0F20F6}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{916319}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{916319}"
+  end: "}"
+  selector: constant.character, constant.other
+- begin: "{\\color[HTML]{916319}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{AA2063}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{AA2063}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{CC4C07}"
+  end: "}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{CC4C07}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{053369}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\color[HTML]{053369}"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{881181}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{881181}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{7520AF}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: variable.other, variable.js, punctuation.separator.variable
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{F02A1D}"
+  end: "}"
+  selector: punctuation.section.embedded -(source string source punctuation.section.embedded), meta.brace.erb.html
+- begin: "{\\color[HTML]{EB291C}"
+  end: "}"
+  selector: invalid
+- begin: "{\\color[HTML]{916305}"
+  end: "}"
+  selector: variable.other.php, variable.other.normal
+- begin: "{\\color[HTML]{163369}"
+  end: "}"
+  selector: meta.function-call
+- begin: "{\\color[HTML]{AA2063}"
+  end: "}"
+  selector: keyword.control
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{A7CAFF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

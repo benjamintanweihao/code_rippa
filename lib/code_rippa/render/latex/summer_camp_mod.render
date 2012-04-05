@@ -1,0 +1,78 @@
+--- 
+name: Summer Camp Mod
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{070604}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{2B2719}\textit{
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{A3ED4E}"
+  end: "}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{3FA2ED}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{3A94DC}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{3588CA}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{F35E18}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{F39B19}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{F3771D}"
+  end: "}"
+  selector: constant.character.escape, string source
+- begin: "{\\color[HTML]{F39B19}"
+  end: "}"
+  selector: meta.preprocessor
+- begin: "{\\color[HTML]{F3771D}"
+  end: "}"
+  selector: keyword.control.import
+- begin: "{\\color[HTML]{7DDE12}"
+  end: "}"
+  selector: entity.name.function, support.function.any-method
+- begin: "{\\color[HTML]{EEF890}\\textit{"
+  end: "}}"
+  selector: entity.name.type
+- begin: "{\\color[HTML]{EEF890}\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F32119}{\rule[-0.5ex]{0pt}{2.0ex}\textit{
+  end: "}}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F33A34}{\rule[-0.5ex]{0pt}{2.0ex}\textit{
+  end: "}}"
+  selector: invalid.deprecated.trailing-whitespace
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{F2F8CB}\columncolor[HTML]{110F0A}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{433D27}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

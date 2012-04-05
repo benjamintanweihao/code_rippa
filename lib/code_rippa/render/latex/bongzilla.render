@@ -1,0 +1,78 @@
+--- 
+name: Bongzilla
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{AEAEAE}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{FF593E}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{FF6400}"
+  end: "}"
+  selector: entity
+- begin: "{\\color[HTML]{FFCC66}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{FFCC66}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{78CE91}"
+  end: "}"
+  selector: string, meta.verbatim
+- begin: "{\\color[HTML]{8DA6CE}"
+  end: "}"
+  selector: support
+- begin: "{"
+  end: "}"
+  selector: variable
+- begin: "{\\color[HTML]{AB2A1D}\\textit{"
+  end: "}}"
+  selector: invalid.deprecated
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{9D1E15}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}
+  end: "}"
+  selector: invalid.illegal
+- begin: "{\\color[HTML]{FF6400}\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{FF6400}"
+  end: "}"
+  selector: string constant.other.placeholder
+- begin: "{\\color[HTML]{BECDE6}"
+  end: "}"
+  selector: meta.function-call.py
+- begin: "{\\color[HTML]{7F90AA}"
+  end: "}"
+  selector: meta.tag, meta.tag entity
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.name.section
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{F8F8F8}\columncolor[HTML]{1F1F1F}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{253B76}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

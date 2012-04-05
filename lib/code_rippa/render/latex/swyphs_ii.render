@@ -1,0 +1,105 @@
+--- 
+name: Swyphs II
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{CACACA}"
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{575757}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{624343}"
+  end: "}"
+  selector: meta.method-return.actionscript.3
+- begin: "{\\color[HTML]{383B40}"
+  end: "}"
+  selector: meta.documentation.tag.see.asdoc
+- begin: "{\\color[HTML]{2E383E}"
+  end: "}"
+  selector: meta.documentation.tag.param.asdoc
+- begin: "{\\color[HTML]{92577E}"
+  end: "}"
+  selector: keyword.control
+- begin: "{\\color[HTML]{82677E}"
+  end: "}"
+  selector: storage.modifier, meta.tag.inline.any.html, meta.tag.structure.any.html, meta.tag.block.any.html
+- begin: "{\\color[HTML]{8B8B8B}"
+  end: "}"
+  selector: keyword.operator.symbolic, entity.other.attribute-name
+- begin: "{\\color[HTML]{8D7D68}"
+  end: "}"
+  selector: storage.type, support.constant.actionscript.2
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{000000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F0D155}
+  end: "}"
+  selector: entity.name.function.actionscript
+- begin: "{\\color[HTML]{6C7D6A}"
+  end: "}"
+  selector: storage.type.import
+- begin: "{\\color[HTML]{654151}"
+  end: "}"
+  selector: storage.type.namespace
+- begin: "{\\color[HTML]{D7D7D7}"
+  end: "}"
+  selector: constant.numeric, string.quoted
+- begin: "{\\color[HTML]{CD402F}"
+  end: "}"
+  selector: storage.type.accessor
+- begin: "{\\color[HTML]{867E63}"
+  end: "}"
+  selector: support.type.function.global, support.class
+- begin: "{\\color[HTML]{7D6068}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{557474}"
+  end: "}"
+  selector: constant.language, source.js
+- begin: "{\\color[HTML]{8B7867}"
+  end: "}"
+  selector: support.property, source.css
+- begin: "{\\color[HTML]{608C6D}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{647980}"
+  end: "}"
+  selector: entity.name.tag.localname.xml
+- begin: "{\\color[HTML]{C5C5C5}"
+  end: "}"
+  selector: text.xml
+- begin: "{\\color[HTML]{A99C6F}"
+  end: "}"
+  selector: punctuation.definition.string.begin.xml, punctuation.definition.string.end.xml
+- begin: "{\\color[HTML]{FEFAF7}"
+  end: "}"
+  selector: string.unquoted.cdata.xml
+- begin: "{\\color[HTML]{82484A}"
+  end: "}"
+  selector: constant.language.null.actionscript
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{C1C1C1}\columncolor[HTML]{000000}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{BC1800}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

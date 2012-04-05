@@ -1,0 +1,147 @@
+--- 
+name: Black Pearl II
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{B4D3E2}"
+  end: "}"
+  selector: text
+- begin: "{\\color[HTML]{CCCCCC}"
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{428BDD}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{D0FF7E}"
+  end: "}"
+  selector: constant, variable.other
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: variable.other.php
+- begin: "{\\color[HTML]{80D500}\\textbf{"
+  end: "}}"
+  selector: constant.language
+- begin: "{\\color[HTML]{F8BB00}\\textbf{"
+  end: "}}"
+  selector: keyword, keyword.operator.logical
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{FF9D00}"
+  end: "}"
+  selector: keyword.control
+- begin: "{\\color[HTML]{80D500}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: declaration.function, entity.name.function
+- begin: "{\\color[HTML]{B6B9F9}"
+  end: "}"
+  selector: other.preprocessor.c
+- begin: "{\\color[HTML]{8AA6C1}\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{CC66FF}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{FF2837}\\textbf{"
+  end: "}}"
+  selector: string constant
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: source string source
+- begin: "{\\color[HTML]{FF7819}"
+  end: "}"
+  selector: string.interpolated
+- begin: "{\\color[HTML]{CA4344}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{FF7819}\\textbf{"
+  end: "}}"
+  selector: string.regexp constant
+- begin: "{\\color[HTML]{EDDD5A}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{66CCFF}"
+  end: "}"
+  selector: constant.other
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{670000}{\rule[-0.5ex]{0pt}{2.0ex}\textbf{
+  end: "}}"
+  selector: invalid
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: entity.name.class, declaration.class
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{8AA6C1}"
+  end: "}"
+  selector: support.function, support.constant, support.variable, support.other
+- begin: "{\\color[HTML]{8AA6C1}\\textbf{"
+  end: "}}"
+  selector: support.class, support.type
+- begin: "{\\color[HTML]{FFFFFF}\\textbf{"
+  end: "}}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{B53B3C}\\textbf{"
+  end: "}}"
+  selector: meta.selector.css, entity.other.attribute-name.pseudo-class.css, entity.name.tag.wildcard.css, entity.other.attribute-name.id.css, entity.other.attribute-name.class.css
+- begin: "{\\color[HTML]{8AA6C1}"
+  end: "}"
+  selector: support.type.property-name.css
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0E2231}{\rule[-0.5ex]{0pt}{2.0ex}\textit{
+  end: "}}"
+  selector: meta.diff, meta.diff.header
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{253B22}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.inserted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{4A410D}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.changed
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{420E09}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.deleted
+- begin: "{\\underline{"
+  end: "}}"
+  selector: markup.underline
+- begin: "{\\color[HTML]{66CCFF}\\underline{"
+  end: "}}"
+  selector: markup.underline.link
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: markup.bold
+- begin: "{\\textit{"
+  end: "}}"
+  selector: markup.italic
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{000000}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

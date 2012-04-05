@@ -1,0 +1,132 @@
+--- 
+name: Django (Smoothy)
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{FD6209}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{9CF340}\\textbf{"
+  end: "}}"
+  selector: constant
+- begin: "{\\color[HTML]{96DD3B}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{FFB454}"
+  end: "}"
+  selector: keyword.control.import.python, keyword.control.import.from.python
+- begin: "{\\color[HTML]{FEC758}"
+  end: "}"
+  selector: entity
+- begin: "{\\color[HTML]{FFE862}\\textbf{"
+  end: "}}"
+  selector: storage
+- begin: "{\\color[HTML]{E1FFB8}\\textit{"
+  end: "}}"
+  selector: string
+- begin: "{\\color[HTML]{9DF39F}"
+  end: "}"
+  selector: support
+- begin: "{\\color[HTML]{FB9A4B}\\textbf{"
+  end: "}}"
+  selector: variable
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{94DA3A}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{A5ABAF}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{9EA6A8}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text.html.ruby source
+- begin: "{\\color[HTML]{FFE862}\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{9DF39F}"
+  end: "}"
+  selector: string.quoted source
+- begin: "{\\color[HTML]{FFE862}"
+  end: "}"
+  selector: string constant
+- begin: "{\\color[HTML]{FFB454}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{EDEF7D}"
+  end: "}"
+  selector: string variable
+- begin: "{\\color[HTML]{FFE862}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{EB939A}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{989898}"
+  end: "}"
+  selector: declaration.sgml.html declaration.doctype, declaration.sgml.html declaration.doctype entity, declaration.sgml.html declaration.doctype string, declaration.xml-processing, declaration.xml-processing entity, declaration.xml-processing string
+- begin: "{\\color[HTML]{E8E8E7}"
+  end: "}"
+  selector: declaration.tag, declaration.tag entity, meta.tag, meta.tag entity
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{245032}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{AA5507}
+  end: "}"
+  selector: meta.selector.css entity.name.tag
+- begin: "{\\color[HTML]{FEC758}"
+  end: "}"
+  selector: meta.selector.css entity.other.attribute-name.id
+- begin: "{\\color[HTML]{41A83E}"
+  end: "}"
+  selector: meta.selector.css entity.other.attribute-name.class
+- begin: "{\\color[HTML]{96DD3B}"
+  end: "}"
+  selector: support.type.property-name.css
+- begin: "{\\color[HTML]{FFE862}\\textit{"
+  end: "}}"
+  selector: meta.property-group support.constant.property-value.css, meta.property-value support.constant.property-value.css
+- begin: "{\\color[HTML]{FFE862}"
+  end: "}"
+  selector: meta.property-value support.constant.named-color.css, meta.property-value constant
+- begin: "{\\color[HTML]{FD6209}"
+  end: "}"
+  selector: meta.preprocessor.at-rule keyword.control.at-rule
+- begin: "{\\color[HTML]{EC9799}"
+  end: "}"
+  selector: meta.constructor.argument.css
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0B2F20}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}\textit{
+  end: "}}"
+  selector: meta.diff, meta.diff.header
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FEDCDD}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{EC9799}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{C4B14A}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}
+  end: "}"
+  selector: markup.changed
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{9BF199}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{41A83E}
+  end: "}"
+  selector: markup.inserted
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{F8F8F8}\columncolor[HTML]{245032}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{336442}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

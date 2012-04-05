@@ -1,0 +1,180 @@
+--- 
+name: GitHub
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F8F8FF}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{999988}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: keyword.operator.assignment
+- begin: "{"
+  end: "}"
+  selector: keyword.other.special-method
+- begin: "{\\color[HTML]{990000}\\textbf{"
+  end: "}}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\color[HTML]{445588}\\textbf{"
+  end: "}}"
+  selector: entity.name
+- begin: "{\\color[HTML]{009999}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{108888}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: constant.language
+- begin: "{\\color[HTML]{0F8787}"
+  end: "}"
+  selector: variable.other.constant.ruby
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: constant.language
+- begin: "{\\color[HTML]{DD1144}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{0F8787}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: punctuation.separator.inheritance
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: punctuation.separator.variable
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: punctuation.section.array
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: punctuation.separator.key-value
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: punctuation.section.function
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: punctuation.section.scope
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: keyword.other.special-method.ruby
+- begin: "{\\color[HTML]{AA2C8C}"
+  end: "}"
+  selector: constant.other.symbol
+- begin: "{\\color[HTML]{008080}"
+  end: "}"
+  selector: support.class.ruby
+- begin: "{\\color[HTML]{009926}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: string.quoted source
+- begin: "{\\color[HTML]{999999}\\textbf{"
+  end: "}}"
+  selector: meta.tag.sgml.html
+- begin: "{\\color[HTML]{999999}\\textbf{"
+  end: "}}"
+  selector: entity.name.tag.doctype
+- begin: "{\\color[HTML]{999999}\\textbf{"
+  end: "}}"
+  selector: string.quoted.double.doctype
+- begin: "{\\color[HTML]{121289}"
+  end: "}"
+  selector: punctuation.definition.tag
+- begin: "{\\color[HTML]{121289}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{0A8585}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{0A8585}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{999999}\\textbf{"
+  end: "}}"
+  selector: punctuation.section.embedded.ruby
+- begin: "{\\color[HTML]{CF1040}"
+  end: "}"
+  selector: source.ruby.embedded.source punctuation.section.embedded.ruby
+- begin: "{"
+  end: "}"
+  selector: punctuation.section.property-list.css
+- begin: "{\\textbf{"
+  end: "}}"
+  selector: support.type.property-name.css
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: punctuation.separator.key-value.css
+- begin: "{\\color[HTML]{009999}"
+  end: "}"
+  selector: meta.property-value, constant.other.color
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: punctuation.terminator.rule.css
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: support.constant.font-name
+- begin: "{\\color[HTML]{009999}"
+  end: "}"
+  selector: keyword.other.unit
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: entity.other.attribute-name.pseudo-class
+- begin: "{\\color[HTML]{000000}\\textbf{"
+  end: "}}"
+  selector: support.constant.property-value
+- begin: "{\\color[HTML]{445588}\\textbf{"
+  end: "}}"
+  selector: entity.other.attribute-name.class
+- begin: "{\\color[HTML]{990000}\\textbf{"
+  end: "}}"
+  selector: entity.other.attribute-name.id
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFDDDD}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: meta.diff.header.from-file
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DDFFDD}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: meta.diff.header.to-file
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DDFFDD}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: markup.inserted.diff
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFDDDD}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: markup.deleted.diff
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{F8F8FF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{BCD5FA}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

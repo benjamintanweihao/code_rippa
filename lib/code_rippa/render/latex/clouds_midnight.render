@@ -1,0 +1,120 @@
+--- 
+name: Clouds Midnight
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{3C403B}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{5D90CD}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{46A609}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{39946A}"
+  end: "}"
+  selector: constant.language
+- begin: "{"
+  end: "}"
+  selector: constant.character, constant.other
+- begin: "{"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{927C5D}"
+  end: "}"
+  selector: keyword, support.constant.property-value, constant.other.color
+- begin: "{\\color[HTML]{366F1A}"
+  end: "}"
+  selector: keyword.other.unit
+- begin: "{\\color[HTML]{A46763}"
+  end: "}"
+  selector: entity.other.attribute-name.html
+- begin: "{\\color[HTML]{4B4B4B}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{E92E2E}"
+  end: "}"
+  selector: storage
+- begin: "{"
+  end: "}"
+  selector: entity.name.class
+- begin: "{\\color[HTML]{858585}"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{"
+  end: "}"
+  selector: entity.name.function
+- begin: "{"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{606060}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{A165AC}"
+  end: "}"
+  selector: constant.character.entity
+- begin: "{\\color[HTML]{A165AC}"
+  end: "}"
+  selector: support.class.js
+- begin: "{\\color[HTML]{606060}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{E92E2E}"
+  end: "}"
+  selector: meta.selector.css, entity.name.tag.css, entity.other.attribute-name.id.css, entity.other.attribute-name.class.css
+- begin: "{\\color[HTML]{616161}"
+  end: "}"
+  selector: meta.property-name.css
+- begin: "{\\color[HTML]{E92E2E}"
+  end: "}"
+  selector: support.function
+- begin: "{"
+  end: "}"
+  selector: support.constant
+- begin: "{"
+  end: "}"
+  selector: support.type, support.class
+- begin: "{"
+  end: "}"
+  selector: support.other.variable
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E92E2E}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: "{\\color[HTML]{E92E2E}"
+  end: "}"
+  selector: punctuation.section.embedded
+- begin: "{\\color[HTML]{606060}"
+  end: "}"
+  selector: punctuation.definition.tag
+- begin: "{\\color[HTML]{A165AC}"
+  end: "}"
+  selector: constant.other.color.rgb-value.css, support.constant.property-value.css
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{929292}\columncolor[HTML]{191919}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{000000}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

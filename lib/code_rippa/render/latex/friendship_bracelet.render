@@ -1,0 +1,102 @@
+--- 
+name: Friendship Bracelet
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{DCDCDC}"
+  end: "}"
+  selector: text
+- begin: "{\\color[HTML]{DCDCDC}"
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{8A8988}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{389AD9}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{FF8C56}"
+  end: "}"
+  selector: keyword
+- begin: "{\\color[HTML]{D4312C}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{D0D0FF}"
+  end: "}"
+  selector: meta.preprocessor.c
+- begin: "{"
+  end: "}"
+  selector: keyword.control.import
+- begin: "{\\color[HTML]{389AD9}"
+  end: "}"
+  selector: entity.name.function
+- begin: "{\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{9B9B9B}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: source comment.block
+- begin: "{\\color[HTML]{F3F99A}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{AAAAAA}"
+  end: "}"
+  selector: string constant.character.escape
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F3F48C}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{0A0A0A}
+  end: "}"
+  selector: string.interpolated
+- begin: "{\\color[HTML]{ECF5A7}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{ECF5A7}"
+  end: "}"
+  selector: string.literal
+- begin: "{\\color[HTML]{555555}"
+  end: "}"
+  selector: string.interpolated constant.character.escape
+- begin: "{"
+  end: "}"
+  selector: entity.name.type
+- begin: "{\\underline{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{FC8C56}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{389AD9}\\textit{"
+  end: "}}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{389AD9}"
+  end: "}"
+  selector: declaration.tag, meta.tag
+- begin: "{\\color[HTML]{FF6666}"
+  end: "}"
+  selector: support.function
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{F1F1F1}\columncolor[HTML]{1F1F1F}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{73597E}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

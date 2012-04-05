@@ -1,0 +1,90 @@
+--- 
+name: CSSEdit
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{A8A8A8}"
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{5D9629}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{6D4496}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{"
+  end: "}"
+  selector: constant.language
+- begin: "{"
+  end: "}"
+  selector: constant.character, constant.other
+- begin: "{"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{4678BC}"
+  end: "}"
+  selector: keyword
+- begin: "{"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{4678BC}"
+  end: "}"
+  selector: entity.name.class
+- begin: "{"
+  end: "}"
+  selector: entity.other.inherited-class
+- begin: "{"
+  end: "}"
+  selector: entity.name.function
+- begin: "{"
+  end: "}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{4678BC}"
+  end: "}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{B84610}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{"
+  end: "}"
+  selector: support.function
+- begin: "{"
+  end: "}"
+  selector: support.constant
+- begin: "{"
+  end: "}"
+  selector: support.type, support.class
+- begin: "{"
+  end: "}"
+  selector: support.other.variable
+- begin: "{"
+  end: "}"
+  selector: invalid
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{474747}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{A0CDFF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

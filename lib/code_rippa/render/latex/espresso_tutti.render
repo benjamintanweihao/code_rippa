@@ -1,0 +1,117 @@
+--- 
+name: Espresso Tutti
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{000000}"
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{AAAAAA}"
+  end: "}"
+  selector: comment
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F4FAFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{2F6F9F}
+  end: "}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{3A1D72}"
+  end: "}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\color[HTML]{D44950}"
+  end: "}"
+  selector: entity.name
+- begin: "{\\color[HTML]{060708}\\textbf{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{4E279A}"
+  end: "}"
+  selector: support
+- begin: "{\\color[HTML]{CF4F5F}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{7B8C4D}"
+  end: "}"
+  selector: variable
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F3F2FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{7653C1}
+  end: "}"
+  selector: constant
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F3F2FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{7653C1}
+  end: "}"
+  selector: variable.other.constant
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F3F2FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{7653C2}
+  end: "}"
+  selector: constant.language
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFFFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{73B00A}
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{D71707}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{0B51A6}"
+  end: "}"
+  selector: support.type
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F5FAFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{2F6F9F}
+  end: "}"
+  selector: entity.name.tag, declaration.tag
+- begin: "{\\color[HTML]{4F9FCF}"
+  end: "}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{D44950}"
+  end: "}"
+  selector: string.quoted.double.html
+- begin: "{\\color[HTML]{4F9EEB}"
+  end: "}"
+  selector: meta.tag
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{F93232}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F9F2CE}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{E8FFD5}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{000000}
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source, string source.ruby
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{81C7FF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.inserted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{D1363D}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{64AB80}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.diff.header, meta.separator.diff, meta.diff.index, meta.diff.range
+- begin: "{\\color[HTML]{2F6F9F}"
+  end: "}"
+  selector: meta.selector.css, entity.other.attribute-name.pseudo-class.css, entity.name.tag.wildcard.css, entity.other.attribute-name.id.css, entity.other.attribute-name.class.css
+- begin: "{\\color[HTML]{C82E0E}"
+  end: "}"
+  selector: support.type.property-name.css
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFFFFF}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{389507}
+  end: "}"
+  selector: keyword.other.unit.css, constant.other.rgb-value.css, constant.numeric.css
+- begin: "{\\color[HTML]{389507}"
+  end: "}"
+  selector: support.constant.font-name.css, constant.other.color.rgb-value.css
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{80C7FF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

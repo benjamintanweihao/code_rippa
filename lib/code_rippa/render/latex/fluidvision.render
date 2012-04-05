@@ -1,0 +1,132 @@
+--- 
+name: Fluidvision
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{DEEEFD}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{386F90}
+  end: "}"
+  selector: comment
+- begin: "{\\color[HTML]{20498D}\\textit{"
+  end: "}}"
+  selector: variable
+- begin: "{\\color[HTML]{5B91E1}\\textbf{"
+  end: "}}"
+  selector: keyword
+- begin: "{\\color[HTML]{C34F0A}\\textbf{"
+  end: "}}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{C5060B}\\textit{"
+  end: "}}"
+  selector: constant
+- begin: "{\\color[HTML]{585CF6}\\textit{"
+  end: "}}"
+  selector: constant.language
+- begin: "{\\color[HTML]{840E0B}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{26B31A}"
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source
+- begin: "{\\color[HTML]{1A921C}"
+  end: "}"
+  selector: other.preprocessor
+- begin: "{\\color[HTML]{0C450D}\\textbf{"
+  end: "}}"
+  selector: entity.name.preprocessor
+- begin: "{\\color[HTML]{1B4B9D}\\textbf{"
+  end: "}}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.name.class
+- begin: "{\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\textit{"
+  end: "}}"
+  selector: variable.parameter
+- begin: "{\\color[HTML]{70727E}"
+  end: "}"
+  selector: storage.type.method
+- begin: "{\\textit{"
+  end: "}}"
+  selector: meta.section entity.name.section, declaration.section entity.name.section
+- begin: "{\\color[HTML]{3C4C72}\\textbf{"
+  end: "}}"
+  selector: support.function
+- begin: "{\\color[HTML]{2D5579}\\textbf{"
+  end: "}}"
+  selector: support.class, support.type
+- begin: "{\\color[HTML]{619A1C}\\textbf{"
+  end: "}}"
+  selector: support.constant
+- begin: "{\\color[HTML]{21439C}\\textbf{"
+  end: "}}"
+  selector: support.other.variable
+- begin: "{\\color[HTML]{687687}"
+  end: "}"
+  selector: keyword.operator.js
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{990000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{FFD0D0}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: invalid.trailing-whitespace
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{719DF4}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: text source, string.unquoted
+- begin: "{\\color[HTML]{68685B}"
+  end: "}"
+  selector: meta.xml-processing, declaration.xml-processing
+- begin: "{\\color[HTML]{888888}"
+  end: "}"
+  selector: meta.doctype, declaration.doctype
+- begin: "{\\textit{"
+  end: "}}"
+  selector: meta.doctype.DTD, declaration.doctype.DTD
+- begin: "{\\color[HTML]{1C3981}"
+  end: "}"
+  selector: meta.tag, declaration.tag
+- begin: "{\\color[HTML]{001D56}\\textbf{"
+  end: "}}"
+  selector: entity.name.tag
+- begin: "{\\color[HTML]{000000}\\textit{"
+  end: "}}"
+  selector: entity.other.attribute-name
+- begin: "{\\color[HTML]{0C07FF}\\textbf{"
+  end: "}}"
+  selector: markup.heading
+- begin: "{\\color[HTML]{000000}\\textit{"
+  end: "}}"
+  selector: markup.quote
+- begin: "{\\color[HTML]{B90690}"
+  end: "}"
+  selector: markup.list
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{000000}\columncolor[HTML]{F4F4F4}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{FFD793}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

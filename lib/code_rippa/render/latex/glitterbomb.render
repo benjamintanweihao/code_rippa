@@ -1,0 +1,120 @@
+--- 
+name: GlitterBomb
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: "{\\color[HTML]{44444E}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{44444E}\\textit{"
+  end: "}}"
+  selector: comment.block
+- begin: "{\\color[HTML]{C0A368}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{E16521}\\textbf{"
+  end: "}}"
+  selector: entity
+- begin: "{\\color[HTML]{988155}"
+  end: "}"
+  selector: keyword.operator
+- begin: "{\\color[HTML]{DBB800}\\textbf{"
+  end: "}}"
+  selector: keyword
+- begin: "{\\color[HTML]{D3C788}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{F6F080}"
+  end: "}"
+  selector: storage
+- begin: "{\\color[HTML]{4D6537}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{7D6C55}"
+  end: "}"
+  selector: support
+- begin: "{\\color[HTML]{AE5251}"
+  end: "}"
+  selector: variable
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{3F110A}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}
+  end: "}"
+  selector: invalid
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{A3A5AC}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{705393}
+  end: "}"
+  selector: text source
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{9B9DA3}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{5F4482}
+  end: "}"
+  selector: text.html.ruby source
+- begin: "{\\color[HTML]{783301}\\textit{"
+  end: "}}"
+  selector: entity.other.inherited-class
+- begin: "{\\color[HTML]{8F8B63}"
+  end: "}"
+  selector: string.quoted source
+- begin: "{\\color[HTML]{707576}"
+  end: "}"
+  selector: string constant
+- begin: "{\\color[HTML]{364627}"
+  end: "}"
+  selector: string.regexp
+- begin: "{\\color[HTML]{EDEF7D}"
+  end: "}"
+  selector: string variable
+- begin: "{\\color[HTML]{935E29}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{EBAC47}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{8996A8}"
+  end: "}"
+  selector: other.preprocessor.c
+- begin: "{\\color[HTML]{AFC4DB}"
+  end: "}"
+  selector: other.preprocessor.c entity
+- begin: "{\\color[HTML]{73817D}"
+  end: "}"
+  selector: declaration.sgml.html declaration.doctype, declaration.sgml.html declaration.doctype entity, declaration.sgml.html declaration.doctype string, declaration.xml-processing, declaration.xml-processing entity, declaration.xml-processing string
+- begin: "{\\color[HTML]{AAD7EF}"
+  end: "}"
+  selector: declaration.tag, declaration.tag entity, meta.tag, meta.tag entity
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{0E2231}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}\textit{
+  end: "}}"
+  selector: meta.diff, meta.diff.header
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{D03620}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{C4B14A}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}
+  end: "}"
+  selector: markup.changed
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{41A83E}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{F8F8F8}
+  end: "}"
+  selector: markup.inserted
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{CFCFCF}\columncolor[HTML]{0B0A0A}}l}
+    \newcolumntype{N}{>{\color[HTML]{000000}\columncolor[HTML]{FFFFFF}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"

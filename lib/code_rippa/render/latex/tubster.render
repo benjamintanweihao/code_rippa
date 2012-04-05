@@ -1,0 +1,93 @@
+--- 
+name: Tubster
+line: 
+  begin: ""
+  end: "}}\\\\"
+filter: "@escaped.gsub(/(\\$)/, '\\\\\\\\\\1').gsub(/\\\\(?!\\$)/, '$\\\\\\\\backslash$').gsub(/(_|\\{|\\}|&|\\#|%)/, '\\\\\\\\\\1').gsub(/~/, '\\\\textasciitilde ').gsub(/ /,'\\\\hspace{1ex}').gsub(/\\t| /,'\\\\hspace{3ex}').gsub(/\\\"/, \"''\").gsub(/(\\^)/,'\\\\\\\\\\1{}')"
+document: 
+  begin: |
+    \documentclass[a4paper,landscape]{article}
+    \usepackage{xcolor}
+    \usepackage{colortbl}
+    \usepackage{longtable}
+    \usepackage[left=2cm,top=1cm,right=3cm,nohead,nofoot]{geometry}
+    \usepackage[T1]{fontenc}
+    \usepackage[scaled]{beramono}
+    \begin{document}
+
+  end: |
+    \end{document}
+
+tags: 
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{232323}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: source
+- begin: "{\\color[HTML]{666666}\\textit{"
+  end: "}}"
+  selector: comment
+- begin: "{\\color[HTML]{CC6633}"
+  end: "}"
+  selector: keyword, storage
+- begin: "{\\color[HTML]{FFCC33}"
+  end: "}"
+  selector: entity.name.function, keyword.other.name-of-parameter.objc
+- begin: "{\\color[HTML]{FFFFFF}"
+  end: "}"
+  selector: entity.name
+- begin: "{\\color[HTML]{99CC66}"
+  end: "}"
+  selector: constant.numeric
+- begin: "{\\color[HTML]{3399CC}"
+  end: "}"
+  selector: variable.language, variable.other
+- begin: "{\\color[HTML]{34A2D9}"
+  end: "}"
+  selector: constant
+- begin: "{\\color[HTML]{CC3333}"
+  end: "}"
+  selector: variable.other.constant
+- begin: "{\\color[HTML]{3399CC}"
+  end: "}"
+  selector: constant.language
+- begin: "{\\color[HTML]{99CC33}"
+  end: "}"
+  selector: string
+- begin: "{\\color[HTML]{DA4939}"
+  end: "}"
+  selector: support.function
+- begin: "{\\color[HTML]{6E9CBE}"
+  end: "}"
+  selector: support.type
+- begin: "{\\color[HTML]{99CC33}"
+  end: "}"
+  selector: support.constant
+- begin: "{\\color[HTML]{FFCC33}"
+  end: "}"
+  selector: meta.tag, declaration.tag, entity.name.tag, entity.other.attribute-name
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{CC0000}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{FFFFFF}
+  end: "}"
+  selector: invalid
+- begin: "{\\color[HTML]{519F50}"
+  end: "}"
+  selector: constant.character.escaped, constant.character.escape, string source, string source.ruby
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{669966}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.inserted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{993333}{\rule[-0.5ex]{0pt}{2.0ex}\color[HTML]{E6E1DC}
+  end: "}"
+  selector: markup.deleted
+- begin: \setlength{\fboxsep}{0ex}\colorbox[HTML]{3366FF}{\rule[-0.5ex]{0pt}{2.0ex}
+  end: "}"
+  selector: meta.diff.header, meta.separator.diff, meta.diff.index, meta.diff.range
+listing: 
+  begin: |
+    \newcolumntype{C}{>{\color[HTML]{E6E1DC}\columncolor[HTML]{232323}}l}
+    \newcolumntype{N}{>{\color[HTML]{FFFFFF}\columncolor[HTML]{5A647E}}l}
+    \begin{longtable}{NC}
+
+  end: |
+    \end{longtable}
+
+line-numbers: 
+  begin: \texttt{
+  end: "}&\\mbox{\\texttt{"
