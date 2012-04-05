@@ -24,25 +24,17 @@ option_parser = OptionParser.new do |opts|
       
   Example:
 
-    code_rippa -s ruby -t amy path_to_file.rb
+    code_rippa -t amy path_to_file.rb
 
     Renders the contents of path_to_file.rb into out.tex.
 
     Then run `pdflatex -interaction=batchmode out.tex` to generate the PDF output.
         
-    "-s" and "-t" are mandatory. The rest are optional.
+    "-t" is mandatory. The rest are optional.
 
   Options:
 END
-	
-	opts.on('-s', '--syntax SYNTAX', 'Selected syntax') do |syntax|
-		if CodeRippa.supported_syntax.include? syntax
-			options[:syntax] = syntax				 
-		else	
-			raise ArgumentError, "syntax for #{syntax} not found. Use -n to see the list of available syntax."
-		end
-	end
-	
+		
 	opts.on('-t', '--theme THEME', 'Selected theme') do |theme|
 		if Uv.themes.include? theme
 			options[:theme] = theme	 
@@ -88,10 +80,10 @@ begin
 	option_parser.parse!	
 	if options[:theme] and options[:syntax] and ARGV.size == 1
 		if FileTest.file?(ARGV[0])
-			CodeRippa.rip_file(ARGV[0], options[:theme], options[:syntax])
+			CodeRippa.rip_file(ARGV[0], options[:theme])
 		elsif File.directory?(ARGV[0])
 		  Dir.chdir(ARGV[0])
-			CodeRippa.rip_dir(Dir.pwd, options[:theme], options[:syntax], options[:excluded_exts])
+			CodeRippa.rip_dir(Dir.pwd, options[:theme], options[:excluded_exts])
 		else
 		  raise ArgumentError, "Invalid path. Aborting.\n"
 		end

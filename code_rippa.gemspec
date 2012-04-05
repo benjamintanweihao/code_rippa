@@ -16,10 +16,11 @@ Gem::Specification.new do |gem|
   gem.require_paths = ["lib", "lib/syntax", "lib/render"]
   gem.version       = CodeRippa::VERSION
   gem.required_ruby_version = '>= 1.9.0'
-  gem.add_dependency "rainbow"
   gem.add_dependency "color"  
   gem.add_dependency "ansi"  
   gem.add_dependency "language_sniffer"  
+  gem.add_dependency "ptools", "~> 1.2.1"
+  gem.add_dependency "rainbow"
   gem.add_dependency "spox-ultraviolet", "~> 0.10.5"
   gem.add_development_dependency "rake"  
   gem.add_development_dependency "minitest"  

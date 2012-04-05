@@ -5,15 +5,67 @@ require 'ansi/progressbar'
 require 'language_sniffer'
 require 'rainbow'
 require 'color'
+require 'ptools'
 
 include ANSI
 
 YAML::ENGINE.yamler = 'syck'
 
 module CodeRippa
-	
+  
+  MAX_WIDTH          = 120
 	@@supported_syntax = nil
-	@@supported_ext = nil
+	@@supported_ext    = nil
+		
+  # main entry point:
+	# Parses the given directory/file, and writes the output file (out.tex)
+	# into the current directory.
+	# 
+	# dir_path			- The directory path
+	# syntax				- The syntax to perform parsing/syntax highlighting. 
+	#									Note the the syntax should be supported by code_rippa.
+	# excluded_exts - An Array of extensions to ignore during parsing. 
+	# 
+	# Examples
+	#
+	#		parse("~/code/ruby/some_folder_or_file", "space_cadet", "ruby")
+	#
+	# Returns nothing 
+	def self.parse(path, theme)
+	  output = ""
+	  begin
+	    if FileTest.file?(path)
+  	    output = parse_file(path, theme)
+      else
+        pbar		 = Progressbar.new("Rippin'", Dir["**/*"].length)
+        counter	 = 0					
+
+        Find.find path do |p|		  
+      		depth = p.to_s.count('/')
+
+      		if File.basename(p)[0] == ?.
+    				Find.prune
+    			else    			  
+  					output << bookmark(p, depth, counter) if bookmarkable?(p, source_syntax(p))
+  			    output << parse_file(p, theme)
+    		  end
+    		  counter += 1
+  				pbar.inc
+    		end
+    		pbar.finish
+  	  end
+      
+  	  outfile = File.open('out.tex', 'w')  	  
+  	  output  = preamble(theme) << output << postscript
+  	  outfile.write output
+
+  	  puts completed_message(path, File.expand_path(outfile))
+  		
+	  rescue Exception => e
+	    puts e.backtrace
+	  end
+	end
+	
 	
 	# Parses the given file, and writes the output file (out.tex)
 	# into the current directory.
@@ -25,128 +77,46 @@ module CodeRippa
 	# 
 	# Examples
 	#
-	#		rip_dir("~/code/ruby/some_folder/some_file.rb", "space_cadet", "ruby", [])
+	#		parse_file("~/code/ruby/some_folder/some_file.rb", "space_cadet", "ruby")
 	#
-	# Returns nothing.
-	def self.rip_file(path, theme, syntax)
-		begin 
-			srcfile = File.read(path)
-			src_ext = File.extname(path)[1..-1]					
-			outfile = File.open('out.tex', 'w') 
-			outfile.write preamble theme
-			outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
-			outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
-			
-      if num_char_of_longest_line(path) < 160
-  			outfile.write Uv.parse(File.read(path), 'latex', syntax, true, theme) 
-  		else
-  		  wrapped_output = ""
-  		  IO.readlines(path).each { |line| wrapped_output << wrap(line, 120) }
-  			outfile.write Uv.parse(wrapped_output, 'latex', syntax, true, theme) 
-  		end
-			
-			outfile.write Uv.parse(srcfile, 'latex', syntax, true, theme) 
-			outfile.write endtag
-			
-			msg =	 "Completed successfully.\n".color(:green)
-			msg << "Output file written to: "
-			msg << "#{File.expand_path(outfile)}\n".color(:yellow)
-			msg << "Now run "
-			msg << "pdflatex -interaction=batchmode #{File.expand_path(outfile)} ".color(:red)
-			puts msg
-			
-			outfile.close
-		rescue Exception => e
-			puts e
-		end
+	# Returns a String of TeX output.
+	def self.parse_file(path, theme)
+		content = ""
+	  syntax  = source_syntax(path)
+	  
+	  if rippable?(path, syntax)
+			content << heading(path)
+			output  =  (max_width(path) <= MAX_WIDTH) ? File.read(path) : wrap_file(path, MAX_WIDTH)      
+      content << Uv.parse(output, 'latex', syntax, true, theme) 	
+      content << "\\clearpage\n"
+    end
+    content
 	end
 
-	# Parses the given directory, and writes the output file (out.tex)
-	# into the current directory.
-	# 
-	# dir_path			- The directory path
-	# syntax				- The syntax to perform parsing/syntax highlighting. 
-	#									Note the the syntax should be supported by code_rippa.
-	# excluded_exts - An Array of extensions to ignore during parsing. 
-	# 
-	# Examples
-	#
-	#		rip_dir("~/code/ruby/some_folder", "space_cadet", "ruby", [])
-	#
-	# Returns nothing.
-	def self.rip_dir(dir_path, theme, syntax, excluded_exts = [])
-		pbar		 = Progressbar.new("Rippin'", Dir["**/*"].length)
-		counter	 = 0					
-		outfile	 = File.open('out.tex', 'w') 
-		
-		outfile.write preamble theme
-		Find.find dir_path do |path|		  
-			depth = path.to_s.count('/')
-			if File.basename(path)[0] == ?. or File.basename(path) == "out.tex"
-				Find.prune
-			else
-				begin
-
-				  # TODO: Remove the 'syntax argument' 
-				  syntax = ""
-				  unless FileTest.directory?(path)
-				    language = LanguageSniffer.detect(path).language
-				    syntax   = language.name.downcase if language
-				    puts "Parsing: #{path} "
-			    end
-					
-					is_rippable = rippable?(path, syntax, excluded_exts)
-					if is_rippable      		  
-						outfile.write "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n"
-						outfile.write "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
-					end
-					
-					if bookmarkable?(path, syntax, excluded_exts)		
-						outfile.write "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
-					end
-					
-					output = ""
-					if is_rippable
-            
-            if num_char_of_longest_line(path) < 160
-              output = File.read(path)
-      			else
-      			  IO.readlines(path).each { |line| output << wrap(line, 120) }
-      			end
-      			outfile.write Uv.parse(output, 'latex', syntax, true, theme) 
-						outfile.write "\\clearpage\n"
-					end
-					
-				rescue Exception => e
-					puts e
-				end
-				counter += 1
-			end
-			pbar.inc
-		end
-		
-		outfile.write endtag
-		pbar.finish
-		
-		msg =	 "Completed successfully.\n".color(:green)
-		msg << "Output file written to: "
-		msg << "#{File.expand_path(outfile)}\n".color(:yellow)
-		msg << "Now run "
-		msg << "pdflatex -interaction=batchmode #{File.expand_path(outfile)} ".color(:red)
-		msg << "** TWICE ** to generate PDF."
-		puts msg
-		
-		outfile.close
-	end
 															
 	private 
 	
+	def self.wrap_file(path, width)
+	  wrapped_output = ""
+	  IO.readlines(path).each { |line| wrapped_output << wrap(line, width) }
+	  wrapped_output
+	end
+
 	def self.wrap(text, width) 
     text.gsub(/(.{1,#{width}})( +|$\n?)|(.{1,#{width}})/, "\\1\\3\n")
   end
 	
-	def self.num_char_of_longest_line(path)
+	def self.max_width(path)
     IO.readlines(path).collect { |x| x.length }.max	 
+	end
+	
+	def self.source_syntax(path)
+	  syntax = ""
+	  if FileTest.file?(path) and not File.binary?(path)
+	    language = LanguageSniffer.detect(path).language
+      syntax   = language.name.downcase if language
+    end
+    syntax
 	end
 	
 	def self.syntax_path
@@ -218,6 +188,10 @@ module CodeRippa
 			@@supported_ext				
 		end
 	end
+	
+	def self.bookmark(path, depth, counter)
+	  "\\pdfbookmark[#{depth-2}]{#{File.basename(path).gsub('_','\_').gsub('%','\%')}}{#{counter}}\n"
+	end
 
 	# Returns True if path should be bookmarked in the output TEX/PDF document.
 	#
@@ -239,7 +213,7 @@ module CodeRippa
 	#		# => false
 	#
 	# Returns True if path should be bookmarked.
-	def self.bookmarkable?(path, syntax, excluded_exts)
+	def self.bookmarkable?(path, syntax, excluded_exts=[])
 		if FileTest.directory?(path)
 			true
 		else
@@ -279,7 +253,7 @@ module CodeRippa
 	#		# => false
 	#
 	# Returns true if path should be ripped.
-	def self.rippable?(path, syntax, excluded_exts)
+	def self.rippable?(path, syntax, excluded_exts=[])
 		if FileTest.directory?(path)
 			false
 		else
@@ -308,6 +282,13 @@ module CodeRippa
   def self.page_color(theme)
     f = YAML.load(File.read("#{Uv.render_path}/latex/#{theme}.render"))           
     /([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})/.match(f['listing']['begin'].split('\\')[3]).to_s
+  end
+  
+  # Heading of each new file
+  #
+  def self.heading(path)
+    "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n" + 
+		"\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
   end
 
 	# Returns the hex color code of the heading. This is done by looking at
@@ -349,7 +330,21 @@ module CodeRippa
 		preamble
 	end
 
-	def self.endtag
+	def self.postscript
 		"\\end{document}\n"
 	end
+	
+	def self.completed_message(in_path, out_path)
+	 	msg =	 "Completed successfully.\n".color(:green)
+		msg << "Output file written to: "
+		msg << "#{out_path}\n".color(:yellow)
+		msg << "Now run "
+		msg << "pdflatex -interaction=batchmode #{out_path}".color(:red)
+		msg << " ** TWICE ** " if FileTest.directory?(in_path)
+	  msg << "to generate PDF."
+	end
+	
 end
+
+CodeRippa.parse("/Users/rambo/code/ruby/code_rippa", "succulent")
+# CodeRippa.parse("/Users/rambo/code/ruby/code_rippa/lib/code_rippa.rb", "amy")
