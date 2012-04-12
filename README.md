@@ -25,7 +25,7 @@ In case your system doesn't have `pdflatex`, you should install a [LaTeX](http:/
 
 ### List all available themes (84 and counting!)
 
-Many of the themes found in CodeRippa can be found [here](http://wiki.macromates.com/Themes/UserSubmittedThemes)	
+Many of the themes found in CodeRippa can be found [here](http://textmatetheme.com/)	
 		
 	$ code_rippa -l
 	
@@ -88,10 +88,8 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 - Themes! Glorious themes! 84 themes to choose from! Props to [filmgirl](https://github.com/filmgirl/TextMate-Themes), and the rest of the wonderful TM users who submitted their themes.
 - Wrap lines of troublesome files such as minified javascript and parser generator outputs.
 - Sensible defaults, removed the need for specifying the syntax 
+- Detects if pdflatex is installed, and automatically runs pdflatex if so
 
-#### TODO
-
-- Generate warnings when syntax is not supported.
 
 ### 0.0.6
 

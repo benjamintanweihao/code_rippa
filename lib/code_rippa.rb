@@ -30,7 +30,8 @@ module CodeRippa
   #
   # Returns nothing 
   def self.parse(path, theme)
-    output = ""
+    logfile = File.open('code_rippa.log', 'w')
+    output  = ""
     
     if FileTest.file?(path)
       output = parse_file(path, theme)
@@ -39,7 +40,7 @@ module CodeRippa
       counter  = 0          
 
       Find.find path do |p|     
-        puts "Parsing: #{p} "
+        logfile << "Parsing: #{p}\n"
         depth = p.to_s.count('/')
 
         if File.basename(p)[0] == ?.
@@ -49,7 +50,7 @@ module CodeRippa
           begin
             output << parse_file(p, theme)
           rescue Exception => e
-            puts "Failed: #{p}".color(:red)
+            logfile << "* Failed: #{p}\n"
           end
         end
         counter += 1
@@ -61,8 +62,23 @@ module CodeRippa
     outfile = File.open('out.tex', 'w')     
     output  = preamble(theme) << output << postscript
     outfile.write output
-    puts completed_message(path, File.expand_path(outfile))
     outfile.close
+
+    # Run the 'pdflatex' command
+    puts "=================================================="
+    if pdflatex_installed?
+      puts "pdflatex found!. Converting TeX -> PDF".color(:green)
+      puts "Compiling [1/2]" 
+      `pdflatex -interaction=batchmode #{File.expand_path(outfile)}`
+      puts "Compiling [2/2]" 
+      `pdflatex -interaction=batchmode #{File.expand_path(outfile)}` 
+      puts completed_message(path, File.expand_path(outfile))
+    else
+      puts install_pdflatex_message "#{File.expand_path(outfile)}"
+    end
+    puts "=================================================="
+
+    logfile.close
   end
   
   
@@ -280,13 +296,30 @@ private
   end
   
   def self.completed_message(in_path, out_path)
-    msg =  "Completed successfully.\n".color(:green)
+    msg =  "Success!. ".color(:green)
     msg << "Output file written to: "
+    msg << "#{out_path.gsub!('tex', 'pdf')}".color(:green)
+  end
+
+  def self.install_pdflatex_message(out_path)
+    msg = "You do not have 'pdflatex' installed!\n".color(:red)
+    msg << "Please install it at "
+    msg << "http://www.tug.org/texlive'\n".color(:yellow)
+    msg << "Output TEX file written to: "
     msg << "#{out_path}\n".color(:yellow)
-    msg << "Now run "
-    msg << "pdflatex -interaction=batchmode #{out_path}".color(:red)
-    msg << " ** TWICE ** " if FileTest.directory?(in_path)
-    msg << "to generate PDF."
+  end
+
+  def self.pdflatex_installed?
+    cmd  = 'pdflatex'
+    exts = ENV['PATHEXT'] ? ENV['PATHEXT'].split(';') : ['']
+    ENV['PATH'].split(File::PATH_SEPARATOR).each do |path|
+      exts.each do |ext|
+        exe = "#{path}/#{cmd}#{ext}"
+        exe if File.executable? exe
+        return exe
+      end
+    end
+    nil  
   end
   
 end
