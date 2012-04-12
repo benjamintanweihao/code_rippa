@@ -49,9 +49,7 @@ With theme specified:
 
 	$ code_rippa -t zenburnesque path_to_single_file.rb
 
-Note that the output file is saved as _out.tex_ in the current directory where _code_rippa_ was called from. 
-
-	$ pdflatex out.tex			# Saved as out.pdf
+Note that the output file is saved as _out.pdf_ in the current directory where _code_rippa_ was called from. 
 
 ### Producing PDF from a directory
 	
@@ -65,12 +63,7 @@ With theme specified:
 
 	$ code_rippa -t rubyblue path_to_directory
 
-Note that the output file is saved as _out.tex_ in the current directory where _code_rippa_ was called from. 
-
-Then, you'll need to run _pdflatex_ __twice__. This is because LaTeX needs to generate the bookmarks.
-
-	$ pdflatex out.tex			# Saved as out.pdf
-	$ pdflatex out.tex			# Remember to run this twice!
+Note that the output file is saved as _out.pdf_ in the current directory where _code_rippa_ was called from. 
 
 ## Credits
 
