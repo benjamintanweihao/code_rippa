@@ -30,7 +30,7 @@ module CodeRippa
   #
   # Returns nothing 
   def self.parse(path, theme)
-    logfile = File.open('code_rippa.log', 'w')
+    # logfile = File.open('code_rippa.log', 'w')
     output  = ""
     
     if FileTest.file?(path)
@@ -40,7 +40,7 @@ module CodeRippa
       counter  = 0          
 
       Find.find path do |p|     
-        logfile << "Parsing: #{p}\n"
+        # logfile << "Parsing: #{p}\n"
         depth = p.to_s.count('/')
 
         if File.basename(p)[0] == ?.
@@ -50,7 +50,7 @@ module CodeRippa
           begin
             output << parse_file(p, theme)
           rescue Exception => e
-            logfile << "* Failed: #{p}\n"
+            # logfile << "* Failed: #{p}\n"
           end
         end
         counter += 1
@@ -62,8 +62,9 @@ module CodeRippa
     outfile = File.open('out.tex', 'w')     
     output  = preamble(theme) << output << postscript
     outfile.write output
+    
     outfile.close
-
+        
     # Run the 'pdflatex' command
     puts "=================================================="
     if pdflatex_installed?
@@ -72,13 +73,18 @@ module CodeRippa
       `pdflatex -interaction=batchmode #{File.expand_path(outfile)}`
       puts "Compiling [2/2]" 
       `pdflatex -interaction=batchmode #{File.expand_path(outfile)}` 
+
+      # Cleanup
+      %w[aux log out tex].each do |ext|  
+        path = File.expand_path(outfile).gsub!('tex', ext) 
+        FileUtils.rm path
+      end
       puts completed_message(path, File.expand_path(outfile))
     else
       puts install_pdflatex_message "#{File.expand_path(outfile)}"
     end
     puts "=================================================="
 
-    logfile.close
   end
   
   
