@@ -89,7 +89,7 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 - Wrap lines of troublesome files such as minified javascript and parser generator outputs.
 - Sensible defaults, removed the need for specifying the syntax 
 - Detects if pdflatex is installed, and automatically runs pdflatex if so
-
+- Proper cleanup after LaTeX successfully completes
 
 ### 0.0.6
 
