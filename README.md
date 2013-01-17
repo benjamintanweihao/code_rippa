@@ -1,4 +1,4 @@
-# CodeRippa
+# CodeRippa!
 
 [![Build Status](https://secure.travis-ci.org/benjamintanweihao/code_rippa.png)](http://travis-ci.org/benjamintanweihao/code_rippa)
 
