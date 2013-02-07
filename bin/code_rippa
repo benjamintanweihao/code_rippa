@@ -58,27 +58,26 @@ END
   opts.on('-h', '--help', 'Display this screen') do
     puts opts
     exit 0
-  end  
+  end
+
+  opts.on('-c', '--compile-pdf', 'Compile output into pdf') do
+    options[:compile] = true
+  end
 end
 
 begin
   option_parser.parse!  
   # Set default theme. TODO: Allow user to change this
   options[:theme] ||= "made_of_code"
-  
-  if ARGV.size == 1
-    if FileTest.file?(ARGV[0])
-      CodeRippa.parse(ARGV[0], options[:theme])
-    elsif File.directory?(ARGV[0])
-      Dir.chdir(ARGV[0])
-      CodeRippa.parse(Dir.pwd, options[:theme])
-    else
-      raise ArgumentError, "Invalid path. Aborting.\n"
-    end
-    exit 0
-  else
+  options[:compile] ||= false
+
+  if ARGV.size < 1
     raise ArgumentError, "Missing arguments. Aborting.\n"
+  else
+    output = CodeRippa.handle_parsing(ARGV, options[:theme])
+    CodeRippa.write_file(output, options[:theme], options[:compile])
   end
+  exit 0
 rescue ArgumentError => e
   puts e
   exit 1
