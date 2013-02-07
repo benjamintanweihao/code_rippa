@@ -16,55 +16,80 @@ module CodeRippa
   MAX_WIDTH          = 120
   @@supported_syntax = nil
   @@supported_ext    = nil
-    
-  # main entry point:
-  # Parses the given directory/file, and writes the output file (out.tex)
-  # into the current directory.
-  # 
-  # path          - The directory path
-  # theme         - The selected theme
-  # 
-  # Examples
-  #
-  #   parse("~/code/ruby/some_folder_or_file", "space_cadet")
-  #
-  # Returns nothing 
-  def self.parse(path, theme)
-    # logfile = File.open('code_rippa.log', 'w')
-    output  = ""
-    
-    if FileTest.file?(path)
-      output = parse_file(path, theme)
-    else
-      pbar     = Progressbar.new("Rippin'", Dir["**/*"].length)
-      counter  = 0          
 
-      Find.find path do |p|     
-        # logfile << "Parsing: #{p}\n"
-        depth = p.to_s.count('/')
+  # main entry point for parsing using the module
+  #
+  # takes in an array of the arguments (a list of valid file/dir paths), and a theme
+  #
+  # returns latex output as a string
+  # note that this output doesn't contain the preamble, or the closing tags. (ref:self.write_file)
+  def self.handle_parsing(arguments, theme)
+    paths = parse_paths(arguments)
+    output = parse(paths, theme)
+    return output
+  end
 
-        if File.basename(p)[0] == ?.
-          Find.prune
-        else            
-          output << bookmark(p, depth, counter) if bookmarkable?(p, source_syntax(p))
-          begin
-            output << parse_file(p, theme)
-          rescue Exception => e
-            # logfile << "* Failed: #{p}\n"
+  # Takes in an array of file/dir paths, and returns an array of file paths,
+  # having expanded the directories into their contents.
+  def self.parse_paths(args)
+    paths = []
+    args.each do |path|
+      if FileTest.file? path
+        paths << path
+      elsif File.directory?(path)
+        Find.find path do |file_path|
+          if File.basename(file_path)[0] == ?.
+            Find.prune
+          else
+            paths << file_path
           end
         end
-        counter += 1
-        pbar.inc
+      else
+        raise ArgumentError, "Invalid path: #{path}. Aborting.\n"
       end
-      pbar.finish
     end
-    
+    return paths
+  end
+
+  # the main workhorse for parsing.
+  # takes in a list of file paths, and returns latex 
+  def self.parse(files, theme)
+    output = ""
+    pbar = Progressbar.new("Rippin'", files.length)
+    counter = 0
+
+    files.each do | p |
+      puts p
+      depth = p.to_s.count('/')
+      output << bookmark(p, depth, counter) if bookmarkable?(p, source_syntax(p))
+      begin
+        output << parse_file(p, theme)
+      rescue Exception => e
+        # logfile << "* Failed: #{p}\n"
+      end
+      counter += 1
+      pbar.inc
+    end
+    pbar.finish
+    return output
+  end
+
+  # writes to the out.tex file.
+  # if passed true for the "compile" parameter, also compiles the tex file into pdf.
+  # therefore, if one were to desire ps output/*, they could generate it themselves
+  def self.write_file(output, theme, compile = false)
     outfile = File.open('out.tex', 'w')     
     output  = preamble(theme) << output << postscript
     outfile.write output
-    
     outfile.close
-        
+    if compile
+      compile_pdf(outfile)
+    end
+  end
+
+
+  def self.compile_pdf(outfile)
+    path = ""
     # Run the 'pdflatex' command
     puts "=================================================="
     if pdflatex_installed?
@@ -84,7 +109,6 @@ module CodeRippa
       puts install_pdflatex_message "#{File.expand_path(outfile)}"
     end
     puts "=================================================="
-
   end
   
   
