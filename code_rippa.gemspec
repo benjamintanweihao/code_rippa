@@ -3,7 +3,7 @@ require File.expand_path('../lib/code_rippa/version', __FILE__)
 
 Gem::Specification.new do |gem|
   gem.authors       = ["Benjamin Tan Wei Hao"]
-  gem.email         = ["ben@witsvale.com"]
+  gem.email         = ["benjamintanweihao@gmail.com"]
   gem.platform      = Gem::Platform::RUBY
   gem.description   = %q{Converts source code into a (bookmarked, themed, and syntax highlighted!) PDF.}
   gem.summary       = %q{CodeRippa takes your source code and turns it into a beautiful PDF file. Currently, it supports 150 languages and 15 themes, all of which are available in TextMate. More syntaxes and themes will be available soon.}
