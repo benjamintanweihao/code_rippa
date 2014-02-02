@@ -325,9 +325,7 @@ private
   end
   
   def self.completed_message(in_path, out_path)
-    msg =  "Success!. "
-    msg << "Output file written to: "
-    msg << "#{out_path.gsub!('tex', 'pdf')}"
+    "Success! Output file written to: #{out_path.gsub!('tex', 'pdf')}"
   end
 
   def self.install_pdflatex_message(out_path)
