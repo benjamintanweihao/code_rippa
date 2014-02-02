@@ -92,7 +92,7 @@ module CodeRippa
     # Run the 'pdflatex' command
     puts "=================================================="
     if pdflatex_installed?
-      puts "pdflatex found!. Converting TeX -> PDF".color(:green)
+      puts "pdflatex found!. Converting TeX -> PDF"
       puts "Compiling [1/2]" 
       `pdflatex -interaction=batchmode #{File.expand_path(outfile)}`
       puts "Compiling [2/2]" 
@@ -325,17 +325,17 @@ private
   end
   
   def self.completed_message(in_path, out_path)
-    msg =  "Success!. ".color(:green)
+    msg =  "Success!. "
     msg << "Output file written to: "
-    msg << "#{out_path.gsub!('tex', 'pdf')}".color(:green)
+    msg << "#{out_path.gsub!('tex', 'pdf')}"
   end
 
   def self.install_pdflatex_message(out_path)
-    msg = "You do not have 'pdflatex' installed!\n".color(:red)
+    msg = "You do not have 'pdflatex' installed!\n"
     msg << "Please install it at "
-    msg << "http://www.tug.org/texlive'\n".color(:yellow)
+    msg << "http://www.tug.org/texlive'\n"
     msg << "Output TEX file written to: "
-    msg << "#{out_path}\n".color(:yellow)
+    msg << "#{out_path}\n"
   end
 
   def self.pdflatex_installed?
@@ -352,7 +352,3 @@ private
   end
   
 end
-
-# Sanity check
-# CodeRippa.parse("/Users/rambo/code/ruby/code_rippa", "succulent")
-# CodeRippa.parse("/Users/rambo/code/ruby/code_rippa/lib/code_rippa.rb", "amy")
