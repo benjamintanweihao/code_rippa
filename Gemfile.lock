@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    code_rippa (1.0.0)
+    code_rippa (1.0.1)
       ansi (~> 1.4)
       color (~> 1.5)
       language_sniffer (~> 1.0)
