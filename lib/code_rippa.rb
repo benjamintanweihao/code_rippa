@@ -63,7 +63,6 @@ module CodeRippa
     counter = 0
 
     files.each do | p |
-      puts p
       depth = p.to_s.count('/')
       output << bookmark(p, depth, counter) if bookmarkable?(p, source_syntax(p))
       begin
