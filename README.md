@@ -1,5 +1,7 @@
 # CodeRippa!
 
+![Code Rippa!](http://code-rippa.heroku.com/assets/ripit-fbef5b91ff0416d7cfb736d4fcff2b04.png)
+
 [![Build Status](https://secure.travis-ci.org/benjamintanweihao/code_rippa.png)](http://travis-ci.org/benjamintanweihao/code_rippa)
 
 [![endorse](http://api.coderwall.com/benjamintanweihao/endorsecount.png)](http://coderwall.com/benjamintanweihao)
@@ -76,6 +78,12 @@ None of this would be possible without the awesome [ultraviolet](https://github.
 Currently this gem is in its infancy. Any bug reports and feature requests are very welcomed.
 
 ## Changelog
+
+### 1.0.0
+
+- Compile pdf by default.
+- Choose a more sane theme (Code) by default.
+- Include LICENCE.
 
 ### 0.0.8 - 0.0.9
 
