@@ -9,11 +9,7 @@ require 'ptools'
 
 include ANSI
 
-if defined? Syck
-  YAML::ENGINE.yamler = 'syck'
-else
-  YAML::ENGINE.yamler = 'psych'
-end
+YAML::ENGINE.yamler = 'psych'
 
 module CodeRippa
   
