@@ -77,6 +77,13 @@ Currently this gem is in its infancy. Any bug reports and feature requests are v
 
 ## Changelog
 
+### 0.0.8 - 0.0.9
+
+- Syntax files are finally compatible for `psych`
+- Abandoned `syck` completely for `psych` 
+- Ruby 2.x compatibility! \o/
+- Thanks @jasonyeo for the initial push towards Ruby 2.x compatibility.
+
 ### 0.0.7
 
 - Using [language_sniffer](https://github.com/grosser/language_sniffer) in place of Linguist for automated source code language detection
