@@ -1,18 +1,14 @@
---- 
+---
 name: Objective-C++
-fileTypes: 
+fileTypes:
 - mm
 - M
 - h
 scopeName: source.objc++
 uuid: FDAB1813-6B1C-11D9-BCAC-000D93589AF6
-foldingStartMarker: "(?x)\n\
-  \t\t /\\*\\*(?!\\*)\n\
-  \t\t|^(?![^{]*?//|[^{]*?/\\*(?!.*?\\*/.*?\\{)).*?\\{\\s*($|//|/\\*(?!.*?\\*/.*\\S))\n\
-  \t\t|^@(interface|protocol|implementation)\\b\n\
-  \t"
-patterns: 
+foldingStartMarker: "(?x)\n\t\t /\\*\\*(?!\\*)\n\t\t|^(?![^{]*?//|[^{]*?/\\*(?!.*?\\*/.*?\\{)).*?\\{\\s*($|//|/\\*(?!.*?\\*/.*\\S))\n\t\t|^@(interface|protocol|implementation)\\b\n\t"
+patterns:
 - include: source.objc
 - include: source.c++
-foldingStopMarker: (?<!\*)\*\*/|^\s*\}|^@end\b
-keyEquivalent: ~^O
+foldingStopMarker: "(?<!\\*)\\*\\*/|^\\s*\\}|^@end\\b"
+keyEquivalent: "~^O"

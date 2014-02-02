@@ -1,0 +1,34 @@
+PATH
+  remote: .
+  specs:
+    code_rippa (0.0.8)
+      ansi
+      color
+      language_sniffer
+      ptools (~> 1.2.1)
+      rainbow
+      spox-ultraviolet (~> 0.10.5)
+
+GEM
+  remote: https://rubygems.org/
+  specs:
+    ansi (1.4.3)
+    color (1.5.1)
+    language_sniffer (1.0.2)
+    minitest (4.7.5)
+    ptools (1.2.2)
+    rainbow (2.0.0)
+    rake (10.1.0)
+    spox-plist (3.0.1)
+    spox-textpow (0.10.3)
+      spox-plist
+    spox-ultraviolet (0.10.5)
+      spox-textpow
+
+PLATFORMS
+  ruby
+
+DEPENDENCIES
+  code_rippa!
+  minitest
+  rake

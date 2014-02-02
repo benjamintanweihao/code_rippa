@@ -1,10 +1,10 @@
---- 
+---
 name: JSON
-fileTypes: 
+fileTypes:
 - json
 scopeName: source.json
-repository: 
-  number: 
+repository:
+  number:
     name: constant.numeric.json
     match: |-
       (?x:         # turn on extended mode
@@ -26,56 +26,56 @@ repository:
                        )?         # make decimal portion optional
                      )
     comment: handles integer and decimal numbers
-  constant: 
+  constant:
     name: constant.language.json
-    match: \b(?:true|false|null)\b
-  value: 
-    patterns: 
+    match: "\\b(?:true|false|null)\\b"
+  value:
+    patterns:
     - include: "#constant"
     - include: "#number"
     - include: "#string"
     - include: "#array"
     - include: "#object"
     comment: the 'value' diagram at http://json.org
-  array: 
+  array:
     name: meta.structure.array.json
-    endCaptures: 
-      "0": 
+    endCaptures:
+      '0':
         name: punctuation.definition.array.end.json
-    begin: \[
-    beginCaptures: 
-      "0": 
+    begin: "\\["
+    beginCaptures:
+      '0':
         name: punctuation.definition.array.begin.json
-    end: \]
-    patterns: 
+    end: "\\]"
+    patterns:
     - include: "#value"
     - name: punctuation.separator.array.json
       match: ","
     - name: invalid.illegal.expected-array-separator.json
       match: "[^\\s\\]]"
-  object: 
+  object:
     name: meta.structure.dictionary.json
-    endCaptures: 
-      "0": 
+    endCaptures:
+      '0':
         name: punctuation.definition.dictionary.end.json
-    begin: \{
-    beginCaptures: 
-      "0": 
+    begin: "\\{"
+    beginCaptures:
+      '0':
         name: punctuation.definition.dictionary.begin.json
-    end: \}
-    patterns: 
+    end: "\\}"
+    patterns:
     - include: "#string"
       comment: the JSON object key
     - name: meta.structure.dictionary.value.json
-      endCaptures: 
-        "1": 
+      endCaptures:
+        '1':
           name: punctuation.separator.dictionary.pair.json
       begin: ":"
-      beginCaptures: 
-        "0": 
+      beginCaptures:
+        '0':
           name: punctuation.separator.dictionary.key-value.json
-      end: (,)|(?=\})
-      patterns: 
+      end: "(,)|(?=\\})"
+      patterns:
       - include: "#value"
         comment: the JSON object value
       - name: invalid.illegal.expected-dictionary-separator.json
@@ -83,17 +83,17 @@ repository:
     - name: invalid.illegal.expected-dictionary-separator.json
       match: "[^\\s\\}]"
     comment: a JSON object
-  string: 
+  string:
     name: string.quoted.double.json
-    endCaptures: 
-      "0": 
+    endCaptures:
+      '0':
         name: punctuation.definition.string.end.json
     begin: "\""
-    beginCaptures: 
-      "0": 
+    beginCaptures:
+      '0':
         name: punctuation.definition.string.begin.json
     end: "\""
-    patterns: 
+    patterns:
     - name: constant.character.escape.json
       match: |-
         (?x:                # turn on extended mode
@@ -106,7 +106,7 @@ repository:
                              )
                            )
     - name: invalid.illegal.unrecognized-string-escape.json
-      match: \\.
+      match: "\\\\."
 uuid: 0C3868E4-F96B-4E55-B204-1DCB5A20748B
 foldingStartMarker: |-
   (?x:       # turn on extended mode
@@ -125,7 +125,7 @@ foldingStartMarker: |-
                             \s*      # some optional space
                             $        # at the end of the line
                           )
-patterns: 
+patterns:
 - include: "#value"
 foldingStopMarker: |-
   (?x:     # turn on extended mode
@@ -133,4 +133,4 @@ foldingStopMarker: |-
                            \s*    # some optional space
                            [}\]]  # and the close of an object or array
                          )
-keyEquivalent: ^~J
+keyEquivalent: "^~J"

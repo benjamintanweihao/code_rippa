@@ -1,17 +1,17 @@
---- 
+---
 name: Man
-fileTypes: 
+fileTypes:
 - man
 scopeName: text.man
 uuid: E8BAC30A-16BF-498D-941D-73FBAED37891
-foldingStartMarker: ^[A-Z](?:(?:\S+\s\S+)+|\S+)$
-patterns: 
+foldingStartMarker: "^[A-Z](?:(?:\\S+\\s\\S+)+|\\S+)$"
+patterns:
 - name: markup.heading.man
-  match: ^[A-Z](?:(?:\S+\s\S+)+|\S+)$
+  match: "^[A-Z](?:(?:\\S+\\s\\S+)+|\\S+)$"
 - name: markup.underline.link.man
-  match: ((https?|ftp|file|txmt)://|mailto:)[-:@a-zA-Z0-9_.~%+/?=&#]+(?<![.?:])
+  match: "((https?|ftp|file|txmt)://|mailto:)[-:@a-zA-Z0-9_.~%+/?=&#]+(?<![.?:])"
 - name: markup.underline.link.internal.man
-  match: ([\w\.]+\(\d[a-z]?\))
+  match: "([\\w\\.]+\\(\\d[a-z]?\\))"
 - name: meta.foldingStopMarker.man
-  match: ^_{2,}$
-foldingStopMarker: ^_{2,}$
+  match: "^_{2,}$"
+foldingStopMarker: "^_{2,}$"
