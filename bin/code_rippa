@@ -14,7 +14,7 @@ option_parser = OptionParser.new do |opts|
   Usage: code_rippa [options] input_file_or_directory
 
      Parses input_file or directory and outputs a file named out.tex. 
-     Unless specified, 'Made of Code' is used as the default theme.
+     Unless specified, 'Coda' is used as the default theme.
              
      To see all themes, type:
         code_rippa -l     
