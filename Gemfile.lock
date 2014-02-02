@@ -1,10 +1,11 @@
 PATH
   remote: .
   specs:
-    code_rippa (0.0.8)
+    code_rippa (0.0.9)
       ansi
       color
       language_sniffer
+      psych
       ptools (~> 1.2.1)
       rainbow
       spox-ultraviolet (~> 0.10.5)
@@ -15,10 +16,11 @@ GEM
     ansi (1.4.3)
     color (1.5.1)
     language_sniffer (1.0.2)
-    minitest (4.7.5)
+    minitest (5.2.2)
+    psych (2.0.2)
     ptools (1.2.2)
     rainbow (2.0.0)
-    rake (10.1.0)
+    rake (10.1.1)
     spox-plist (3.0.1)
     spox-textpow (0.10.3)
       spox-plist
