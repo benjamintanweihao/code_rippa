@@ -2,13 +2,13 @@ PATH
   remote: .
   specs:
     code_rippa (0.0.9)
-      ansi
-      color
-      language_sniffer
-      psych
-      ptools (~> 1.2.1)
-      rainbow
-      spox-ultraviolet (~> 0.10.5)
+      ansi (~> 1.4)
+      color (~> 1.5)
+      language_sniffer (~> 1.0)
+      psych (~> 2.0)
+      ptools (~> 1.2)
+      rainbow (~> 2.0)
+      spox-ultraviolet (~> 0.10)
 
 GEM
   remote: https://rubygems.org/
@@ -32,5 +32,5 @@ PLATFORMS
 
 DEPENDENCIES
   code_rippa!
-  minitest
-  rake
+  minitest (~> 5.2)
+  rake (~> 10.1)

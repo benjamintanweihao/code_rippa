@@ -1,6 +1,7 @@
 require 'find'
 require 'code_rippa/uv_overrides'
 require 'code_rippa/version'
+require 'ansi'
 require 'ansi/progressbar'
 require 'language_sniffer'
 require 'rainbow'

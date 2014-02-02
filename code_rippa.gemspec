@@ -17,6 +17,7 @@ Gem::Specification.new do |gem|
   gem.version       = CodeRippa::VERSION
   gem.required_ruby_version = ">= 1.9.0"
   gem.add_dependency "psych", "~> 2.0"
+  gem.add_dependency "ansi", "~> 1.4"  
   gem.add_dependency "color", "~> 1.5"
   gem.add_dependency "language_sniffer", "~> 1.0"
   gem.add_dependency "ptools", "~> 1.2"
