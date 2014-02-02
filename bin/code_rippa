@@ -68,8 +68,8 @@ end
 begin
   option_parser.parse!  
   # Set default theme. TODO: Allow user to change this
-  options[:theme] ||= "made_of_code"
-  options[:compile] ||= false
+  options[:theme] ||= "coda"
+  options[:compile] ||= true
 
   if ARGV.size < 1
     raise ArgumentError, "Missing arguments. Aborting.\n"
