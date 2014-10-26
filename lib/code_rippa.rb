@@ -10,7 +10,7 @@ require 'ptools'
 
 include ANSI
 
-YAML::ENGINE.yamler = 'psych'
+YAML::ENGINE.yamler = 'psych' if defined? YAML::ENGINE
 
 module CodeRippa
   
