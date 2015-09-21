@@ -10,7 +10,7 @@ require 'ptools'
 
 include ANSI
 
-YAML::ENGINE.yamler = 'psych' if defined? YAML::ENGINE
+YAML::ENGINE.yamler = 'psych'
 
 module CodeRippa
   
@@ -229,7 +229,10 @@ private
       begin
         language = LanguageSniffer.detect(path).language
         syntax = language.name.downcase if language
-      rescue Exception => e
+        syntax = "ruby" if syntax.empty?
+        puts "#{path}: #{syntax}"
+      rescue Exception => ex
+        puts ex
       end
     end
     syntax
@@ -284,8 +287,8 @@ private
   
   # Returns a String containing the heading of the parsed file.
   def self.heading(path)
-    "\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}\\\\\n" + 
-    "\\textcolor{headingcolor}{\\rule{\\linewidth}{1.0mm}}\\\\\n"
+    "\\subsection{\\textcolor{headingcolor}{\\textbf{\\texttt{#{path.gsub('_','\_').gsub('%','\%')}}}}}\\\\\n"
+    # "\\textcolor{headingcolor}{\\rule{\\linewidth}{0.5mm}}\\\\\n"
   end
 
   # Returns the hex color code of the heading, which is the inverse of page color.
@@ -301,23 +304,33 @@ private
   end
   
   def self.preamble(theme)
-    preamble = ''
-    preamble << "\\documentclass[a4paper,landscape]{article}\n"
+    preamble =  ""
+    preamble << "\\documentclass[a4paper,portrait]{article}\n"
     preamble << "\\pagestyle{empty}\n"
     preamble << "\\usepackage{xcolor}\n"
     preamble << "\\usepackage{colortbl}\n"
     preamble << "\\usepackage{longtable}\n"
-    preamble << "\\usepackage[left=0cm,top=0.2cm,right=0cm,bottom=0.2cm,nohead,nofoot]{geometry}\n"
+    preamble << "\\usepackage[nohead,nofoot]{geometry}\n"
+    preamble << "\\geometry{margin=0.8cm}\n"
     preamble << "\\usepackage[T1]{fontenc}\n"
     preamble << "\\usepackage[scaled]{beramono}\n"
     preamble << "\\usepackage[bookmarksopen,bookmarksdepth=20]{hyperref}\n"
     preamble << "\\definecolor{pgcolor}{HTML}{#{page_color(theme)}}\n"
     preamble << "\\definecolor{headingcolor}{HTML}{#{heading_color(theme)}}\n"
     preamble << "\\pagecolor{pgcolor}\n"
+    preamble << "\\setcounter{secnumdepth}{-100}\n"
     preamble << "\\begin{document}\n"
-    preamble << "\\setlength\\LTleft\\parindent\n"
+    preamble << "\\dominitoc"
+    preamble << "\\tableofcontents\n"
+    preamble << "\\newpage\n"
+    preamble << "\\pagestyle{headings}\n"
+    preamble << "\\setcounter{page}{1}\n"
+    preamble << "\\pagenumbering{arabic}\n"
+    # preamble << "\\setlength\\LTleft\\parindent\n"
+    preamble << "\\setlength{\\LTleft}{-3pt}\n"
+    # preamble << "\\setlength\\LTleft\\parindent\n"
     preamble << "\\setlength\\LTright\\fill\n"
-    preamble << "\\setlength{\\LTpre}{-10pt}\n"
+    preamble << "\\setlength{\\LTpre}{-2.5pt}\n"
     preamble
   end
 
